@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">GERSOFT</string>
+    <string name="txt_pass">Introduza a Password</string>
+    <string name="txt_email">Introduza o Email</string>
+    <string name="txt_login">Login</string>
+    <string name="comentarios_txt">Comentários</string>
+    <string name="pedido_na_mesa_txt">Pedido na Mesa</string>
+    <string name="takeaway_txt">Takeaway</string>
+    <string name="reserva_txt">Reserva de Mesa</string>
+    <string name="refeicoes_txt">Refeições Grátis</string>
+    <string name="pedidos_txt">Pedidos</string>
+    <string name="navMais">Mais</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

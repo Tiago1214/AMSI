@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+
+
+
+                <item
+                    android:id="@+id/navReserva"
+                    android:title="@string/reserva_txt"
+                    android:icon="@drawable/ic_action_reservation_foreground"/>
+
+
+                                <group android:checkableBehavior="single">
+                                    <item android:title="@string/pedidos_txt">
+                                        <menu>
+                                            <item
+                                                android:id="@+id/navTakeaway"
+                                                android:title="@string/takeaway_txt"
+                                                android:icon="@drawable/ic_action_takeaway_foreground"
+                                                />
+                                            <item
+                                                android:id="@+id/navPedidoMesa"
+                                                android:title="@string/pedido_na_mesa_txt"
+                                                android:icon="@drawable/ic_action_tablerequest_foreground"
+                                                />
+                                        </menu>
+                                    </item>
+                                </group>
+
+        <group android:checkableBehavior="single">
+            <item android:title="@string/navMais">
+                <menu>
+                    <item
+                        android:id="@+id/navRefeicao"
+                        android:title="@string/refeicoes_txt"
+                        android:icon="@drawable/ic_action_freefood_foreground"
+                        />
+                    <item
+                        android:id="@+id/navComentários"
+                        android:title="@string/comentarios_txt"
+                        android:icon="@drawable/ic_action_comment_foreground"
+                        />
+                </menu>
+            </item>
+
+        </group>
+
+</menu>
