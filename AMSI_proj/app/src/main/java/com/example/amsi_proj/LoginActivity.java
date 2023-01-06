@@ -12,6 +12,11 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
+    // Declarar variaveis
+    private EditText etEmail, etPassword;
+    private final int MIN_PASS = 4;
+
+
 
 
 
