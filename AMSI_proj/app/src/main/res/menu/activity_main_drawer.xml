@@ -12,25 +12,14 @@
                     android:title="@string/reserva_txt"
                     android:icon="@drawable/ic_action_reservation_foreground"/>
 
+    <item
+        android:id="@+id/navPedidos"
+        android:icon="@drawable/ic_action_tablerequest_foreground"
+        android:title="@string/pedido_na_mesa_txt" />
 
-                                <group android:checkableBehavior="single">
-                                    <item android:title="@string/pedidos_txt">
-                                        <menu>
-                                            <item
-                                                android:id="@+id/navTakeaway"
-                                                android:title="@string/takeaway_txt"
-                                                android:icon="@drawable/ic_action_takeaway_foreground"
-                                                />
-                                            <item
-                                                android:id="@+id/navPedidoMesa"
-                                                android:title="@string/pedido_na_mesa_txt"
-                                                android:icon="@drawable/ic_action_tablerequest_foreground"
-                                                />
-                                        </menu>
-                                    </item>
-                                </group>
 
-        <group android:checkableBehavior="single">
+
+    <group android:checkableBehavior="single">
             <item android:title="@string/navMais">
                 <menu>
                     <item
@@ -39,7 +28,7 @@
                         android:icon="@drawable/ic_action_freefood_foreground"
                         />
                     <item
-                        android:id="@+id/navComentários"
+                        android:id="@+id/navComentarios"
                         android:title="@string/comentarios_txt"
                         android:icon="@drawable/ic_action_comment_foreground"
                         />

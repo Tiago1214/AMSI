@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ComentariosFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".PedidoMesaFragment">
 
     <ListView
-        android:id="@+id/list_Comentarios"
+        android:id="@+id/list_Menus"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </ListView>
+        android:layout_height="match_parent"
+        />
+
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_AdicionarComentario"
+        android:id="@+id/floating_AdicionarPedidoMesa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -24,5 +22,4 @@
         android:clickable="true"
         android:background="@color/orange2"
         android:src="@drawable/ic_action_add" />
-
 </FrameLayout>

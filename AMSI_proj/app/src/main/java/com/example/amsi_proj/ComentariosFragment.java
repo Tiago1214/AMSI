@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+
 public class ComentariosFragment extends Fragment {
 
     public ComentariosFragment() {

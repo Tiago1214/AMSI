@@ -5,8 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".RefeicaoFragment">
 
-    <LinearLayout
+    <GridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"></LinearLayout>
+        android:numColumns="2" />
+
 </FrameLayout>

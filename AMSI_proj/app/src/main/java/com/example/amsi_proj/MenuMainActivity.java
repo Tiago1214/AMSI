@@ -31,11 +31,8 @@ public class MenuMainActivity extends AppCompatActivity {
                  fragment = new ReservaFragment();
                 setTitle(item.getTitle());
                 break;
-            case R.id.navComentários:
-                fragment = new ComentariosFragment();
-                setTitle(item.getTitle());
-                break;
-            case R.id.navPedidoMesa:
+
+            case R.id.navPedidos:
                 fragment = new PedidoMesaFragment();
                 setTitle(item.getTitle());
                 break;
@@ -43,14 +40,15 @@ public class MenuMainActivity extends AppCompatActivity {
                 fragment = new RefeicaoFragment();
                 setTitle(item.getTitle());
                 break;
-            case R.id.navTakeaway:
-                fragment = new TakeawayFragment();
+
+            case R.id.navComentarios:
+                fragment = new ComentariosFragment();
                 setTitle(item.getTitle());
                 break;
+
         }
         if (fragment != null)
-            fragmentManager.beginTransaction().replace(R.id.contentfragment,
-                    fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.contentfragment, fragment).commit();
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
