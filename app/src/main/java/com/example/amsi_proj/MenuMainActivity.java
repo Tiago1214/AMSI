@@ -14,6 +14,8 @@ public class MenuMainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     private DrawerLayout drawer;
+    public static final String USERNAME="USERNAME";
+    public static final String TOKEN="TOKEN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
