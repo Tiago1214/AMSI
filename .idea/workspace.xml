@@ -1,14 +1,253 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="533735c8-f2c0-4845-8db5-a26b774f0ef1" name="Changes" comment="" />
+    <list default="true" id="a1fe5441-f7d8-413e-ba74-f9494dd7089f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/AMSI_proj.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/.idea/deploymentTargetDropDown.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/androidTest/java/com/example/amsi_proj/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/ic_action_comment-playstore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/ic_action_freefood-playstore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/ic_action_freefooduncheckded-playstore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/ic_action_reservation-playstore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/ic_action_tablerequest-playstore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/ic_action_takeaway-playstore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/ic_launcher-playstore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/ic_logo_100portugues-playstore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-anydpi/ic_action_adicionar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-anydpi/ic_action_guardar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-anydpi/ic_action_pesquisar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-anydpi/ic_action_remover.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-hdpi/ic_action_adicionar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-hdpi/ic_action_guardar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-hdpi/ic_action_pesquisar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-hdpi/ic_action_remover.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-mdpi/ic_action_adicionar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-mdpi/ic_action_guardar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-mdpi/ic_action_pesquisar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-mdpi/ic_action_remover.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-xhdpi/ic_action_adicionar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-xhdpi/ic_action_guardar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-xhdpi/ic_action_pesquisar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-xhdpi/ic_action_remover.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-xxhdpi/ic_action_adicionar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-xxhdpi/ic_action_guardar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-xxhdpi/ic_action_pesquisar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable-xxhdpi/ic_action_remover.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable/ic_action_add.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable/ic_action_comment_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable/ic_action_comment_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable/ic_action_freefood_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable/ic_action_freefood_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable/ic_action_reservation_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable/ic_action_reservation_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable/ic_action_tablerequest_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable/ic_action_tablerequest_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable/ic_action_takeaway_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable/ic_action_takeaway_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-anydpi-v26/ic_action_comment.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-anydpi-v26/ic_action_comment_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-anydpi-v26/ic_action_reservation.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-anydpi-v26/ic_action_reservation_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-anydpi-v26/ic_action_tablerequest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-anydpi-v26/ic_action_tablerequest_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-anydpi-v26/ic_action_takeaway.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-anydpi-v26/ic_action_takeaway_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-anydpi-v26/ic_logo_100portugues.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-anydpi-v26/ic_logo_100portugues_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-hdpi/ic_action_comment.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-hdpi/ic_action_comment_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-hdpi/ic_action_reservation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-hdpi/ic_action_reservation_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-hdpi/ic_action_tablerequest.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-hdpi/ic_action_tablerequest_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-hdpi/ic_action_takeaway.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-hdpi/ic_action_takeaway_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-hdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-hdpi/ic_logo_100portugues.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-hdpi/ic_logo_100portugues_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-hdpi/ic_logo_100portugues_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-mdpi/ic_action_comment.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-mdpi/ic_action_comment_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-mdpi/ic_action_reservation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-mdpi/ic_action_reservation_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-mdpi/ic_action_tablerequest.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-mdpi/ic_action_tablerequest_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-mdpi/ic_action_takeaway.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-mdpi/ic_action_takeaway_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-mdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-mdpi/ic_logo_100portugues.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-mdpi/ic_logo_100portugues_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-mdpi/ic_logo_100portugues_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xhdpi/ic_action_comment.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xhdpi/ic_action_comment_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xhdpi/ic_action_reservation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xhdpi/ic_action_reservation_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xhdpi/ic_action_tablerequest.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xhdpi/ic_action_tablerequest_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xhdpi/ic_action_takeaway.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xhdpi/ic_action_takeaway_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xhdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xhdpi/ic_logo_100portugues.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xhdpi/ic_logo_100portugues_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xhdpi/ic_logo_100portugues_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxhdpi/ic_action_comment.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxhdpi/ic_action_comment_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxhdpi/ic_action_reservation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxhdpi/ic_action_reservation_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxhdpi/ic_action_tablerequest.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxhdpi/ic_action_tablerequest_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxhdpi/ic_action_takeaway.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxhdpi/ic_action_takeaway_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxhdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxhdpi/ic_logo_100portugues.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxhdpi/ic_logo_100portugues_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxhdpi/ic_logo_100portugues_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxxhdpi/ic_action_comment.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxxhdpi/ic_action_comment_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxxhdpi/ic_action_reservation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxxhdpi/ic_action_reservation_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxxhdpi/ic_action_tablerequest.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxxhdpi/ic_action_tablerequest_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxxhdpi/ic_action_takeaway.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxxhdpi/ic_action_takeaway_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxxhdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxxhdpi/ic_logo_100portugues.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxxhdpi/ic_logo_100portugues_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/debug/res/mipmap-xxxhdpi/ic_logo_100portugues_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/java/com/example/amsi_proj/ComentariosFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/java/com/example/amsi_proj/LoginActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/java/com/example/amsi_proj/MenuMainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/java/com/example/amsi_proj/PedidoMesaFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/java/com/example/amsi_proj/RefeicaoFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/java/com/example/amsi_proj/ReservaFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/java/com/example/amsi_proj/modelo/Comentario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/java/com/example/amsi_proj/modelo/ComentarioBDHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/drawable/_100portugues_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/drawable/gersoft_removebg_preview.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/activity_login.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/activity_menu_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/app_bar_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/fragment_adicionar_pedido.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/fragment_comentarios.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/fragment_pedidos.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/fragment_refeicao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/fragment_reserva.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/item_grelha_refeicao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/item_lista_adicionar_comentario.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/item_lista_adicionar_pedido.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/item_lista_adicionar_reserva.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/item_lista_comentario.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/item_lista_pedido.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/item_lista_reserva.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/layout/nav_header_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/menu/activity_main_drawer.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/menu/menu_detalhes_livro.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/menu/menu_pesquisa.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/mipmap-hdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/mipmap-mdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/values-night/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/values/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/xml/backup_rules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/main/res/xml/data_extraction_rules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/app/src/test/java/com/example/amsi_proj/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AMSI_proj/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/local.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\tiago\.android\avd\Pixel_6_API_30.avd]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="AMSI_proj" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -16,31 +255,101 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2KVMANWN4JW6OYQEzM3wEAdyiDM" />
+  <component name="ProjectId" id="2KVchBdq5bygzJtI3C94PRsupD2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/Users/User/Documents/GitHub/AMSI/AMSI_proj",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Books" />
+  </component>
+  <component name="RunManager">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="AMSI_proj.app.main" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+        <option name="PROFILING_MODE" value="NOT_SET" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="AMSI_proj" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="AMSI_proj" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="533735c8-f2c0-4845-8db5-a26b774f0ef1" name="Changes" comment="" />
-      <created>1674055153979</created>
+      <changelist id="a1fe5441-f7d8-413e-ba74-f9494dd7089f" name="Changes" comment="" />
+      <created>1674063307851</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1674055153979</updated>
+      <updated>1674063307851</updated>
     </task>
     <servers />
   </component>
