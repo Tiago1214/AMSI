@@ -60,7 +60,7 @@ public class SingletonGersoft {
                 public void onResponse(String response) {
                     String token = LoginJsonParser.parserJsonLogin(response);
                     if (loginListener != null)
-                        loginListener.onValidateLogin(token);
+                        loginListener.onValidateLogin(token,username);
                 }
 
             }, new Response.ErrorListener() {

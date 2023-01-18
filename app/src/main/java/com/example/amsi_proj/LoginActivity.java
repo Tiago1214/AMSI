@@ -63,11 +63,12 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
 
 
     @Override
-    public void onValidateLogin(String token) {
+    public void onValidateLogin(String token,String username) {
         if (token!=null)
         {
             Intent intent = new Intent(this, MenuMainActivity.class);
             intent.putExtra(MenuMainActivity.TOKEN, token);
+            intent.putExtra(MenuMainActivity.USERNAME,username);
             startActivity(intent);
             finish();
         }else
