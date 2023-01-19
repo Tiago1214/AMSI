@@ -57,6 +57,7 @@ public class ListaArtigoAdaptador extends BaseAdapter {
             viewHolder = new ViewHolderLista(view);
             view.setTag(viewHolder);
         }
+        viewHolder.update(artigos.get(i));
         return view;
     }
 
@@ -67,6 +68,14 @@ public class ListaArtigoAdaptador extends BaseAdapter {
         public ViewHolderLista(View view){
             tvNome = view.findViewById(R.id.tvNome);
             tvPreco = view.findViewById(R.id.tvPreco);
+            imgArtigo=view.findViewById(R.id.imgArtigo);
+        }
+        public void update(Artigo artigo){
+            tvNome.setText(artigo.getNome());
+            tvPreco.setText(artigo.getPreco()+"");
+            Glide.with(context)
+                    .load("http://10.0.2.2/gersoft/backend/web/images/"+artigo.getImagemurl())
+                    .into(imgArtigo);
         }
     }
 }

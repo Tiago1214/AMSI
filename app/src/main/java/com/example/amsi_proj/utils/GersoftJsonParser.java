@@ -36,7 +36,7 @@ public class GersoftJsonParser {
                 String descricao = artigo.getString("descricao");
                 String referencia = artigo.getString("referencia");
                 double preco = artigo.getDouble("preco");
-                String imagemurl=artigo.getString("imagemurl");
+                String imagemurl=artigo.getString("imagem");
                 int iva_id=artigo.getInt("iva_id");
                 int categoria_id=artigo.getInt("categoria_id");
 

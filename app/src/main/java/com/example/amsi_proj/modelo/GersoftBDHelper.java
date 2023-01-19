@@ -189,14 +189,16 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
                 null,null,null,null,null);
 
         if(cursor.moveToFirst()){
+            do {
             Artigo auxArtigo = new Artigo(cursor.getInt(0), cursor.getString(1)
-                    , cursor.getString(2), cursor.getString(3), cursor.getDouble(4), cursor.getString(5),cursor.getInt(6),cursor.getInt(7));
+                    , cursor.getString(2), cursor.getString(3),
+                    cursor.getDouble(4), cursor.getString(5),cursor.getInt(6),cursor.getInt(7));
 
             artigos.add(auxArtigo);
+            }while (cursor.moveToNext());
+            cursor.close();
         }
         return artigos;
     }
-
-
     //endregion
 }

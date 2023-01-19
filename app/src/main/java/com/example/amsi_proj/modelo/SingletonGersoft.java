@@ -41,6 +41,7 @@ public class SingletonGersoft {
 
     //region variaveis do singleton
     public SingletonGersoft(Context context) {
+        gersoftBD=new GersoftBDHelper(context);
     }
 
     public static synchronized SingletonGersoft getInstance(Context context){
@@ -146,6 +147,14 @@ public class SingletonGersoft {
             });
             volleyQueue.add(req);
         }
+    }
+
+    public Artigo getArtigo(int idArtigo){
+        for (Artigo a : artigos){
+            if(a.getId() == idArtigo)
+                return a;
+        }
+        return null;
     }
     //endregion
 }

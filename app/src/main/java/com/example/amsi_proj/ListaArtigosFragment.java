@@ -98,9 +98,10 @@ public class ListaArtigosFragment extends Fragment implements ArtigoListener {
             @Override
             public boolean onQueryTextChange(String s) {
                 ArrayList<Artigo> tempLista = new ArrayList<>();
-                for(Artigo a: SingletonGersoft.getInstance(getContext()).getArtigosBD())
+                ArrayList<Artigo> teste = SingletonGersoft.getInstance(getContext()).getArtigosBD();
+                for(Artigo a: teste)
                 {
-                    if (a.getDescricao().toLowerCase().contains(a.toLowerCase()))
+                    if (a.getNome().toLowerCase().contains(s.toLowerCase()))
                     {
                         tempLista.add(a);
                     }
