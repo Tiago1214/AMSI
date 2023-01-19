@@ -1,6 +1,7 @@
 package com.example.amsi_proj.modelo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
@@ -21,6 +22,9 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.amsi_proj.DetalhesArtigoActivity;
+import com.example.amsi_proj.ListaArtigosFragment;
+import com.example.amsi_proj.LoginActivity;
 import com.example.amsi_proj.R;
 import com.example.amsi_proj.listeners.ArtigoListener;
 import com.example.amsi_proj.listeners.DetalhesListener;
@@ -36,6 +40,7 @@ public class SingletonGersoft {
     private DetalhesListener DetalhesListener;
     private LoginListener loginListener;
     private ArtigoListener artigoListener;
+    private DetalhesListener detalhesListener;
     private GersoftBDHelper gersoftBD;
     private ArrayList<Artigo> artigos;
 
@@ -56,6 +61,7 @@ public class SingletonGersoft {
     //region Login
     public void loginAPI(final String username, final String password, final Context context){
         if (!GersoftJsonParser.isConnectionInternet(context)){
+            //Intent intent=new Intent(LoginActivity.class);
             Toast.makeText(context, R.string.SemligacaoInternet, Toast.LENGTH_LONG).show();
         }else
         {
@@ -155,6 +161,10 @@ public class SingletonGersoft {
                 return a;
         }
         return null;
+    }
+
+    public void setDetalhesListener(DetalhesListener detalhesListener ) {
+        this.detalhesListener=detalhesListener;
     }
     //endregion
 }

@@ -72,7 +72,7 @@ public class ListaArtigoAdaptador extends BaseAdapter {
         }
         public void update(Artigo artigo){
             tvNome.setText(artigo.getNome());
-            tvPreco.setText(artigo.getPreco()+"");
+            tvPreco.setText(artigo.getPreco()+" €");
             Glide.with(context)
                     .load("http://10.0.2.2/gersoft/backend/web/images/"+artigo.getImagemurl())
                     .into(imgArtigo);

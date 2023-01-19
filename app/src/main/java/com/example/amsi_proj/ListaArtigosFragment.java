@@ -22,6 +22,7 @@ import com.example.amsi_proj.adaptadores.ListaArtigoAdaptador;
 import com.example.amsi_proj.listeners.ArtigoListener;
 import com.example.amsi_proj.modelo.Artigo;
 import com.example.amsi_proj.modelo.SingletonGersoft;
+import com.example.amsi_proj.DetalhesArtigoActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -31,7 +32,6 @@ public class ListaArtigosFragment extends Fragment implements ArtigoListener {
 
     private ListView lvArtigos;
    // private ArrayList<Artigo> artigos;
-    private FloatingActionButton fabLista;
     private SearchView searchView;
     public static final int ACT_DETALHES = 1;
 
@@ -40,7 +40,6 @@ public class ListaArtigosFragment extends Fragment implements ArtigoListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lista_artigos, container, false);
         setHasOptionsMenu(true);
-        fabLista=view.findViewById(R.id.fabLista);
         lvArtigos = view.findViewById(R.id.lvArtigos);
 
         lvArtigos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -48,39 +47,12 @@ public class ListaArtigosFragment extends Fragment implements ArtigoListener {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DetalhesArtigoActivity.class);
                 intent.putExtra("ID_ARTIGO", (int) id);
-                startActivityForResult(intent, ACT_DETALHES);
-            }
-        });
-
-        fabLista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), DetalhesArtigoActivity.class);
-                startActivityForResult(intent, ACT_DETALHES);
+                startActivity(intent);
             }
         });
         SingletonGersoft.getInstance(getContext()).setArtigosListener(this);
         SingletonGersoft.getInstance(getContext()).getAllArtigosAPI(getContext());
         return view;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
-        if (resultCode== Activity.RESULT_OK && requestCode==ACT_DETALHES){
-           SingletonGersoft.getInstance(getContext()).getAllArtigosAPI(getContext()); // quando sai dos detalhes e volta a lsta
-
-            switch (intent.getIntExtra(MenuMainActivity.OPERACAO, 0)){
-                case MenuMainActivity.ADD:
-                    Toast.makeText(getContext(), "Livro adicionado", Toast.LENGTH_SHORT).show();
-                    break;
-                case MenuMainActivity.EDIT:
-                    Toast.makeText(getContext(), "Livro editado", Toast.LENGTH_SHORT).show();
-                    break;
-                case MenuMainActivity.DELETE:
-                    Toast.makeText(getContext(), "Livro eliminado", Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }
     }
 
     @Override
