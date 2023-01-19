@@ -16,6 +16,10 @@
         android:id="@+id/navPedidos"
         android:icon="@drawable/ic_action_tablerequest_foreground"
         android:title="@string/pedido_na_mesa_txt" />
+    <item
+        android:id="@+id/navArtigos"
+        android:icon="@drawable/ic_action_tablerequest_foreground"
+        android:title="@string/Artigos_menu" />
 
 
 

@@ -17,4 +17,7 @@
     <string name="ndOpen">Open</string>
     <string name="ndClose">Close</string>
     <string name="SHARED_USER">DADOS_USER</string>
+    <string name="SemligacaoInternet">Sem ligação á internet</string>
+    <string name="ErroLogin">Utilizador ou password errada</string>
+    <string name="Artigos_menu">Artigos</string>
 </resources>

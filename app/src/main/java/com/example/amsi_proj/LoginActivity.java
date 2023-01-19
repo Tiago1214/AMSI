@@ -73,9 +73,8 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
             finish();
         }else
         {
-            Toast.makeText(getApplicationContext(),"Erro login",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.ErroLogin,Toast.LENGTH_LONG).show();
         }
-
     }
 
 }

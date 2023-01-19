@@ -1,12 +1,9 @@
 package com.example.amsi_proj.modelo;
 
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,19 +21,25 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.amsi_proj.R;
+import com.example.amsi_proj.listeners.ArtigoListener;
 import com.example.amsi_proj.listeners.DetalhesListener;
 import com.example.amsi_proj.listeners.LoginListener;
-import com.example.amsi_proj.utils.LoginJsonParser;
+import com.example.amsi_proj.utils.GersoftJsonParser;
 
 public class SingletonGersoft {
 
     private static  SingletonGersoft instance = null;
     private static RequestQueue volleyQueue = null;
     private static final  String mUrlAPILogin = "http://10.0.2.2/gersoft/backend/web/api/users/auth";
-    private static final String TOKEN = "SwqsYsSzen1wSXRZYb_-P1pPEbbFXcey";
+    private static final String mUrlAPIArtigos="http://10.0.2.2/gersoft/backend/web/api/artigos";
     private DetalhesListener DetalhesListener;
     private LoginListener loginListener;
+    private ArtigoListener artigoListener;
+    private GersoftBDHelper gersoftBD;
+    private ArrayList<Artigo> artigos;
 
+    //region variaveis do singleton
     public SingletonGersoft(Context context) {
     }
 
@@ -48,17 +51,17 @@ public class SingletonGersoft {
         }
         return instance;
     }
-
+    //endregion
     //region Login
     public void loginAPI(final String username, final String password, final Context context){
-        if (!LoginJsonParser.isConnectionInternet(context)){
-            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, R.string.SemligacaoInternet, Toast.LENGTH_LONG).show();
         }else
         {
             StringRequest req = new StringRequest(Request.Method.GET, mUrlAPILogin, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    String token = LoginJsonParser.parserJsonLogin(response);
+                    String token = GersoftJsonParser.parserJsonLogin(response);
                     if (loginListener != null)
                         loginListener.onValidateLogin(token,username);
                 }
@@ -67,6 +70,9 @@ public class SingletonGersoft {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.d("LOGIN: Error" + error.getMessage());
+                    //para dar mensagem de erro no login
+                    loginListener.onValidateLogin(null,username);
+
                 }
             }){
                 @Override
@@ -82,6 +88,64 @@ public class SingletonGersoft {
 
     public void setLoginListener(LoginListener loginListener) {
         this.loginListener = loginListener;
+    }
+    //endregion
+
+    //region artigos
+    public ArrayList<Artigo> getArtigosBD() { // return da copia dos livros
+        artigos=gersoftBD.getAllArtigosBD();
+        return new ArrayList(artigos);
+    }
+
+    public void setArtigosListener(ArtigoListener artigoListener) {
+        this.artigoListener=artigoListener;
+    }
+
+    public void adicionarArtigosBD(ArrayList<Artigo> artigos)
+    {
+        gersoftBD.removerAllArtigos();
+        for(Artigo a:artigos)
+        {
+            adicionarArtigoBD(a);
+        }
+    }
+
+    public void adicionarArtigoBD(Artigo a)
+    {
+        gersoftBD.adicionarArtigoBD(a);
+    }
+
+    public void getAllArtigosAPI(final Context context){
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+            if (artigoListener!=null)
+            {
+                artigoListener.onRefreshListaArtigos(gersoftBD.getAllArtigosBD());
+            }
+        }else
+        {
+            SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+            String user_logado=sharedPreferences.getString("USERNAME","");
+            String token_logado=sharedPreferences.getString("TOKEN","");
+            JsonArrayRequest req=new JsonArrayRequest(Request.Method.GET, mUrlAPIArtigos+"?access-token="+token_logado, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    artigos = GersoftJsonParser.parserJsonArtigos(response);
+                    adicionarArtigosBD(artigos);
+
+                    if (artigoListener!=null)
+                    {
+                        artigoListener.onRefreshListaArtigos(artigos);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
     }
     //endregion
 }

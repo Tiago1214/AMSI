@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,6 +19,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.amsi_proj.modelo.Artigo;
+import com.example.amsi_proj.modelo.Comentario;
+import com.example.amsi_proj.modelo.SingletonGersoft;
 import com.google.android.material.navigation.NavigationView;
 
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -48,12 +52,12 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         drawer.addDrawerListener(toggle);
 
         carregarCabecalho();
-
         navigationView.setNavigationItemSelectedListener(this);
         fragmentManager = getSupportFragmentManager();
         carregarFragmentoInicial();
     }
 
+    //region atribuir valores ao header e ao menu
     private boolean carregarFragmentoInicial() {
         Menu menu = navigationView.getMenu();
         MenuItem item = menu.getItem(0);
@@ -84,18 +88,23 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         }
 
     }
+    //endregion
 
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
         Fragment fragment = null;
         switch (item .getItemId()) {
             case R.id.navReserva:
-                 fragment = new ReservaFragment();
+                fragment = new ReservaFragment();
                 setTitle(item.getTitle());
                 break;
 
             case R.id.navPedidos:
                 fragment = new PedidoMesaFragment();
+                setTitle(item.getTitle());
+                break;
+            case R.id.navArtigos:
+                fragment=new ListaArtigosFragment();
                 setTitle(item.getTitle());
                 break;
             case R.id.navRefeicao:
@@ -109,10 +118,24 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 break;
 
         }
-        if (fragment != null)
+        if (fragment != null){
             fragmentManager.beginTransaction().replace(R.id.contentfragment, fragment).commit();
+        }
+
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void onClickLogout(View view) {
+        SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+
+        // Navigate to login activity
+        Intent loginIntent = new Intent(MenuMainActivity.this, LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(loginIntent);
+        finish();
     }
 }

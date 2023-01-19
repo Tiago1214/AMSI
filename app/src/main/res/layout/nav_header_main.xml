@@ -33,11 +33,12 @@
             android:gravity="right|end">
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/btnimgLogout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|end"
-                app:srcCompat="@drawable/ic_logout" />
+                app:srcCompat="@drawable/ic_logout"
+                android:onClick="onClickLogout"/>
         </LinearLayout>
 
 
