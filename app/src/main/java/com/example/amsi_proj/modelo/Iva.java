@@ -1,13 +1,12 @@
 package com.example.amsi_proj.modelo;
 
-public class Categoria {
+public class Iva {
+    private int id,taxaiva;
+    private String descricao;
 
-    private int id;
-    private String nome,descricao;
-
-    public Categoria(int id, String nome, String descricao) {
+    public Iva(int id, int taxaiva, String descricao) {
         this.id = id;
-        this.nome = nome;
+        this.taxaiva = taxaiva;
         this.descricao = descricao;
     }
 
@@ -19,12 +18,12 @@ public class Categoria {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public int getTaxaiva() {
+        return taxaiva;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setTaxaiva(int taxaiva) {
+        this.taxaiva = taxaiva;
     }
 
     public String getDescricao() {
