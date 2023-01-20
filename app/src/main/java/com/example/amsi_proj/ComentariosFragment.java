@@ -19,8 +19,10 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.amsi_proj.DetalhesComentarioActivity;
 import com.example.amsi_proj.adaptadores.ListaComentarioAdaptador;
 import com.example.amsi_proj.listeners.ComentarioListener;
+import com.example.amsi_proj.modelo.Artigo;
 import com.example.amsi_proj.modelo.Comentario;
 import com.example.amsi_proj.modelo.SingletonGersoft;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -106,7 +108,8 @@ public class ComentariosFragment extends Fragment implements ComentarioListener 
             @Override
             public boolean onQueryTextChange(String s) {
                 ArrayList<Comentario> tempLista = new ArrayList<>();
-                for(Comentario c: SingletonGersoft.getInstance(getContext()).getComentariosDB())
+                ArrayList<Comentario> teste = SingletonGersoft.getInstance(getContext()).getComentariosDB();
+                for(Comentario c: teste)
                 {
                     if (c.getTitulo().toLowerCase().contains(s.toLowerCase()))
                     {

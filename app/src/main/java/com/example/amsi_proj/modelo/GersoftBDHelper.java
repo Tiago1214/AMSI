@@ -220,7 +220,7 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
     public void removerAllCometarios() {
     }
 
-    public void adicionarComentarioBD(ArrayList<Comentario> c) {
+    public void adicionarComentarioBD(Comentario c) {
     }
     //endregion
 }

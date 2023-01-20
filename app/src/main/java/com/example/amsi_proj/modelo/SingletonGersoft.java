@@ -181,15 +181,15 @@ public class SingletonGersoft {
         this.comentarioListener=comentarioListener;
     }
 
-    public void adicionarComentariosBD(Comentario comentarios)
+    public void adicionarComentariosBD(ArrayList<Comentario> comentarios)
     {
         gersoftBD.removerAllCometarios();
-        for(Comentario c: comentarios)
+        for(Comentario c : comentarios)
         {
-            adicionarComentariosBD(c);
+            adicionarComentarioBD(c);
         }
     }
-    public void adicionarComentarioBD(ArrayList<Comentario> c)
+    public void adicionarComentarioBD(Comentario c)
     {
         gersoftBD.adicionarComentarioBD(c);
     }
@@ -210,7 +210,7 @@ public class SingletonGersoft {
                 @Override
                 public void onResponse(JSONArray response) {
                     comentarios = GersoftJsonParser.parserJsonComentarios(response);
-                    adicionarComentarioBD(comentarios);
+                    adicionarComentariosBD(comentarios);
 
                     if (comentarioListener!=null)
                     {

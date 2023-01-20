@@ -10,24 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1fe5441-f7d8-413e-ba74-f9494dd7089f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/amsi_proj/DetalhesComentarioActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/amsi_proj/adaptadores/ListaComentarioAdaptador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_detalhes_comentario.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/amsi_proj/ComentariosFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/amsi_proj/ComentariosFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/amsi_proj/listeners/ComentarioListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/amsi_proj/listeners/ComentarioListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/amsi_proj/modelo/Comentario.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/amsi_proj/modelo/Comentario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/amsi_proj/modelo/GersoftBDHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/amsi_proj/modelo/GersoftBDHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/amsi_proj/modelo/SingletonGersoft.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/amsi_proj/modelo/SingletonGersoft.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/amsi_proj/utils/GersoftJsonParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/amsi_proj/utils/GersoftJsonParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_detalhes_artigo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_detalhes_artigo.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_lista_adicionar_pedido.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_lista_adicionar_pedido.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_lista_artigo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_lista_artigo.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_lista_comentario.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_lista_comentario.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_lista_reserva.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_lista_reserva.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
