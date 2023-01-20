@@ -92,6 +92,22 @@ public class GersoftJsonParser {
         }
         return comentarios;
     }
+
+    public static Comentario parserJsonComentario(String response) {
+        Comentario auxComentario = null;
+        try {
+            JSONObject comentario = new JSONObject(response);
+            int id = comentario.getInt("id");
+            String titulo = comentario.getString("titulo");
+            String descricao = comentario.getString("descricao");
+            int profile_id = comentario.getInt("profile_id");
+            auxComentario = new Comentario(id, profile_id,titulo, descricao);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxComentario;
+    }
     //endregion
 
     //region reserva

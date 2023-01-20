@@ -31,6 +31,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     private DrawerLayout drawer;
     private String username;
     private String token;
+    public static final String SHARED_USER="DADOS_USER";
     public static final String USERNAME="USERNAME";
     public static final String TOKEN="TOKEN";
     public static final String OPERACAO="OPERACAO";

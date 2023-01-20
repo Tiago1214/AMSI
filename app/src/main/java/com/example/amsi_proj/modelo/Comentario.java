@@ -13,6 +13,7 @@ public class Comentario {
         this.profile_id = profile_id;
     }
 
+
     public int getId() {
         return id;
     }

@@ -218,9 +218,39 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
     }
 
     public void removerAllCometarios() {
+        db.delete(TABLE_COMENTARIO, null, null);
     }
 
-    public void adicionarComentarioBD(Comentario c) {
+
+
+    public Boolean editarComentarioBD(Comentario comentario) {
+
+        ContentValues values = new ContentValues();
+        values.put(TITULO, comentario.getTitulo());
+        values.put(DESCRICAO, comentario.getDescricao());
+        // db.update retorna o numero de linhas atualizadas
+        return db.update(TABLE_COMENTARIO, values, ID+"=?", new String[]{comentario.getId()+""})==1;
+
+    }
+    public Boolean removerLivroBD(int id)
+    {
+        // db.delete
+        return db.delete(TABLE_COMENTARIO,ID+"=?", new String[]{id+""})==1;
+    }
+
+    public Comentario adicionarComentarioBD(Comentario comentario)
+    {
+        ContentValues values = new ContentValues();
+        values.put(ID, comentario.getId());
+        values.put(TITULO, comentario.getTitulo());
+        values.put(DESCRICAO, comentario.getDescricao());
+        int id = (int)db.insert(TABLE_COMENTARIO, null, values);
+        if(id>-1)
+        {
+            comentario.setId(id);
+            return comentario;
+        }
+        return null;
     }
     //endregion
 }

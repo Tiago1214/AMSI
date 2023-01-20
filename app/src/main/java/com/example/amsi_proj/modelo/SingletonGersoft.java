@@ -21,6 +21,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.amsi_proj.MenuMainActivity;
 import com.example.amsi_proj.R;
 import com.example.amsi_proj.listeners.ArtigoListener;
 import com.example.amsi_proj.listeners.ComentarioListener;
@@ -35,10 +36,11 @@ public class SingletonGersoft {
     private static final  String mUrlAPILogin = "http://10.0.2.2/gersoft/backend/web/api/users/auth";
     private static final String mUrlAPIArtigos="http://10.0.2.2/gersoft/backend/web/api/artigos";
     private static final String mUrlAPIComentarios="http://10.0.2.2/gersoft/backend/web/api/comentarios/meuscomentarios";
-    private DetalhesListener DetalhesListener;
+
     private LoginListener loginListener;
     private ArtigoListener artigoListener;
     private DetalhesListener detalhesListener;
+    private GersoftBDHelper comentariosBD;
     private GersoftBDHelper gersoftBD;
     private ArrayList<Artigo> artigos;
     private ArrayList<Comentario> comentarios;
@@ -234,8 +236,114 @@ public class SingletonGersoft {
         return null;
     }
 
+    public void editarComentarioAPI(final Comentario comentario , final Context context, String token){
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        }else
+        {
+            StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPIComentarios+ "/"+comentario.getId(), new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    editarComentarioBD(comentario);
 
+                    if (detalhesListener!=null)
+                    {
+                        detalhesListener.onRefreshDetalhes(MenuMainActivity.EDIT);
+                    }
 
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                public Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("token", token);
+                    params.put("titulo", comentario.getTitulo());
+                    params.put("comentario", comentario.getDescricao());
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+    }
+
+    private void editarComentarioBD(Comentario c) {
+        Comentario auxComentario = getComentario(c.getId());
+        if(auxComentario!=null)
+        {
+            comentariosBD.editarComentarioBD(c);
+        }
+    }
+
+    public void adicionarComentarioAPI(final Comentario comentario, final Context context, String token) {
+
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        }else
+        {
+            StringRequest req = new StringRequest(Request.Method.POST, mUrlAPIComentarios, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    adicionarComentarioBD(GersoftJsonParser.parserJsonComentario(response));
+                    if (detalhesListener!=null)
+                    {
+                        detalhesListener.onRefreshDetalhes(MenuMainActivity.ADD);
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                public Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("token", token);
+                    params.put("titulo", comentario.getTitulo());
+                    params.put("descricao", comentario.getDescricao());
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+    }
+
+    public void removerComentarioAPI(final Comentario comentario, final Context context){
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        }else
+        {
+            StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPIComentarios+ "/"+comentario.getId(), new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    removerComentarioBD(comentario.getId());
+                    if (detalhesListener!=null)
+                    {
+                        detalhesListener.onRefreshDetalhes(MenuMainActivity.DELETE);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
+    private void removerComentarioBD(int id) {
+            Comentario auxComentario = getComentario(id);
+            if (auxComentario!=null)
+                comentariosBD.removerLivroBD(id);
+
+    }
 
 
     //endregion
