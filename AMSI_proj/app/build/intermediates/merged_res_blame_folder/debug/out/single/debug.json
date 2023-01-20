@@ -1,0 +1,546 @@
+[
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxxhdpi_ic_action_tablerequest_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxxhdpi/ic_action_tablerequest_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxxhdpi_ic_logo_100portugues_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxxhdpi/ic_logo_100portugues_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable_ic_action_reservation_background.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable/ic_action_reservation_background.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-hdpi_ic_action_guardar.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-hdpi/ic_action_guardar.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxhdpi_ic_logo_100portugues.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxhdpi/ic_logo_100portugues.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-mdpi_ic_action_tablerequest.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-mdpi/ic_action_tablerequest.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxhdpi_ic_logo_100portugues_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxhdpi/ic_logo_100portugues_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-anydpi_ic_action_pesquisar.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-anydpi/ic_action_pesquisar.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxxhdpi_ic_logo_100portugues_foreground.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxxhdpi/ic_logo_100portugues_foreground.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xhdpi_ic_action_comment.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xhdpi/ic_action_comment.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxxhdpi_ic_action_comment.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxxhdpi/ic_action_comment.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_item_lista_comentario.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/item_lista_comentario.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable_ic_action_comment_foreground.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable/ic_action_comment_foreground.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxhdpi_ic_action_tablerequest_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxhdpi/ic_action_tablerequest_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxhdpi_ic_action_reservation_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxhdpi/ic_action_reservation_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_item_lista_pedido.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/item_lista_pedido.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xhdpi_ic_action_takeaway.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xhdpi/ic_action_takeaway.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable_ic_action_add.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable/ic_action_add.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_item_lista_adicionar_comentario.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/item_lista_adicionar_comentario.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable_ic_action_tablerequest_background.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable/ic_action_tablerequest_background.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable_ic_action_freefood_foreground.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable/ic_action_freefood_foreground.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-mdpi_ic_logo_100portugues_foreground.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-mdpi/ic_logo_100portugues_foreground.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_nav_header_main.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/nav_header_main.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-hdpi_ic_action_adicionar.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-hdpi/ic_action_adicionar.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-mdpi_ic_logo_100portugues.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-mdpi/ic_logo_100portugues.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-hdpi_ic_action_remover.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-hdpi/ic_action_remover.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxxhdpi_ic_action_takeaway.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxxhdpi/ic_action_takeaway.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable_ic_action_takeaway_foreground.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable/ic_action_takeaway_foreground.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-anydpi-v26_ic_action_tablerequest.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-anydpi-v26/ic_action_tablerequest.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-hdpi_ic_logo_100portugues_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-hdpi/ic_logo_100portugues_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_activity_menu_main.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/activity_menu_main.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xhdpi_ic_action_comment_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xhdpi/ic_action_comment_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_item_lista_adicionar_pedido.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/item_lista_adicionar_pedido.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxxhdpi_ic_action_reservation.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxxhdpi/ic_action_reservation.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxxhdpi_ic_logo_100portugues.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxxhdpi/ic_logo_100portugues.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-hdpi_ic_action_tablerequest.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-hdpi/ic_action_tablerequest.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xhdpi_ic_logo_100portugues.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xhdpi/ic_logo_100portugues.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-hdpi_ic_action_comment_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-hdpi/ic_action_comment_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-xxhdpi_ic_action_guardar.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-xxhdpi/ic_action_guardar.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_fragment_refeicao.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/fragment_refeicao.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-anydpi-v26_ic_action_comment.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-anydpi-v26/ic_action_comment.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable_ic_action_takeaway_background.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable/ic_action_takeaway_background.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-anydpi-v26_ic_action_takeaway_round.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-anydpi-v26/ic_action_takeaway_round.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xhdpi_ic_logo_100portugues_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xhdpi/ic_logo_100portugues_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-mdpi_ic_logo_100portugues_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-mdpi/ic_logo_100portugues_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-xhdpi_ic_action_pesquisar.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-xhdpi/ic_action_pesquisar.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xhdpi_ic_action_reservation_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xhdpi/ic_action_reservation_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-anydpi-v26_ic_action_reservation.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-anydpi-v26/ic_action_reservation.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-mdpi_ic_action_reservation_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-mdpi/ic_action_reservation_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-anydpi_ic_action_guardar.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-anydpi/ic_action_guardar.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-hdpi_ic_action_takeaway.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-hdpi/ic_action_takeaway.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxhdpi_ic_action_reservation.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxhdpi/ic_action_reservation.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-anydpi-v26_ic_action_tablerequest_round.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-anydpi-v26/ic_action_tablerequest_round.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-hdpi_ic_action_tablerequest_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-hdpi/ic_action_tablerequest_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxhdpi_ic_action_takeaway.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxhdpi/ic_action_takeaway.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-hdpi_ic_action_pesquisar.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-hdpi/ic_action_pesquisar.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-hdpi_ic_action_comment.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-hdpi/ic_action_comment.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xhdpi_ic_action_tablerequest.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xhdpi/ic_action_tablerequest.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/menu_activity_main_drawer.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/menu/activity_main_drawer.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable_ic_action_reservation_foreground.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable/ic_action_reservation_foreground.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-hdpi_ic_action_takeaway_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-hdpi/ic_action_takeaway_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xhdpi_ic_action_takeaway_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xhdpi/ic_action_takeaway_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-mdpi_ic_action_pesquisar.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-mdpi/ic_action_pesquisar.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxhdpi_ic_action_takeaway_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxhdpi/ic_action_takeaway_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-anydpi-v26_ic_logo_100portugues_round.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-anydpi-v26/ic_logo_100portugues_round.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xhdpi_ic_action_tablerequest_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xhdpi/ic_action_tablerequest_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxxhdpi_ic_action_reservation_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxxhdpi/ic_action_reservation_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xhdpi_ic_logo_100portugues_foreground.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xhdpi/ic_logo_100portugues_foreground.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable_ic_action_comment_background.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable/ic_action_comment_background.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-xxhdpi_ic_action_remover.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-xxhdpi/ic_action_remover.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_fragment_pedidos.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/fragment_pedidos.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_fragment_reserva.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/fragment_reserva.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-xxhdpi_ic_action_pesquisar.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-xxhdpi/ic_action_pesquisar.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-anydpi-v26_ic_action_comment_round.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-anydpi-v26/ic_action_comment_round.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-mdpi_ic_action_guardar.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-mdpi/ic_action_guardar.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxxhdpi_ic_action_comment_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxxhdpi/ic_action_comment_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-xhdpi_ic_action_guardar.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-xhdpi/ic_action_guardar.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxhdpi_ic_action_comment_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxhdpi/ic_action_comment_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-mdpi_ic_action_comment_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-mdpi/ic_action_comment_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-anydpi_ic_action_remover.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-anydpi/ic_action_remover.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-hdpi_ic_logo_100portugues_foreground.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-hdpi/ic_logo_100portugues_foreground.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_app_bar_main.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/app_bar_main.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-anydpi-v26_ic_action_reservation_round.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-anydpi-v26/ic_action_reservation_round.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_item_lista_adicionar_reserva.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/item_lista_adicionar_reserva.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-hdpi_ic_logo_100portugues.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-hdpi/ic_logo_100portugues.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_activity_login.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_item_grelha_refeicao.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/item_grelha_refeicao.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xhdpi_ic_action_reservation.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xhdpi/ic_action_reservation.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-xhdpi_ic_action_adicionar.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-xhdpi/ic_action_adicionar.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxhdpi_ic_action_tablerequest.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxhdpi/ic_action_tablerequest.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-hdpi_ic_action_reservation_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-hdpi/ic_action_reservation_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxxhdpi_ic_action_tablerequest.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxxhdpi/ic_action_tablerequest.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-hdpi_ic_action_reservation.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-hdpi/ic_action_reservation.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable__100portugues_logo.png.flat",
+        "source": "com.example.amsi_proj.app-main-31:/drawable/_100portugues_logo.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-mdpi_ic_action_takeaway_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-mdpi/ic_action_takeaway_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_fragment_comentarios.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/fragment_comentarios.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-xxhdpi_ic_action_adicionar.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-xxhdpi/ic_action_adicionar.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable_gersoft_removebg_preview.png.flat",
+        "source": "com.example.amsi_proj.app-main-31:/drawable/gersoft_removebg_preview.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxxhdpi_ic_action_takeaway_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxxhdpi/ic_action_takeaway_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-mdpi_ic_action_comment.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-mdpi/ic_action_comment.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/xml_backup_rules.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-mdpi_ic_action_remover.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-mdpi/ic_action_remover.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_item_lista_reserva.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/item_lista_reserva.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable_ic_action_tablerequest_foreground.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable/ic_action_tablerequest_foreground.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable_ic_action_freefood_background.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable/ic_action_freefood_background.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-anydpi-v26_ic_logo_100portugues.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-anydpi-v26/ic_logo_100portugues.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-anydpi_ic_action_adicionar.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-anydpi/ic_action_adicionar.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-anydpi-v26_ic_action_takeaway.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-anydpi-v26/ic_action_takeaway.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-xhdpi_ic_action_remover.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-xhdpi/ic_action_remover.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-mdpi_ic_action_reservation.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-mdpi/ic_action_reservation.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxhdpi_ic_action_comment.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxhdpi/ic_action_comment.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/layout_fragment_adicionar_pedido.xml.flat",
+        "source": "com.example.amsi_proj.app-main-31:/layout/fragment_adicionar_pedido.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-mdpi_ic_action_takeaway.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-mdpi/ic_action_takeaway.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-xxhdpi_ic_logo_100portugues_foreground.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-xxhdpi/ic_logo_100portugues_foreground.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/drawable-mdpi_ic_action_adicionar.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/drawable-mdpi/ic_action_adicionar.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-mdpi_ic_action_tablerequest_round.png.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-mdpi/ic_action_tablerequest_round.png"
+    },
+    {
+        "merged": "com.example.amsi_proj.app-merged_res-29:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.amsi_proj.app-debug-30:/mipmap-anydpi-v26/ic_launcher.xml"
+    }
+]
