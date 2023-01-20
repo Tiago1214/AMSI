@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.example.amsi_proj.modelo.Artigo;
+import com.example.amsi_proj.modelo.Comentario;
 import com.example.amsi_proj.modelo.Reserva;
 
 import org.json.JSONArray;
@@ -12,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class GersoftJsonParser {
 
@@ -70,6 +72,25 @@ public class GersoftJsonParser {
             e.printStackTrace();
         }
         return auxArtigo;
+    }
+
+    public static ArrayList<Comentario> parserJsonComentarios(JSONArray response) {
+        ArrayList<Comentario> comentarios = new ArrayList<>();
+        try {
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject comentario = (JSONObject) response.get(i);
+                int id = comentario.getInt("id");
+                String titulo = comentario.getString("titulo");
+                String descricao = comentario.getString("descricao");
+                int profile_id = comentario.getInt("profile_id");
+
+                Comentario auxComentario = new Comentario(id, profile_id,titulo, descricao);
+                comentarios.add(auxComentario);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return comentarios;
     }
     //endregion
 

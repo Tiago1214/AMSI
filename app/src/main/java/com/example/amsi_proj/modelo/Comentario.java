@@ -3,14 +3,14 @@ package com.example.amsi_proj.modelo;
 
 public class Comentario {
 
-    private int id;
-    private String data, nome, comentario;
+    private int id, profile_id;
+    private String titulo, descricao;
 
-    public Comentario(int id, String data, String nome, String comentario) {
+    public Comentario(int id, int profile_id, String titulo, String descricao) {
         this.id = id;
-        this.data = data;
-        this.nome = nome;
-        this.comentario = comentario;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.profile_id = profile_id;
     }
 
     public int getId() {
@@ -21,27 +21,27 @@ public class Comentario {
         this.id = id;
     }
 
-    public String getData() {return data; }
-
-    public void setData(String data) {
-        this.data = data;
+    public int getProfile_id() {
+        return profile_id;
     }
 
-    public String getNome() {
-        return nome;
+    public void setProfile_id(int profile_id) {
+        this.profile_id = profile_id;
     }
 
-    public void setNome(String titulo) {
-        this.nome = nome;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public String getComentario() {
-        return comentario;
+    public void setTitulo(String nome) {
+        this.titulo = nome;
     }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
+    public String getDescricao() {
+        return descricao;
     }
 
-
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 }

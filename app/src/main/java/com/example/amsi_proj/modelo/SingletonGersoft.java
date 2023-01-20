@@ -1,7 +1,6 @@
 package com.example.amsi_proj.modelo;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
@@ -22,11 +21,9 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.amsi_proj.DetalhesArtigoActivity;
-import com.example.amsi_proj.ListaArtigosFragment;
-import com.example.amsi_proj.LoginActivity;
 import com.example.amsi_proj.R;
 import com.example.amsi_proj.listeners.ArtigoListener;
+import com.example.amsi_proj.listeners.ComentarioListener;
 import com.example.amsi_proj.listeners.DetalhesListener;
 import com.example.amsi_proj.listeners.LoginListener;
 import com.example.amsi_proj.utils.GersoftJsonParser;
@@ -37,12 +34,15 @@ public class SingletonGersoft {
     private static RequestQueue volleyQueue = null;
     private static final  String mUrlAPILogin = "http://10.0.2.2/gersoft/backend/web/api/users/auth";
     private static final String mUrlAPIArtigos="http://10.0.2.2/gersoft/backend/web/api/artigos";
+    private static final String mUrlAPIComentarios="http://10.0.2.2/gersoft/backend/web/api/comentarios/meuscomentarios";
     private DetalhesListener DetalhesListener;
     private LoginListener loginListener;
     private ArtigoListener artigoListener;
     private DetalhesListener detalhesListener;
     private GersoftBDHelper gersoftBD;
     private ArrayList<Artigo> artigos;
+    private ArrayList<Comentario> comentarios;
+    private ComentarioListener comentarioListener;
 
     //region variaveis do singleton
     public SingletonGersoft(Context context) {
@@ -166,5 +166,77 @@ public class SingletonGersoft {
     public void setDetalhesListener(DetalhesListener detalhesListener ) {
         this.detalhesListener=detalhesListener;
     }
+
+
+        //endregion
+
+
+    //region comentarios
+
+    public ArrayList getComentariosDB() {
+        comentarios=gersoftBD.getAllComentariosBD();
+        return new ArrayList(comentarios);
+    }
+    public void setComentariosListener(ComentarioListener comentarioListener) {
+        this.comentarioListener=comentarioListener;
+    }
+
+    public void adicionarComentariosBD(Comentario comentarios)
+    {
+        gersoftBD.removerAllCometarios();
+        for(Comentario c: comentarios)
+        {
+            adicionarComentariosBD(c);
+        }
+    }
+    public void adicionarComentarioBD(ArrayList<Comentario> c)
+    {
+        gersoftBD.adicionarComentarioBD(c);
+    }
+
+    public void getAllComentariosAPI(final Context context){
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+            if (comentarioListener!=null)
+            {
+                comentarioListener.onRefreshListaComentarios(gersoftBD.getAllComentariosBD());
+            }
+        }else
+        {
+            SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+            String user_logado=sharedPreferences.getString("USERNAME","");
+            String token_logado=sharedPreferences.getString("TOKEN","");
+            JsonArrayRequest req=new JsonArrayRequest(Request.Method.GET, mUrlAPIComentarios+"?access-token="+token_logado, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    comentarios = GersoftJsonParser.parserJsonComentarios(response);
+                    adicionarComentarioBD(comentarios);
+
+                    if (comentarioListener!=null)
+                    {
+                        comentarioListener.onRefreshListaComentarios(comentarios);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+    public Comentario getComentario(int idComentario){
+        for (Comentario c : comentarios){
+            if(c.getId() == idComentario)
+                return c;
+        }
+        return null;
+    }
+
+
+
+
+
     //endregion
 }

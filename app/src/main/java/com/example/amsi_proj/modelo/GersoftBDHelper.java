@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 
 public class GersoftBDHelper extends SQLiteOpenHelper {
@@ -16,7 +14,7 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
     //Nome da base de dados
     private static final String DB_NAME="gersoft";
     //versão da base de dados
-    private static final int DB_VERSION=1;
+    private static final int DB_VERSION=2;
     //iniciar base de dados
     private final SQLiteDatabase db;
 
@@ -74,7 +72,7 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
                 ID+" INTEGER PRIMARY KEY, "+
                 TITULO+" TEXT NOT NULL, "+
                 DESCRICAO+" TEXT NOT NULL, "+
-                PROFILE_ID+"INTEGET NOT NULL);";
+                PROFILE_ID+"INTEGER NOT NULL);";
 
         String sqlCreateTableLinhapedido="CREATE TABLE "+TABLE_LINHAPEDIDO+"("+
                 ID+" INTEGER PRIMARY KEY, "+
@@ -199,6 +197,30 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
             cursor.close();
         }
         return artigos;
+    }
+
+    public ArrayList<Comentario> getAllComentariosBD() {
+        ArrayList<Comentario> comentarios=new ArrayList<>();
+        Cursor cursor=db.query(TABLE_COMENTARIO,new String[]{ID,TITULO,DESCRICAO,PROFILE_ID},
+                null,null,null,null,null);
+
+        if(cursor.moveToFirst()){
+            do {
+                Comentario auxComentario = new Comentario(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3)
+                );
+                
+                comentarios.add(auxComentario);
+            }while (cursor.moveToNext());
+            cursor.close();
+        }
+        return comentarios;
+
+    }
+
+    public void removerAllCometarios() {
+    }
+
+    public void adicionarComentarioBD(ArrayList<Comentario> c) {
     }
     //endregion
 }
