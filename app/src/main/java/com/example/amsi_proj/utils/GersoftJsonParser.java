@@ -75,47 +75,43 @@ public class GersoftJsonParser {
 
     //region reserva
 
-    /*public static ArrayList<Reserva> parserJsonArtigos(JSONArray response) {
+    public static ArrayList<Reserva> parserJsonReservas(JSONArray response) {
         ArrayList<Reserva> reservas = new ArrayList<>();
         try {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject reserva = (JSONObject) response.get(i);
                 int id = reserva.getInt("id");
                 int nrpessoas = reserva.getInt("nrpessoas");
-                String descricao = artigo.getString("descricao");
-                String referencia = artigo.getString("referencia");
-                double preco = artigo.getDouble("preco");
-                String imagemurl=artigo.getString("imagem");
-                int iva_id=artigo.getInt("iva_id");
-                int categoria_id=artigo.getInt("categoria_id");
+                int estado = reserva.getInt("estado");
+                int profile_id = reserva.getInt("profile_id");
+                String data = reserva.getString("data");
+                String hora=reserva.getString("hora");
 
-                Artigo auxArtigo = new Artigo(id, nome, descricao, referencia, preco, imagemurl, iva_id,categoria_id);
-                reservas.add(auxArtigo);
+                Reserva auxReserva = new Reserva(id, nrpessoas, estado, profile_id, data, hora);
+                reservas.add(auxReserva);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return livros;
+        return reservas;
     }
 
-    public static Artigo parserJsonArtigo(String response) {
-        Artigo auxArtigo = null;
+    public static Reserva parserJsonReserva(String response) {
+        Reserva auxReserva = null;
         try {
-            JSONObject artigo = new JSONObject(response);
-            int id = artigo.getInt("id");
-            String nome = artigo.getString("nome");
-            String descricao = artigo.getString("descricao");
-            String referencia = artigo.getString("referencia");
-            double preco = artigo.getDouble("preco");
-            String imagemurl=artigo.getString("imagemurl");
-            int iva_id=artigo.getInt("iva_id");
-            int categoria_id=artigo.getInt("categoria_id");
-            auxArtigo = new Artigo(id, nome, descricao, referencia, preco, imagemurl, iva_id,categoria_id);
+            JSONObject reserva = new JSONObject(response);
+            int id = reserva.getInt("id");
+            int nrpessoas = reserva.getInt("nrpessoas");
+            int estado = reserva.getInt("estado");
+            int profile_id = reserva.getInt("profile_id");
+            String data = reserva.getString("data");
+            String hora=reserva.getString("hora");
+            auxReserva = new Reserva(id, nrpessoas, estado, profile_id, data, hora);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return auxArtigo;
-    }*/
+        return auxReserva;
+    }
     //endregion
 }

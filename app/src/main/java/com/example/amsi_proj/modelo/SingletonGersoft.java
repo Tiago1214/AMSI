@@ -25,10 +25,13 @@ import java.util.Map;
 import com.example.amsi_proj.DetalhesArtigoActivity;
 import com.example.amsi_proj.ListaArtigosFragment;
 import com.example.amsi_proj.LoginActivity;
+import com.example.amsi_proj.MenuMainActivity;
 import com.example.amsi_proj.R;
+import com.example.amsi_proj.ReservaFragment;
 import com.example.amsi_proj.listeners.ArtigoListener;
 import com.example.amsi_proj.listeners.DetalhesListener;
 import com.example.amsi_proj.listeners.LoginListener;
+import com.example.amsi_proj.listeners.ReservaListener;
 import com.example.amsi_proj.utils.GersoftJsonParser;
 
 public class SingletonGersoft {
@@ -37,12 +40,16 @@ public class SingletonGersoft {
     private static RequestQueue volleyQueue = null;
     private static final  String mUrlAPILogin = "http://10.0.2.2/gersoft/backend/web/api/users/auth";
     private static final String mUrlAPIArtigos="http://10.0.2.2/gersoft/backend/web/api/artigos";
+    private static final String mUrlAPIReservas="http://10.0.2.2/gersoft/backend/web/api/reservas/minhasreservas";
+    private static final String mUrlAPIReservasEditar="http://10.0.2.2/gersoft/backend/web/api/reservas";
     private DetalhesListener DetalhesListener;
     private LoginListener loginListener;
     private ArtigoListener artigoListener;
     private DetalhesListener detalhesListener;
+    private ReservaListener reservasListener;
     private GersoftBDHelper gersoftBD;
     private ArrayList<Artigo> artigos;
+    private ArrayList<Reserva> reservas;
 
     //region variaveis do singleton
     public SingletonGersoft(Context context) {
@@ -97,7 +104,9 @@ public class SingletonGersoft {
         this.loginListener = loginListener;
     }
     //endregion
-
+    public void setDetalhesListener(DetalhesListener detalhesListener ) {
+        this.detalhesListener=detalhesListener;
+    }
     //region artigos
     public ArrayList<Artigo> getArtigosBD() { // return da copia dos livros
         artigos=gersoftBD.getAllArtigosBD();
@@ -163,8 +172,118 @@ public class SingletonGersoft {
         return null;
     }
 
-    public void setDetalhesListener(DetalhesListener detalhesListener ) {
-        this.detalhesListener=detalhesListener;
+
+    //endregion
+
+    //region reservas
+    public void setReservaListener(ReservaListener reservaListener) {
+        this.reservasListener=reservaListener;
+    }
+
+    public void getAllReservasAPI(final Context context){
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+            if (reservasListener!=null)
+            {
+                reservasListener.onRefreshListaReservas(gersoftBD.getAllReservasBD());
+            }
+        }else
+        {
+            SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+            String user_logado=sharedPreferences.getString("USERNAME","");
+            String token_logado=sharedPreferences.getString("TOKEN","");
+            JsonArrayRequest req=new JsonArrayRequest(Request.Method.GET, mUrlAPIReservas+"?access-token="+token_logado, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    reservas = GersoftJsonParser.parserJsonReservas(response);
+                    adicionarReservasBD(reservas);
+
+                    if (reservasListener!=null)
+                    {
+                        reservasListener.onRefreshListaReservas(reservas);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
+    public void adicionarReservasBD(ArrayList<Reserva> reservas)
+    {
+        gersoftBD.removerAllReservas();
+        for(Reserva r:reservas)
+        {
+            adicionarReservaBD(r);
+        }
+    }
+
+    public void adicionarReservaBD(Reserva r)
+    {
+        gersoftBD.adicionarReservaBD(r);
+    }
+
+    public ArrayList<Reserva> getReservasBD() { // return da copia dos livros
+        reservas=gersoftBD.getAllReservasBD();
+        return new ArrayList(reservas);
+    }
+
+
+    public Reserva getReserva(int idReserva){
+        for (Reserva r : reservas){
+            if(r.getId() == idReserva)
+                return r;
+        }
+        return null;
+    }
+
+    public void editarReservaAPI(final Reserva reserva,final Context context, String token) {
+        if(!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context,"Sem ligação á internet",Toast.LENGTH_LONG).show();
+        }else{
+            StringRequest req = new StringRequest(Request.Method.PATCH, mUrlAPIReservasEditar+ "/"+reserva.getId()+"?access-token="+token, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    editarReservaDB(reserva);
+                    if (DetalhesListener!=null)
+                    {
+                        DetalhesListener.onRefreshDetalhes(MenuMainActivity.EDIT);
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                public Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("nrpessoas", reserva.getNrpessoas()+"");
+                    params.put("data",reserva.getData());
+                    params.put("hora",reserva.getHora());
+                    //params.put("profile_id",);
+
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+    }
+
+    public void editarReservaDB(Reserva r)
+    {
+        Reserva auxReserva = getReserva(r.getId());
+        if(auxReserva!=null)
+        {
+            gersoftBD.editarReservaBD(r);
+        }
+
     }
     //endregion
 }
