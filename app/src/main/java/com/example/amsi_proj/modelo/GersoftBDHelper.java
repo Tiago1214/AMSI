@@ -253,4 +253,58 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
         return null;
     }
     //endregion
+
+    //region Reserva
+    public ArrayList<Reserva> getAllReservasBD(){
+        ArrayList<Reserva> reservas=new ArrayList<>();
+        Cursor cursor=db.query(TABLE_RESERVA,new String[]{ID,NRPESSOAS,ESTADO,PROFILE_ID,DATA,HORA},
+                null,null,null,null,null);
+
+        if(cursor.moveToFirst()){
+            do {
+                Reserva auxReserva = new Reserva(cursor.getInt(0), cursor.getInt(1)
+                        , cursor.getInt(2), cursor.getInt(3),
+                        cursor.getString(4), cursor.getString(5));
+                reservas.add(auxReserva);
+            }while (cursor.moveToNext());
+            cursor.close();
+        }
+        return reservas;
+    }
+
+    public Reserva adicionarReservaBD(Reserva r)
+    {
+        ContentValues values = new ContentValues();
+        values.put(ID, r.getId());
+        values.put(NRPESSOAS, r.getNrpessoas());
+        values.put(ESTADO, r.getEstado());
+        values.put(PROFILE_ID, r.getProfile_id());
+        values.put(DATA, r.getData());
+        values.put(HORA, r.getHora());
+        // db.insert retorna -1 em caso de erro ou o id que foi criado
+        int id = (int)db.insert(TABLE_RESERVA, null, values);
+        if(id>-1)
+        {
+            r.setId(id);
+            return r;
+        }
+        return null;
+    }
+
+    public void removerAllReservas()
+    {
+        db.delete(TABLE_RESERVA, null, null);
+    }
+
+    public Boolean editarReservaBD(Reserva reserva)
+    {
+        ContentValues values = new ContentValues();
+        values.put(NRPESSOAS, reserva.getNrpessoas());
+        values.put(DATA,reserva.getData());
+        values.put(HORA,reserva.getHora());
+        // db.update retorna o numero de linhas atualizadas
+        return db.update(TABLE_RESERVA, values, ID+"=?", new String[]{reserva.getId()+""})==1;
+    }
+
+    //end region
 }

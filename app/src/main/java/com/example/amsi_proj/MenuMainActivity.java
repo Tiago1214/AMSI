@@ -128,7 +128,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         return true;
     }
     public void onClickLogout(View view) {
-        SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences(String.valueOf(R.string.SHARED_USER), MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
         editor.apply();

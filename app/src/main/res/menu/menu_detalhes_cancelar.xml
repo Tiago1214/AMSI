@@ -4,9 +4,9 @@
     >
 
     <item
-        android:id="@+id/itemRemvover"
+        android:id="@+id/itemRemover"
         android:title="@string/menu_remover"
         app:showAsAction="always"
-        android:icon="@drawable/ic_action_remover"
+        android:icon="@drawable/ic_action_cancelar"
         />
 </menu>
