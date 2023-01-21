@@ -9,6 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
+
     <list default="true" id="a1fe5441-f7d8-413e-ba74-f9494dd7089f" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_action_cancelar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_detalhes_remover.xml" afterDir="false" />
@@ -39,6 +40,9 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_detalhes_livro.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_detalhes_cancelar.xml" afterDir="false" />
 
     </list>
+
+    <list default="true" id="a1fe5441-f7d8-413e-ba74-f9494dd7089f" name="Changes" comment="" />
+
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
