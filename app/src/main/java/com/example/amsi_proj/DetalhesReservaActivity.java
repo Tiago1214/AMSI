@@ -1,42 +1,35 @@
 package com.example.amsi_proj;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.NumberPicker;
-import android.widget.TextClock;
-import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.amsi_proj.listeners.DetalhesListener;
-import com.example.amsi_proj.modelo.Artigo;
 import com.example.amsi_proj.modelo.Reserva;
 import com.example.amsi_proj.modelo.SingletonGersoft;
-import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.sql.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Locale;
 
 public class DetalhesReservaActivity extends AppCompatActivity implements DetalhesListener {
 
@@ -62,6 +55,8 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
         etHora=findViewById(R.id.etHora);
         fabGuardar=findViewById(R.id.fabGuardar);
         SingletonGersoft.getInstance(getApplicationContext()).setDetalhesListener(this);
+        InputFilter timeFilter;
+
 
         //region validaredittextdate
         etData.addTextChangedListener(new TextWatcher() {
@@ -125,22 +120,88 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
 
             }
         });
-        //end region
+        //endregion
 
         //region validaredittexthora
+
         etHora.addTextChangedListener(new TextWatcher() {
+            String beforeTXT;
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.i("before TEXT TEXXT", " this : "+s+" and "+start+" and "+count+"and "+after);
+                beforeTXT= ""+s;
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int input ;
+
+                //first determine whether user is at hrs side or min side
+                if (s.toString().equals("")){
+                    return;
+                }
+                if(s.toString().length()>2 && start<=2){ //means the user is at hour side
+                    input = Integer.parseInt(s.toString().substring(0,1)) % 10;
+
+                }
+                else if(s.toString().length()>2 && start>=3) {//means that user is at min side
+                    input = Integer.parseInt("0"+s.toString().substring(3))%10;
+
+                }
+                else if(s.toString().indexOf(":")==1){ // if we have for eg 1: or 0: then we take first character for parsing
+                    input = Integer.parseInt(s.toString().charAt(0)+"");
+                }
+                else{ //else it is default where the user is at first position
+                    input = Integer.parseInt(s.toString()) % 10;
+                }
+
+                //Special case where 00: is autommatically converted to 12: in 12hr time format
+                if(s.toString().contains("00:")){
+                    Log.i("INsisde )))","i am called ");
+                    etHora.setText("24:");
+                    return;
+                }
+
+                //Now we manipulate the input and its formattin and cursor movement
+                if(input<=1 && start ==0){ //thiis is for first input value to check .... time shouldnt exceed 12 hr
+                    //do nothing
+                }
+                else if (input>2 && start==0){ //if at hour >1 is press then automaticc set the time as 02: or 05: etc
+                    etHora.setText("0"+s+":");
+                }
+                else if(input>3 && start==1 && !s.toString().startsWith("0")){ //whe dont have greater than 12 hrs so second postionn shouldn't exceed value 2
+                    etHora.setText(beforeTXT);
+                }
+                else if(start==1 && !beforeTXT.contains(":")){  //if valid input 10 or 11 or 12 is given then convert it to 10: 11: or 12:
+                    etHora.setText(s.toString()+":");
+
+                    if(s.toString().length()==1 && s.toString().startsWith("0")){
+                        etHora.setText("");
+                    }
+                    if(s.toString().startsWith("1")&& s.toString().length()==1){ //on back space convert 1: to 01:
+                        etHora.setText("0"+etHora.getText().toString());
+                    }
+
+                }
+                else if(start == 3 && input >5 ){ //min fig shouldn't exceed 59 so ...if at first digit of min input >5 then do nothing or codpy the earlier text
+                    etHora.setText(beforeTXT);
+                }
+                else if (start>4 && s.toString().length()>5){ // the total string lenght shouldn't excced 5
+                    etHora.setText(beforeTXT);
+                }
+                else if(start<2 && beforeTXT.length()>2){
+                    etHora.setText(beforeTXT);
+
+                }
+
 
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void afterTextChanged(Editable s) {
 
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
+                Log.i("after  TEXT TEXXT", " this : "+s);
+                etHora.setSelection(etHora.getText().toString().length());
 
             }
         });
@@ -154,7 +215,7 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
         //verificar se a reserva se encontra concluída
         if(reserva.getEstado()==1){
             Toast.makeText(this.getApplicationContext(),"Não se pode alterar" +
-                    "e visualizar reservas Concluídas",Toast.LENGTH_LONG).show();
+                    " e visualizar reservas Concluídas",Toast.LENGTH_LONG).show();
             Intent intent;
             intent = new Intent(this, MenuMainActivity.class);
             startActivity(intent);
@@ -162,7 +223,7 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
         //verificar se a reserva se encontra cancelada
         if(reserva.getEstado()==2){
             Toast.makeText(this.getApplicationContext(),"Não se pode visualizar" +
-                    "reservas cancelas",Toast.LENGTH_LONG).show();
+                    " reservas cancelas",Toast.LENGTH_LONG).show();
             Intent intent;
             intent = new Intent(this, MenuMainActivity.class);
             startActivity(intent);
@@ -188,16 +249,81 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
         });
     }
 
+    //region CancelarReserva
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.itemRemover:
+                //dialogRemover();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /*private void dialogRemover() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Cancelar Reserva")
+                .setMessage("Tem a certeza que pretende cancelar a reserva?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SingletonGersoft.getInstance(getApplicationContext()).cancelarReservaAPI(reserva, getApplicationContext());
+
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Nao fazer nada
+                    }
+                })
+                .setIcon(android.R.drawable.ic_delete)
+                .show();
+    }*/
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(reserva!=null){
+            getMenuInflater().inflate(R.menu.menu_detalhes_cancelar,menu);
+            return super.onCreateOptionsMenu(menu);
+        }
+        return false;
+    }
+    //endregion
+
+    //region validar reserva
     private boolean isReservaValida() {
         int nrpessoas = Integer.parseInt(etnrPessoas.getText().toString());
+        String data=etData.getText().toString();
+        DateTimeFormatter parser = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate inicio = LocalDate.parse(data, parser);
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
+        String datetime = dateformat.format(c.getTime());
+        LocalDate fim = LocalDate.parse(datetime, parser);
+        String hora=etHora.getText().toString();
 
         if (nrpessoas<0){
             etnrPessoas.setText("Erro");
             return false;
         }
+        if(inicio.isBefore(fim)){
+            etData.setText("Insira uma data superior á data de hoje");
+            return false;
+        }
+        if(data.length()<9){
+            etData.setText("A data é um campo obrigatório");
+            return false;
+        }
+        if(hora.length()<5){
+            etHora.setText("A hora é um campo obrigatório");
+            return false;
+        }
         return true;
     }
+    //endregion
 
+    //region
     @Override
     public void onRefreshDetalhes(int operacao) {
         Intent intent = new Intent();
@@ -212,14 +338,5 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
         etnrPessoas.setText(reserva.getNrpessoas()+"");
         etData.setText(reserva.getData());
         etHora.setText(reserva.getHora());
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if(reserva!=null){
-            getMenuInflater().inflate(R.menu.menu_pesquisa,menu);
-            return super.onCreateOptionsMenu(menu);
-        }
-        return false;
     }
 }

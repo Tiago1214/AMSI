@@ -16,13 +16,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.2"
-                />
+                android:layout_weight="0.2" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -41,11 +40,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:inputType="number"
                     android:hint="Nrpessoas"
-                    />
+                    android:inputType="number"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -65,11 +63,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:inputType="date"
                     android:hint="Data"
-                    />
+                    android:inputType="date"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -89,23 +87,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:inputType="time"
                     android:hint="Hora"
-                    />
+                    android:inputType="time"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.3"
-                />
-
+                android:layout_weight="0.3" />
 
         </LinearLayout>
 
     </ScrollView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabGuardar"
         android:layout_width="wrap_content"
@@ -113,6 +110,8 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:clickable="true"
-        app:srcCompat="@drawable/ic_action_guardar" />
+        android:contentDescription="@string/SemligacaoInternet"
+        app:srcCompat="@drawable/ic_action_guardar"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

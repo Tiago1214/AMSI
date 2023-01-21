@@ -60,13 +60,14 @@ public class ListaReservaAdaptador extends BaseAdapter {
     }
 
     private class ViewHolderLista{
-        private TextView tvNumeropessoas, tvData, tvHora;
+        private TextView tvNumeropessoas, tvData, tvHora,tvEstado;
         private ImageView imgCapa;
 
         public ViewHolderLista(View view){
             tvNumeropessoas = view.findViewById(R.id.tvNumeroPessoas);
             tvData = view.findViewById(R.id.tvData);
             tvHora = view.findViewById(R.id.tvHora);
+            tvEstado=view.findViewById(R.id.tvEstado);
             imgCapa=view.findViewById(R.id.imageView3);
         }
 
@@ -75,6 +76,15 @@ public class ListaReservaAdaptador extends BaseAdapter {
             tvData.setText(reserva.getData());
             tvHora.setText(reserva.getHora()+"");
             imgCapa.setImageResource(R.drawable.ic_baseline_bookmark);
+            if(reserva.getEstado()==0){
+                tvEstado.setText("Em processamento");
+            }
+            else if(reserva.getEstado()==1){
+                tvEstado.setText("Concluído");
+            }
+            else if(reserva.getEstado()==2){
+                tvEstado.setText("Cancelado");
+            }
         }
     }
 }
