@@ -56,11 +56,8 @@ public class SingletonGersoft {
     private static final String mUrlAPIReservas="http://10.0.2.2/gersoft/backend/web/api/reservas/minhasreservas";
     private static final String mUrlAPIReservasEditar="http://10.0.2.2/gersoft/backend/web/api/reservas";
     private DetalhesListener DetalhesListener;
-    private LoginListener loginListener;
-    private ArtigoListener artigoListener;
-    private DetalhesListener detalhesListener;
     private ReservaListener reservasListener;
-    private ArrayList<Artigo> artigos;
+
     private ArrayList<Reserva> reservas;
 
     //region variaveis do singleton

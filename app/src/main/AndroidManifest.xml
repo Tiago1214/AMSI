@@ -25,7 +25,8 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
+
+
         <activity android:name=".DetalhesReservaActivity"
             android:exported="false"/> 
 
@@ -39,6 +40,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+            <activity android:name=".DetalhesArtigoActivity"></activity>
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -52,7 +56,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".DetalhesArtigoActivity" />
-    </application>
+            </application>
 
-</manifest>
+    </manifest>

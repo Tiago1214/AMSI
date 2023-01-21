@@ -119,7 +119,7 @@ public class DetalhesComentarioActivity extends AppCompatActivity implements Det
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if(comentario!=null){
-            getMenuInflater().inflate(R.menu.menu_detalhes_livro,menu);
+            getMenuInflater().inflate(R.menu.menu_detalhes_remover,menu);
             return super.onCreateOptionsMenu(menu);
         }
         return false;
@@ -127,7 +127,7 @@ public class DetalhesComentarioActivity extends AppCompatActivity implements Det
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.itemRemvover:
+            case R.id.itemRemover:
                 dialogRemover();
                 return true;
         }
