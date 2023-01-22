@@ -2,9 +2,12 @@ package com.example.amsi_proj.modelo;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.amsi_proj.R;
 
 import java.util.ArrayList;
 
@@ -14,7 +17,7 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
     //Nome da base de dados
     private static final String DB_NAME="gersoft";
     //versão da base de dados
-    private static final int DB_VERSION=2;
+    private static final int DB_VERSION=3;
     //iniciar base de dados
     private final SQLiteDatabase db;
 
@@ -72,7 +75,7 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
                 ID+" INTEGER PRIMARY KEY, "+
                 TITULO+" TEXT NOT NULL, "+
                 DESCRICAO+" TEXT NOT NULL, "+
-                PROFILE_ID+"INTEGER NOT NULL);";
+                PROFILE_ID+" INTEGER NOT NULL);";
 
         String sqlCreateTableLinhapedido="CREATE TABLE "+TABLE_LINHAPEDIDO+"("+
                 ID+" INTEGER PRIMARY KEY, "+
@@ -87,7 +90,7 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
                 ID+" INTEGER PRIMARY KEY, "+
                 NRMESA+" INTEGER NOT NULL, "+
                 NRLUGARES+" INTEGER NOT NULL, "+
-                TIPOMESA+"TEXT NOT NULL);";
+                TIPOMESA+" TEXT NOT NULL);";
 
         String sqlCreateTableMetodopagamento="CREATE TABLE "+TABLE_METODOPAGAMENTO+"("+
                 ID+" INTEGER PRIMARY KEY, "+
@@ -198,17 +201,18 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
         }
         return artigos;
     }
+    //endregion
 
     public ArrayList<Comentario> getAllComentariosBD() {
         ArrayList<Comentario> comentarios=new ArrayList<>();
-        Cursor cursor=db.query(TABLE_COMENTARIO,new String[]{ID,TITULO,DESCRICAO,PROFILE_ID},
+        Cursor cursor=db.query(TABLE_COMENTARIO,new String[]{ID,PROFILE_ID,TITULO,DESCRICAO},
                 null,null,null,null,null);
 
         if(cursor.moveToFirst()){
             do {
-                Comentario auxComentario = new Comentario(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3)
+                Comentario auxComentario = new Comentario(cursor.getInt(0), cursor.getInt(1)
+                        , cursor.getString(2), cursor.getString(3)
                 );
-                
                 comentarios.add(auxComentario);
             }while (cursor.moveToNext());
             cursor.close();
@@ -232,18 +236,22 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
         return db.update(TABLE_COMENTARIO, values, ID+"=?", new String[]{comentario.getId()+""})==1;
 
     }
-    public Boolean removerLivroBD(int id)
+
+    public Boolean removerComentarioDB(int id)
     {
         // db.delete
         return db.delete(TABLE_COMENTARIO,ID+"=?", new String[]{id+""})==1;
     }
 
-    public Comentario adicionarComentarioBD(Comentario comentario)
+    public Comentario adicionarComentarioBD(Comentario comentario,Context context)
     {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+        int profile_id=sharedPreferences.getInt("PROFILE_ID",0);
         ContentValues values = new ContentValues();
         values.put(ID, comentario.getId());
         values.put(TITULO, comentario.getTitulo());
         values.put(DESCRICAO, comentario.getDescricao());
+        values.put(PROFILE_ID,profile_id);
         int id = (int)db.insert(TABLE_COMENTARIO, null, values);
         if(id>-1)
         {
@@ -272,13 +280,15 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
         return reservas;
     }
 
-    public Reserva adicionarReservaBD(Reserva r)
+    public Reserva adicionarReservaBD(Reserva r, Context context)
     {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+        int profile_id=sharedPreferences.getInt("PROFILE_ID",0);
         ContentValues values = new ContentValues();
         values.put(ID, r.getId());
         values.put(NRPESSOAS, r.getNrpessoas());
-        values.put(ESTADO, r.getEstado());
-        values.put(PROFILE_ID, r.getProfile_id());
+        values.put(ESTADO, 0);
+        values.put(PROFILE_ID, profile_id);
         values.put(DATA, r.getData());
         values.put(HORA, r.getHora());
         // db.insert retorna -1 em caso de erro ou o id que foi criado
@@ -302,9 +312,16 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
         values.put(NRPESSOAS, reserva.getNrpessoas());
         values.put(DATA,reserva.getData());
         values.put(HORA,reserva.getHora());
+        values.put(ESTADO,reserva.getEstado());
         // db.update retorna o numero de linhas atualizadas
         return db.update(TABLE_RESERVA, values, ID+"=?", new String[]{reserva.getId()+""})==1;
     }
 
-    //end region
+    public boolean cancelarReservaDB(Reserva reserva) {
+        ContentValues values=new ContentValues();
+        values.put(ESTADO,2);
+        return db.update(TABLE_RESERVA, values, ID+"=?", new String[]{reserva.getId()+""})==1;
+    }
+
+    //endregion
 }

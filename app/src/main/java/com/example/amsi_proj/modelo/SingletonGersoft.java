@@ -1,5 +1,6 @@
 package com.example.amsi_proj.modelo;
 
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
@@ -8,12 +9,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -22,12 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-import com.example.amsi_proj.DetalhesArtigoActivity;
-import com.example.amsi_proj.ListaArtigosFragment;
-import com.example.amsi_proj.LoginActivity;
 import com.example.amsi_proj.MenuMainActivity;
 import com.example.amsi_proj.R;
-import com.example.amsi_proj.ReservaFragment;
 import com.example.amsi_proj.listeners.ArtigoListener;
 import com.example.amsi_proj.listeners.ComentarioListener;
 import com.example.amsi_proj.listeners.DetalhesListener;
@@ -43,24 +41,21 @@ public class SingletonGersoft {
     private static final String mUrlAPIArtigos="http://10.0.2.2/gersoft/backend/web/api/artigos";
 
     private static final String mUrlAPIComentarios="http://10.0.2.2/gersoft/backend/web/api/comentarios/meuscomentarios";
+    private static final String mUrlAPIComentariosEditAdd="http://10.0.2.2/gersoft/backend/web/api/comentarios";
 
     private LoginListener loginListener;
     private ArtigoListener artigoListener;
     private DetalhesListener detalhesListener;
-    private GersoftBDHelper comentariosBD;
     private GersoftBDHelper gersoftBD;
     private ArrayList<Artigo> artigos;
     private ArrayList<Comentario> comentarios;
     private ComentarioListener comentarioListener;
 
     private static final String mUrlAPIReservas="http://10.0.2.2/gersoft/backend/web/api/reservas/minhasreservas";
-    private static final String mUrlAPIReservasEditar="http://10.0.2.2/gersoft/backend/web/api/reservas";
+    private static final String mUrlAPIReservasEditAdd="http://10.0.2.2/gersoft/backend/web/api/reservas";
+    private static final String getmUrlAPIReservasCancelar="http://10.0.2.2/gersoft/backend/web/api/reservas/cancelarreserva";
     private DetalhesListener DetalhesListener;
-    private LoginListener loginListener;
-    private ArtigoListener artigoListener;
-    private DetalhesListener detalhesListener;
     private ReservaListener reservasListener;
-    private ArrayList<Artigo> artigos;
     private ArrayList<Reserva> reservas;
 
     //region variaveis do singleton
@@ -77,28 +72,24 @@ public class SingletonGersoft {
         return instance;
     }
     //endregion
+
     //region Login
     public void loginAPI(final String username, final String password, final Context context){
         if (!GersoftJsonParser.isConnectionInternet(context)){
             //Intent intent=new Intent(LoginActivity.class);
             Toast.makeText(context, R.string.SemligacaoInternet, Toast.LENGTH_LONG).show();
-        }else
-        {
-            StringRequest req = new StringRequest(Request.Method.GET, mUrlAPILogin, new Response.Listener<String>() {
+        }else{
+            JsonObjectRequest req=new JsonObjectRequest(Request.Method.GET, mUrlAPILogin, null, new Response.Listener<JSONObject>() {
                 @Override
-                public void onResponse(String response) {
-                    String token = GersoftJsonParser.parserJsonLogin(response);
+                public void onResponse(JSONObject response) {
+                    ArrayList<String> arrayList = GersoftJsonParser.parserJsonLogin(response);
                     if (loginListener != null)
-                        loginListener.onValidateLogin(token,username);
+                        loginListener.onValidateLogin(arrayList.get(0),username,Integer.parseInt(arrayList.get(1)));
                 }
-
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    VolleyLog.d("LOGIN: Error" + error.getMessage());
-                    //para dar mensagem de erro no login
-                    loginListener.onValidateLogin(null,username);
-
+                    Toast.makeText(context, R.string.ErroLogin,Toast.LENGTH_LONG).show();
                 }
             }){
                 @Override
@@ -116,9 +107,7 @@ public class SingletonGersoft {
         this.loginListener = loginListener;
     }
     //endregion
-    public void setDetalhesListener(DetalhesListener detalhesListener ) {
-        this.detalhesListener=detalhesListener;
-    }
+
     //region artigos
     public ArrayList<Artigo> getArtigosBD() { // return da copia dos livros
         artigos=gersoftBD.getAllArtigosBD();
@@ -208,7 +197,7 @@ public class SingletonGersoft {
                 @Override
                 public void onResponse(JSONArray response) {
                     reservas = GersoftJsonParser.parserJsonReservas(response);
-                    adicionarReservasBD(reservas);
+                    adicionarReservasBD(reservas,context);
 
                     if (reservasListener!=null)
                     {
@@ -225,18 +214,18 @@ public class SingletonGersoft {
         }
     }
 
-    public void adicionarReservasBD(ArrayList<Reserva> reservas)
+    public void adicionarReservasBD(ArrayList<Reserva> reservas,Context context)
     {
         gersoftBD.removerAllReservas();
         for(Reserva r:reservas)
         {
-            adicionarReservaBD(r);
+            adicionarReservaBD(r,context);
         }
     }
 
-    public void adicionarReservaBD(Reserva r)
+    public void adicionarReservaBD(Reserva r,Context context)
     {
-        gersoftBD.adicionarReservaBD(r);
+        gersoftBD.adicionarReservaBD(r,context);
     }
 
     public ArrayList<Reserva> getReservasBD() { // return da copia dos livros
@@ -257,7 +246,7 @@ public class SingletonGersoft {
         if(!GersoftJsonParser.isConnectionInternet(context)){
             Toast.makeText(context,"Sem ligação á internet",Toast.LENGTH_LONG).show();
         }else{
-            StringRequest req = new StringRequest(Request.Method.PATCH, mUrlAPIReservasEditar+ "/"+reserva.getId()+"?access-token="+token, new Response.Listener<String>() {
+                StringRequest req = new StringRequest(Request.Method.PATCH, mUrlAPIReservasEditAdd+ "/"+reserva.getId()+"?access-token="+token, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     editarReservaDB(reserva);
@@ -301,7 +290,6 @@ public class SingletonGersoft {
 
         //endregion
 
-
     //region comentarios
 
     public ArrayList getComentariosDB() {
@@ -312,18 +300,20 @@ public class SingletonGersoft {
         this.comentarioListener=comentarioListener;
     }
 
-    public void adicionarComentariosBD(ArrayList<Comentario> comentarios)
+    public void adicionarComentariosBD(ArrayList<Comentario> comentarios,Context context)
     {
         gersoftBD.removerAllCometarios();
         for(Comentario c : comentarios)
         {
-            adicionarComentarioBD(c);
+            adicionarComentarioBD(c,context);
         }
     }
-    public void adicionarComentarioBD(Comentario c)
+    public void adicionarComentarioBD(Comentario c,Context context)
     {
-        gersoftBD.adicionarComentarioBD(c);
+        gersoftBD.adicionarComentarioBD(c,context);
     }
+
+
 
     public void getAllComentariosAPI(final Context context){
         if (!GersoftJsonParser.isConnectionInternet(context)){
@@ -341,7 +331,7 @@ public class SingletonGersoft {
                 @Override
                 public void onResponse(JSONArray response) {
                     comentarios = GersoftJsonParser.parserJsonComentarios(response);
-                    adicionarComentariosBD(comentarios);
+                    adicionarComentariosBD(comentarios,context);
 
                     if (comentarioListener!=null)
                     {
@@ -370,7 +360,9 @@ public class SingletonGersoft {
             Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
         }else
         {
-            StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPIComentarios+ "/"+comentario.getId(), new Response.Listener<String>() {
+
+            StringRequest req = new StringRequest(Request.Method.PATCH, mUrlAPIComentariosEditAdd+ "/"+comentario.getId()+"?access-token="+token
+                    , new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     editarComentarioBD(comentario);
@@ -390,9 +382,8 @@ public class SingletonGersoft {
                 @Override
                 public Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
-                    params.put("token", token);
                     params.put("titulo", comentario.getTitulo());
-                    params.put("comentario", comentario.getDescricao());
+                    params.put("descricao", comentario.getDescricao());
                     return params;
                 }
             };
@@ -404,25 +395,24 @@ public class SingletonGersoft {
         Comentario auxComentario = getComentario(c.getId());
         if(auxComentario!=null)
         {
-            comentariosBD.editarComentarioBD(c);
+            gersoftBD.editarComentarioBD(c);
         }
     }
 
-    public void adicionarComentarioAPI(final Comentario comentario, final Context context, String token) {
 
+    public void adicionarComentarioAPI(final Comentario comentario, final Context context, String token) {
         if (!GersoftJsonParser.isConnectionInternet(context)){
             Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
         }else
         {
-            StringRequest req = new StringRequest(Request.Method.POST, mUrlAPIComentarios, new Response.Listener<String>() {
+            StringRequest req = new StringRequest(Request.Method.POST, mUrlAPIComentariosEditAdd+"?access-token="+token, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    adicionarComentarioBD(GersoftJsonParser.parserJsonComentario(response));
-                    if (detalhesListener!=null)
+                    adicionarComentarioBD(GersoftJsonParser.parserJsonComentario(response),context);
+                    if (DetalhesListener!=null)
                     {
-                        detalhesListener.onRefreshDetalhes(MenuMainActivity.ADD);
+                        DetalhesListener.onRefreshDetalhes(MenuMainActivity.ADD);
                     }
-
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -433,9 +423,12 @@ public class SingletonGersoft {
                 @Override
                 public Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
+                    SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+                    int profile_id=sharedPreferences.getInt("PROFILE_ID",0);
                     params.put("token", token);
                     params.put("titulo", comentario.getTitulo());
                     params.put("descricao", comentario.getDescricao());
+                    params.put("profile_id", profile_id+"");
                     return params;
                 }
             };
@@ -448,7 +441,11 @@ public class SingletonGersoft {
             Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
         }else
         {
-            StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPIComentarios+ "/"+comentario.getId(), new Response.Listener<String>() {
+            SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+            String user_logado=sharedPreferences.getString("USERNAME","");
+            String token_logado=sharedPreferences.getString("TOKEN","");
+            StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPIComentariosEditAdd+ "/"+comentario.getId()+"?access-token="+token_logado
+                    , new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     removerComentarioBD(comentario.getId());
@@ -470,10 +467,81 @@ public class SingletonGersoft {
     private void removerComentarioBD(int id) {
             Comentario auxComentario = getComentario(id);
             if (auxComentario!=null)
-                comentariosBD.removerLivroBD(id);
+                gersoftBD.removerComentarioDB(id);
 
     }
-
-
     //endregion
+
+    public void setDetalhesListener(DetalhesListener detalhesListener ) {
+        this.detalhesListener=detalhesListener;
+    }
+
+    public void cancelarReservaAPI(Reserva reserva, final Context context,String token) {
+        if (!GersoftJsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        } else {
+            JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, getmUrlAPIReservasCancelar + "/" + reserva.getId()
+                    + "?access-token=" + token, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    cancelarReservaDB(reserva);
+
+                    reservasListener.onRefreshListaReservas(reservas);
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+    public void cancelarReservaDB(Reserva r){
+        Reserva auxReserva = getReserva(r.getId());
+        if(auxReserva!=null)
+        {
+            gersoftBD.cancelarReservaDB(r);
+        }
+    }
+
+    public void adicionarReservaAPI(final Reserva reserva, Context context, String token) {
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        }else
+        {
+            StringRequest req = new StringRequest(Request.Method.POST, mUrlAPIComentariosEditAdd+"?access-token="+token, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    adicionarReservaBD(GersoftJsonParser.parserJsonReserva(response),context);
+                    if (DetalhesListener!=null)
+                    {
+                        DetalhesListener.onRefreshDetalhes(MenuMainActivity.ADD);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                public Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+                    int profile_id=sharedPreferences.getInt("PROFILE_ID",0);
+                    int estado=0;
+                    params.put("token", token);
+                    params.put("nrpessoas", reserva.getNrpessoas()+"");
+                    params.put("estado", estado+"");
+                    params.put("profile_id", profile_id+"");
+                    params.put("data",reserva.getData());
+                    params.put("hora",reserva.getHora());
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+    }
 }

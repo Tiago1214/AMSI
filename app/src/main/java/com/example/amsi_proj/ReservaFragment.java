@@ -41,7 +41,6 @@ public class ReservaFragment extends Fragment implements ReservaListener {
         setHasOptionsMenu(true);
         lvReservas = view.findViewById(R.id.list_Reservas);
         fabLista=view.findViewById(R.id.floating_AdicionarReserva);
-
         lvReservas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {

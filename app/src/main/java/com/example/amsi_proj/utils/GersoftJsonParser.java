@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.amsi_proj.modelo.Artigo;
 import com.example.amsi_proj.modelo.Comentario;
 import com.example.amsi_proj.modelo.Reserva;
@@ -18,8 +19,17 @@ import java.util.Map;
 public class GersoftJsonParser {
 
     //dar return do token
-    public static String parserJsonLogin(String response) { // static para nao ter de fazer new
-        return response;
+    public static ArrayList<String> parserJsonLogin(JSONObject response) { // static para nao ter de fazer new
+        ArrayList<String> teste=new ArrayList<>();
+        try{
+            String token=response.getString("token");
+            String profile_id=response.getString("profile_id");
+            teste.add(token);
+            teste.add(profile_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return teste;
     }
 
     //ver se o user ta ligado a internet

@@ -31,9 +31,11 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     private DrawerLayout drawer;
     private String username;
     private String token;
+    private int profile_id;
     public static final String SHARED_USER="DADOS_USER";
     public static final String USERNAME="USERNAME";
     public static final String TOKEN="TOKEN";
+    public static final String PROFILE_ID="PROFILE_ID";
     public static final String OPERACAO="OPERACAO";
     public static final int ADD=10, EDIT=20, DELETE=30;
 
@@ -69,12 +71,14 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     private void carregarCabecalho() {
         username=getIntent().getStringExtra(USERNAME);
         token= getIntent().getStringExtra(TOKEN);
+        profile_id=getIntent().getIntExtra(PROFILE_ID,0);
         SharedPreferences infoUser=getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
 
         if(username!=null && token!=null)  {
             SharedPreferences.Editor editor =infoUser.edit();
             editor.putString(USERNAME, username);
             editor.putString(TOKEN, token);
+            editor.putInt(PROFILE_ID,profile_id);
             editor.apply();
         }
 
