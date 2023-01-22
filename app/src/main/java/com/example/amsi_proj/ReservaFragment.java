@@ -14,6 +14,7 @@ import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.amsi_proj.adaptadores.ListaReservaAdaptador;
 import com.example.amsi_proj.listeners.ReservaListener;
@@ -27,16 +28,15 @@ import java.util.ArrayList;
 public class ReservaFragment extends Fragment implements ReservaListener {
 
     private ListView lvReservas;
-    // private ArrayList<Artigo> artigos;
+    private ArrayList<Reserva> reservas;
     private SearchView searchView;
     private FloatingActionButton fabLista;
     public static final int ACT_DETALHES = 1;
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        onRefreshListaReservas(reservas);
         View view = inflater.inflate(R.layout.fragment_reserva, container, false);
         setHasOptionsMenu(true);
         lvReservas = view.findViewById(R.id.list_Reservas);

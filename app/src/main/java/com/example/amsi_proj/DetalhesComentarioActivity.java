@@ -74,15 +74,17 @@ public class DetalhesComentarioActivity extends AppCompatActivity implements Det
                         comentario.setTitulo(etTitulo.getText().toString());
                         comentario.setDescricao(etComentario.getText().toString());
                         SingletonGersoft.getInstance(getApplicationContext()).editarComentarioAPI(comentario, getApplicationContext(), token);
-                        ComentariosFragment exampleFragment = new ComentariosFragment();
-                        fragmentManager.beginTransaction().replace(R.id.contentfragment, exampleFragment).commit();
+                        Intent intent;
+                        intent = new Intent(view.getContext(), MenuMainActivity.class);
+                        startActivity(intent);
                     } else {
                         Comentario comentarioAux = new Comentario(0,profile_id,etTitulo.getText().toString()
                                 , etComentario.getText().toString());
                         SingletonGersoft.getInstance(getApplicationContext()).adicionarComentarioAPI(comentarioAux,
                                 getApplicationContext(), token);
-                        ComentariosFragment exampleFragment = new ComentariosFragment();
-                        fragmentManager.beginTransaction().replace(R.id.contentfragment, exampleFragment).commit();
+                        Intent intent;
+                        intent = new Intent(view.getContext(), MenuMainActivity.class);
+                        startActivity(intent);
                     }
                 }
             }

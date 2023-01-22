@@ -72,7 +72,9 @@ public class SingletonGersoft {
         return instance;
     }
     //endregion
-
+    public void setDetalhesListener(DetalhesListener detalhesListener ) {
+        this.detalhesListener=detalhesListener;
+    }
     //region Login
     public void loginAPI(final String username, final String password, final Context context){
         if (!GersoftJsonParser.isConnectionInternet(context)){
@@ -287,8 +289,75 @@ public class SingletonGersoft {
 
     }
 
+    public void cancelarReservaAPI(Reserva reserva, final Context context,String token) {
+        if (!GersoftJsonParser.isConnectionInternet(context)) {
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        } else {
+            JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, getmUrlAPIReservasCancelar + "/" + reserva.getId()
+                    + "?access-token=" + token, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    cancelarReservaDB(reserva);
 
-        //endregion
+                    reservasListener.onRefreshListaReservas(reservas);
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+    public void cancelarReservaDB(Reserva r){
+        Reserva auxReserva = getReserva(r.getId());
+        if(auxReserva!=null)
+        {
+            gersoftBD.cancelarReservaDB(r);
+        }
+    }
+
+    public void adicionarReservaAPI(final Reserva reserva, Context context, String token) {
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        }else
+        {
+            StringRequest req = new StringRequest(Request.Method.POST, mUrlAPIReservasEditAdd+"?access-token="+token, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    adicionarReservaBD(GersoftJsonParser.parserJsonReserva(response),context);
+                    if (DetalhesListener!=null)
+                    {
+                        DetalhesListener.onRefreshDetalhes(MenuMainActivity.ADD);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                public Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+                    int profile_id=sharedPreferences.getInt("PROFILE_ID",0);
+                    int estado=0;
+                    params.put("token", token);
+                    params.put("nrpessoas", reserva.getNrpessoas()+"");
+                    params.put("estado", estado+"");
+                    params.put("profile_id", profile_id+"");
+                    params.put("data",reserva.getData());
+                    params.put("hora",reserva.getHora());
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+    }
+    //endregion
 
     //region comentarios
 
@@ -471,77 +540,4 @@ public class SingletonGersoft {
 
     }
     //endregion
-
-    public void setDetalhesListener(DetalhesListener detalhesListener ) {
-        this.detalhesListener=detalhesListener;
-    }
-
-    public void cancelarReservaAPI(Reserva reserva, final Context context,String token) {
-        if (!GersoftJsonParser.isConnectionInternet(context)) {
-            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
-        } else {
-            JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, getmUrlAPIReservasCancelar + "/" + reserva.getId()
-                    + "?access-token=" + token, null, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    cancelarReservaDB(reserva);
-
-                    reservasListener.onRefreshListaReservas(reservas);
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-            volleyQueue.add(req);
-        }
-    }
-    public void cancelarReservaDB(Reserva r){
-        Reserva auxReserva = getReserva(r.getId());
-        if(auxReserva!=null)
-        {
-            gersoftBD.cancelarReservaDB(r);
-        }
-    }
-
-    public void adicionarReservaAPI(final Reserva reserva, Context context, String token) {
-        if (!GersoftJsonParser.isConnectionInternet(context)){
-            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
-        }else
-        {
-            StringRequest req = new StringRequest(Request.Method.POST, mUrlAPIComentariosEditAdd+"?access-token="+token, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    adicionarReservaBD(GersoftJsonParser.parserJsonReserva(response),context);
-                    if (DetalhesListener!=null)
-                    {
-                        DetalhesListener.onRefreshDetalhes(MenuMainActivity.ADD);
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            }){
-                @Override
-                public Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<>();
-                    SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
-                    int profile_id=sharedPreferences.getInt("PROFILE_ID",0);
-                    int estado=0;
-                    params.put("token", token);
-                    params.put("nrpessoas", reserva.getNrpessoas()+"");
-                    params.put("estado", estado+"");
-                    params.put("profile_id", profile_id+"");
-                    params.put("data",reserva.getData());
-                    params.put("hora",reserva.getHora());
-                    return params;
-                }
-            };
-            volleyQueue.add(req);
-        }
-    }
 }
