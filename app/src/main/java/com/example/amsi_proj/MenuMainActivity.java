@@ -18,9 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.amsi_proj.modelo.Artigo;
-import com.example.amsi_proj.modelo.Comentario;
 import com.example.amsi_proj.modelo.SingletonGersoft;
 import com.google.android.material.navigation.NavigationView;
 
@@ -58,6 +55,12 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
         fragmentManager = getSupportFragmentManager();
         carregarFragmentoInicial();
+    }
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+        SingletonGersoft.getInstance(getApplicationContext()).getAllReservasAPI(getApplicationContext());
     }
 
     //region atribuir valores ao header e ao menu
@@ -105,7 +108,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 break;
 
             case R.id.navPedidos:
-                fragment = new PedidoMesaFragment();
+                fragment = new PedidosFragment();
                 setTitle(item.getTitle());
                 break;
             case R.id.navArtigos:
@@ -131,6 +134,8 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
     public void onClickLogout(View view) {
         SharedPreferences preferences = getSharedPreferences(String.valueOf(R.string.SHARED_USER), MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();

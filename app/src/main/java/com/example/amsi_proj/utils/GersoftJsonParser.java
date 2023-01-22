@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.amsi_proj.modelo.Artigo;
 import com.example.amsi_proj.modelo.Comentario;
+import com.example.amsi_proj.modelo.Pedido;
 import com.example.amsi_proj.modelo.Reserva;
 
 import org.json.JSONArray;
@@ -84,40 +85,7 @@ public class GersoftJsonParser {
         return auxArtigo;
     }
 
-    public static ArrayList<Comentario> parserJsonComentarios(JSONArray response) {
-        ArrayList<Comentario> comentarios = new ArrayList<>();
-        try {
-            for (int i = 0; i < response.length(); i++) {
-                JSONObject comentario = (JSONObject) response.get(i);
-                int id = comentario.getInt("id");
-                String titulo = comentario.getString("titulo");
-                String descricao = comentario.getString("descricao");
-                int profile_id = comentario.getInt("profile_id");
 
-                Comentario auxComentario = new Comentario(id, profile_id,titulo, descricao);
-                comentarios.add(auxComentario);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return comentarios;
-    }
-
-    public static Comentario parserJsonComentario(String response) {
-        Comentario auxComentario = null;
-        try {
-            JSONObject comentario = new JSONObject(response);
-            int id = comentario.getInt("id");
-            String titulo = comentario.getString("titulo");
-            String descricao = comentario.getString("descricao");
-            int profile_id = comentario.getInt("profile_id");
-            auxComentario = new Comentario(id, profile_id,titulo, descricao);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return auxComentario;
-    }
     //endregion
 
     //region reserva
@@ -159,6 +127,93 @@ public class GersoftJsonParser {
             e.printStackTrace();
         }
         return auxReserva;
+    }
+    //endregion
+
+    //region comentários
+    public static ArrayList<Comentario> parserJsonComentarios(JSONArray response) {
+        ArrayList<Comentario> comentarios = new ArrayList<>();
+        try {
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject comentario = (JSONObject) response.get(i);
+                int id = comentario.getInt("id");
+                String titulo = comentario.getString("titulo");
+                String descricao = comentario.getString("descricao");
+                int profile_id = comentario.getInt("profile_id");
+
+                Comentario auxComentario = new Comentario(id, profile_id,titulo, descricao);
+                comentarios.add(auxComentario);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return comentarios;
+    }
+
+    public static Comentario parserJsonComentario(String response) {
+        Comentario auxComentario = null;
+        try {
+            JSONObject comentario = new JSONObject(response);
+            int id = comentario.getInt("id");
+            String titulo = comentario.getString("titulo");
+            String descricao = comentario.getString("descricao");
+            int profile_id = comentario.getInt("profile_id");
+            auxComentario = new Comentario(id, profile_id,titulo, descricao);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxComentario;
+    }
+
+    //endregion
+
+    //region Pedidos
+    public static ArrayList<Pedido> parserJsonPedidos(JSONArray response) {
+        ArrayList<Pedido> pedidos = new ArrayList<>();
+        try {
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject pedido = (JSONObject) response.get(i);
+                int id = pedido.getInt("id");
+                int tipo_pedido=pedido.getInt("tipo_pedido");
+                int profile_id=pedido.getInt("profile_id");
+                int metodo_pagamento_id=0;
+                if(pedido.get("metodo_pagamento_id")==null){
+                    metodo_pagamento_id=pedido.getInt("metodo_pagamento_id");
+                }
+                int mesa_id=0;
+                if(pedido.get("mesa_id")==null){
+                    mesa_id=pedido.getInt("mesa_id");
+                }
+                String data=pedido.getString("data");
+                String estado=pedido.getString("estado");
+                Double total=pedido.getDouble("total");
+                Pedido auxPedido = new Pedido(id, tipo_pedido,profile_id,metodo_pagamento_id,mesa_id,data,estado,total);
+                pedidos.add(auxPedido);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return pedidos;
+    }
+
+    public static Pedido parserJsonPedido(String response) {
+        Pedido auxPedido = null;
+        try {
+            JSONObject pedido = new JSONObject(response);
+            int id = pedido.getInt("id");
+            int tipo_pedido=pedido.getInt("tipo_pedido");
+            int profile_id=pedido.getInt("profile_id");
+            int metodo_pagamento_id=pedido.getInt("metodo_pagamento_id");
+            int mesa_id=pedido.getInt("mesa_id");
+            String data=pedido.getString("data");
+            String estado=pedido.getString("estado");
+            Double total=pedido.getDouble("total");
+            auxPedido = new Pedido(id, tipo_pedido,profile_id,metodo_pagamento_id,mesa_id,data,estado,total);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxPedido;
     }
     //endregion
 }

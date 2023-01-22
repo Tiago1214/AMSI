@@ -2,6 +2,7 @@ package com.example.amsi_proj.modelo;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
@@ -25,11 +26,13 @@ import java.util.Map;
 
 
 import com.example.amsi_proj.MenuMainActivity;
+import com.example.amsi_proj.PedidosFragment;
 import com.example.amsi_proj.R;
 import com.example.amsi_proj.listeners.ArtigoListener;
 import com.example.amsi_proj.listeners.ComentarioListener;
 import com.example.amsi_proj.listeners.DetalhesListener;
 import com.example.amsi_proj.listeners.LoginListener;
+import com.example.amsi_proj.listeners.PedidoListener;
 import com.example.amsi_proj.listeners.ReservaListener;
 import com.example.amsi_proj.utils.GersoftJsonParser;
 
@@ -37,10 +40,14 @@ public class SingletonGersoft {
 
     private static  SingletonGersoft instance = null;
     private static RequestQueue volleyQueue = null;
+    //connect login api
     private static final  String mUrlAPILogin = "http://10.0.2.2/gersoft/backend/web/api/users/auth";
+    //connect artigos api
     private static final String mUrlAPIArtigos="http://10.0.2.2/gersoft/backend/web/api/artigos";
 
+    //ir buscar a lista dos comentários do utilizador com sessão iniciada
     private static final String mUrlAPIComentarios="http://10.0.2.2/gersoft/backend/web/api/comentarios/meuscomentarios";
+    //criar,eliminar ou editar reservas
     private static final String mUrlAPIComentariosEditAdd="http://10.0.2.2/gersoft/backend/web/api/comentarios";
 
     private LoginListener loginListener;
@@ -51,18 +58,27 @@ public class SingletonGersoft {
     private ArrayList<Comentario> comentarios;
     private ComentarioListener comentarioListener;
 
+    //ir buscar as reservas do utilizador com sessão iniciada
     private static final String mUrlAPIReservas="http://10.0.2.2/gersoft/backend/web/api/reservas/minhasreservas";
+    //criar ou editar reservas
     private static final String mUrlAPIReservasEditAdd="http://10.0.2.2/gersoft/backend/web/api/reservas";
+    //cancelar reservas
     private static final String getmUrlAPIReservasCancelar="http://10.0.2.2/gersoft/backend/web/api/reservas/cancelarreserva";
     private DetalhesListener DetalhesListener;
     private ReservaListener reservasListener;
     private ArrayList<Reserva> reservas;
+
+    //pedidos
+    private PedidoListener pedidoListener;
+    private static final String mUrlAPIPedidos="http://10.0.2.2/gersoft/backend/web/api/pedidos/meuspedidos";
+    private ArrayList<Pedido> pedidos;
 
     //region variaveis do singleton
     public SingletonGersoft(Context context) {
         gersoftBD=new GersoftBDHelper(context);
     }
 
+    //instancia do singleton
     public static synchronized SingletonGersoft getInstance(Context context){
         if(instance == null)
         {
@@ -71,15 +87,29 @@ public class SingletonGersoft {
         }
         return instance;
     }
-    //endregion
+
+    //detalhes do que o utilizador está a fazer
     public void setDetalhesListener(DetalhesListener detalhesListener ) {
         this.detalhesListener=detalhesListener;
     }
+    //endregion
+
     //region Login
+
+    //validar o login ao fazer o método get á api com o username e password
     public void loginAPI(final String username, final String password, final Context context){
+        //verificar se o utilizador tem ligação a internet
         if (!GersoftJsonParser.isConnectionInternet(context)){
-            //Intent intent=new Intent(LoginActivity.class);
+
             Toast.makeText(context, R.string.SemligacaoInternet, Toast.LENGTH_LONG).show();
+            SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+            String user_logado=sharedPreferences.getString("USERNAME","");
+            String token_logado=sharedPreferences.getString("TOKEN","");
+            int perfil_logado=sharedPreferences.getInt("PROFILE_ID",0);
+            if(user_logado!=null){
+                Intent intent=new Intent(context,MenuMainActivity.class);
+                loginListener.onValidateLogin(user_logado,username,perfil_logado);
+            }
         }else{
             JsonObjectRequest req=new JsonObjectRequest(Request.Method.GET, mUrlAPILogin, null, new Response.Listener<JSONObject>() {
                 @Override
@@ -371,7 +401,7 @@ public class SingletonGersoft {
 
     public void adicionarComentariosBD(ArrayList<Comentario> comentarios,Context context)
     {
-        gersoftBD.removerAllCometarios();
+        gersoftBD.removerAllComentarios();
         for(Comentario c : comentarios)
         {
             adicionarComentarioBD(c,context);
@@ -538,6 +568,64 @@ public class SingletonGersoft {
             if (auxComentario!=null)
                 gersoftBD.removerComentarioDB(id);
 
+    }
+    //endregion
+
+    //region Pedidos
+    public void setPedidoListener(PedidoListener pedidoListener) {
+        this.pedidoListener=pedidoListener;
+    }
+
+    public void getAllPedidosAPI(final Context context) {
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+            if (pedidoListener!=null)
+            {
+                pedidoListener.onRefreshListaPedidos(gersoftBD.getAllPedidosBD());
+            }
+        }else
+        {
+            SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+            String user_logado=sharedPreferences.getString("USERNAME","");
+            String token_logado=sharedPreferences.getString("TOKEN","");
+            JsonArrayRequest req=new JsonArrayRequest(Request.Method.GET, mUrlAPIPedidos+"?access-token="+token_logado, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    pedidos = GersoftJsonParser.parserJsonPedidos(response);
+                    adicionarPedidosBD(pedidos,context);
+
+                    if (pedidoListener!=null)
+                    {
+                        pedidoListener.onRefreshListaPedidos(pedidos);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
+    public void adicionarPedidosBD(ArrayList<Pedido> pedidos,Context context)
+    {
+        gersoftBD.removerAllPedidos();
+        for(Pedido p : pedidos)
+        {
+            adicionarPedidoBD(p,context);
+        }
+    }
+
+    public void adicionarPedidoBD(Pedido p,Context context)
+    {
+        gersoftBD.adicionarPedidoBD(p,context);
+    }
+
+    public ArrayList getPedidosDB() {
+        pedidos=gersoftBD.getAllPedidosBD();
+        return new ArrayList(pedidos);
     }
     //endregion
 }

@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PedidoMesaFragment">
+    tools:context=".PedidosFragment">
 
     <ListView
-        android:id="@+id/list_Menus"
+        android:id="@+id/list_Pedidos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

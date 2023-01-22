@@ -17,7 +17,7 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
     //Nome da base de dados
     private static final String DB_NAME="gersoft";
     //versão da base de dados
-    private static final int DB_VERSION=3;
+    private static final int DB_VERSION=5;
     //iniciar base de dados
     private final SQLiteDatabase db;
 
@@ -103,8 +103,8 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
                 TIPO_PEDIDO+" INTEGER NOT NULL, "+
                 ESTADO+" TEXT NOT NULL, "+
                 PROFILE_ID+" INTEGER NOT NULL, "+
-                METODO_PAGAMENTO_ID+"INTEGER, "+
-                MESA_ID+"INTEGER);";
+                METODO_PAGAMENTO_ID+" INTEGER DEFAULT NULL, "+
+                MESA_ID+" INTEGER DEFAULT NULL);";
 
         String sqlCreateTableReserva="CREATE TABLE "+TABLE_RESERVA+"("+
                 ID+" INTEGER PRIMARY KEY, "+
@@ -221,7 +221,7 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
 
     }
 
-    public void removerAllCometarios() {
+    public void removerAllComentarios() {
         db.delete(TABLE_COMENTARIO, null, null);
     }
 
@@ -323,5 +323,52 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
         return db.update(TABLE_RESERVA, values, ID+"=?", new String[]{reserva.getId()+""})==1;
     }
 
+
+
+    //endregion
+
+    //region Pedido
+    public ArrayList<Pedido> getAllPedidosBD() {
+        ArrayList<Pedido> pedidos=new ArrayList<>();
+        Cursor cursor=db.query(TABLE_PEDIDO,new String[]{ID,TIPO_PEDIDO,PROFILE_ID,METODO_PAGAMENTO_ID,MESA_ID,DATA,ESTADO,TOTAL},
+                null,null,null,null,null);
+
+        if(cursor.moveToFirst()){
+            do {
+                Pedido auxPedido = new Pedido(cursor.getInt(0), cursor.getInt(1)
+                        , cursor.getInt(2), cursor.getInt(3),cursor.getInt(4),
+                        cursor.getString(5),cursor.getString(6),cursor.getDouble(7)
+                );
+                pedidos.add(auxPedido);
+            }while (cursor.moveToNext());
+            cursor.close();
+        }
+        return pedidos;
+    }
+
+    public void removerAllPedidos() {
+        db.delete(TABLE_PEDIDO, null, null);
+    }
+
+    public Pedido adicionarPedidoBD(Pedido p,Context context)
+    {
+        ContentValues values = new ContentValues();
+        values.put(ID, p.getId());
+        values.put(TIPO_PEDIDO, p.getTipo_pedido());
+        values.put(PROFILE_ID, p.getProfile_id());
+        values.put(METODO_PAGAMENTO_ID, p.getMetodo_pagamento_id());
+        values.put(MESA_ID, p.getMesa_id());
+        values.put(DATA, p.getData());
+        values.put(ESTADO,p.getEstado());
+        values.put(TOTAL,p.getTotal());
+        // db.insert retorna -1 em caso de erro ou o id que foi criado
+        int id = (int)db.insert(TABLE_PEDIDO, null, values);
+        if(id>-1)
+        {
+            p.setId(id);
+            return p;
+        }
+        return null;
+    }
     //endregion
 }
