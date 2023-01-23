@@ -34,25 +34,33 @@ public class RefeicaoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        //Definir variaveis
         View view = inflater.inflate(R.layout.fragment_refeicao, container, false);
         setHasOptionsMenu(true);
         tvNrpedidos=view.findViewById(R.id.tvNrPedidos);
         btnPedgratis=view.findViewById(R.id.btnPedgratis);
         btnPedgratis.setEnabled(false);
 
+        //Definir sharedPrefences
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("TOKEN", "");
         int profile_id=sharedPreferences.getInt("PROFILE_ID",0);
+
+        /** Pedir todos os pedidos guardados na base de dados local
+         * Procurar pelos pedidos que são diferentes de cancelado para o cliente com sessão iniciada
+         * Quando o cliente tiver 10 registos irá ser ativado um botão para resgatar uma refeição grátis
+         */
         ArrayList<Pedido> tempLista = new ArrayList<>();
         ArrayList<Pedido> teste = SingletonGersoft.getInstance(getContext()).getPedidosDB();
         int contador=0;
         for(Pedido p: teste)
         {
-            if(p.getEstado()!="Cancelado"&&p.getProfile_id()==profile_id){
+            if(p.getProfile_id()==profile_id&&p.getEstado()!="Cancelado"){
                 contador++;
             }
         }
         if(contador==10){
+            //Ativar o botão
             btnPedgratis.setEnabled(true);
             btnPedgratis.setOnClickListener(new View.OnClickListener() {
                 @Override

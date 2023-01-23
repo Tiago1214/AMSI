@@ -24,10 +24,13 @@ public class DetalhesArtigoActivity extends AppCompatActivity implements Detalhe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //definir vista
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_artigo);
+        //obter sharedPreferences
         SharedPreferences sharedPreferences =getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
         token = sharedPreferences.getString(MenuMainActivity.TOKEN, "");
+        //obter id do artigo selecionado
         int id=getIntent().getIntExtra("ID_ARTIGO", 0);
         artigo= SingletonGersoft.getInstance(this).getArtigo(id);
         nome=findViewById(R.id.etTitulo);
@@ -37,6 +40,7 @@ public class DetalhesArtigoActivity extends AppCompatActivity implements Detalhe
 
         SingletonGersoft.getInstance(getApplicationContext()).setDetalhesListener(this);
 
+        //carregar artigo selecionado
         if(artigo != null){
             carregarArtigo();
         }
@@ -50,6 +54,7 @@ public class DetalhesArtigoActivity extends AppCompatActivity implements Detalhe
         finish();
     }
 
+    //Carregar artigo
     private void carregarArtigo() {
         Resources res=getResources();
         String titulo = String.format(artigo.getNome());

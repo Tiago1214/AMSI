@@ -39,9 +39,11 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Definir vista
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_main);
 
+        //Definir toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawerLayout);
@@ -58,6 +60,8 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         carregarFragmentoInicial();
     }
 
+    //Quando o cliente carregar no botão de voltar para voltar para a página anterior
+    //faz um pedido á api para as reservas e mesas
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
@@ -101,6 +105,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     }
     //endregion
 
+    //opções do menu
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
         Fragment fragment = null;
@@ -142,6 +147,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     }
 
 
+    //Terminar Sessão
     public void onClickLogout(View view) {
         SharedPreferences preferences = getSharedPreferences(String.valueOf(R.string.SHARED_USER), MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();

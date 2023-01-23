@@ -39,24 +39,33 @@ public class PedidosFragment extends Fragment implements PedidoListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        //Atribuir os valores á lista
         onRefreshListaPedidos(pedidos);
+        //Definir a vista
         View view = inflater.inflate(R.layout.fragment_pedidos_concluidos, container, false);
         setHasOptionsMenu(true);
         lvPedidos = view.findViewById(R.id.list_Pedidos);
 
+        //Visualizar pedido concluído
         lvPedidos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), VisualizarPedidoConcluidoActivity.class);
                 intent.putExtra("ID_PEDIDO", (int) id);
+                //onactivityresult
                 startActivityForResult(intent,ACT_DETALHES);
             }
         });
 
+        //Definir o listener do pedido
         SingletonGersoft.getInstance(getContext()).setPedidoListener(this);
+
+        //Pedir todos os pedidos concluídos á api
         SingletonGersoft.getInstance(getContext()).getAllPedidosConcluidosAPI(getContext());
         return view;
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
@@ -78,6 +87,7 @@ public class PedidosFragment extends Fragment implements PedidoListener{
     }
 
 
+    //Barra de Pesquisa
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) { // pesquisa de aulas projeto
         inflater.inflate(R.menu.menu_pesquisa,menu);
@@ -120,6 +130,7 @@ public class PedidosFragment extends Fragment implements PedidoListener{
         super.onResume();
     }
 
+    //Definir adaptador da lista de pedidos
     @Override
     public void onRefreshListaPedidos(ArrayList<Pedido> listaPedidos) {
         if(listaPedidos != null){

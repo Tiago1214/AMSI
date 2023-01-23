@@ -38,6 +38,7 @@ public class ListaArtigosFragment extends Fragment implements ArtigoListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //Definir a vista
         View view = inflater.inflate(R.layout.fragment_lista_artigos, container, false);
         setHasOptionsMenu(true);
         lvArtigos = view.findViewById(R.id.lvArtigos);
@@ -50,11 +51,14 @@ public class ListaArtigosFragment extends Fragment implements ArtigoListener {
                 startActivity(intent);
             }
         });
+        //Definir Listener
         SingletonGersoft.getInstance(getContext()).setArtigosListener(this);
+        //Fazer um GET de todos os artigos á API
         SingletonGersoft.getInstance(getContext()).getAllArtigosAPI(getContext());
         return view;
     }
 
+    //pesquisa
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) { // pesquisa de aulas projeto
         inflater.inflate(R.menu.menu_pesquisa,menu);
@@ -97,7 +101,7 @@ public class ListaArtigosFragment extends Fragment implements ArtigoListener {
         super.onResume();
     }
 
-
+    //definir adaptador para a lista
     @Override
     public void onRefreshListaArtigos(ArrayList<Artigo> listaArtigos) {
         if(listaArtigos != null){

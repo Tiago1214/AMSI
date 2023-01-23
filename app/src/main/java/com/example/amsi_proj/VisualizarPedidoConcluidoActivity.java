@@ -29,8 +29,11 @@ public class VisualizarPedidoConcluidoActivity extends AppCompatActivity impleme
         setContentView(R.layout.activity_visualizar_pedido_concluido);
         lvLinhaspedido = findViewById(R.id.lvLinhasPedido);
         int id=getIntent().getIntExtra("ID_PEDIDO", 0);
+        //Chamar o listener do pedido
         SingletonGersoft.getInstance(getApplicationContext()).setLinhapedidoListener(this);
+        //Pedir á api as linhas de pedido
         SingletonGersoft.getInstance(getApplicationContext()).getAllLinhaspedidoAPI(getApplicationContext(),id);
+        //Pedir á api os pedidos concluidos
         SingletonGersoft.getInstance(getApplicationContext()).getAllPedidosConcluidosAPI(getApplicationContext());
     }
 
@@ -49,6 +52,8 @@ public class VisualizarPedidoConcluidoActivity extends AppCompatActivity impleme
         }
     }
 
+
+    //Função para atribuir os pedidos concluidos quando se carregar no botao para voltar á página anterior
     @Override
     public void onBackPressed() {
         super.onBackPressed();

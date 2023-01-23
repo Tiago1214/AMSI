@@ -43,11 +43,14 @@ public class DetalhesComentarioActivity extends AppCompatActivity implements Det
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //definir vista
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_comentario);
+        //obter sharedPreferences
         SharedPreferences sharedPreferences =getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
         token = sharedPreferences.getString("TOKEN", "");
         profile_id=sharedPreferences.getInt("PROFILE_ID",0);
+        //obter o id do comentario selecionado
         int id=getIntent().getIntExtra("ID_COMENTARIO", 0);
         comentario= SingletonGersoft.getInstance(this).getComentario(id);
         etTitulo=findViewById(R.id.etTitulo);
@@ -56,6 +59,7 @@ public class DetalhesComentarioActivity extends AppCompatActivity implements Det
 
         SingletonGersoft.getInstance(getApplicationContext()).setDetalhesListener(this);
 
+        //verificar se o comentario é nulo
         if(comentario != null){
             carregarComentario();
             fabGuardar.setImageResource(R.drawable.ic_action_guardar);
@@ -66,6 +70,7 @@ public class DetalhesComentarioActivity extends AppCompatActivity implements Det
 
         }
 
+        //botão para guardar o comentário
         fabGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,6 +94,7 @@ public class DetalhesComentarioActivity extends AppCompatActivity implements Det
 
     }
 
+    //Carregar comentário
     private void carregarComentario() {
         Resources res=getResources();
         String titulo = String.format(res.getString(R.string.act_titulo), comentario.getTitulo());
@@ -98,12 +104,10 @@ public class DetalhesComentarioActivity extends AppCompatActivity implements Det
 
     }
 
+    //validar comentário
     private boolean isComentarioValido() {
         String titulo = etTitulo.getText().toString();
-
         String descricao = etComentario.getText().toString();
-
-
 
         if (titulo.length()<MIN_CHAR){
             etTitulo.setError("Titulo invalida");
@@ -144,6 +148,7 @@ public class DetalhesComentarioActivity extends AppCompatActivity implements Det
         return super.onOptionsItemSelected(item);
     }
 
+    //Remover comentário
     private void dialogRemover() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Remover Comentario")

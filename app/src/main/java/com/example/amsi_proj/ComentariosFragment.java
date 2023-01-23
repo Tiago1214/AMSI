@@ -38,21 +38,17 @@ public class ComentariosFragment extends Fragment implements ComentarioListener 
     private SearchView searchView;
     public static final int ACT_DETALHES = 1;
 
-    public ComentariosFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
+        // Definir vista
         View view = inflater.inflate(R.layout.fragment_comentarios, container, false);
         setHasOptionsMenu(true);
         fabLista=view.findViewById(R.id.floating_AdicionarComentario);
         lvComentarios = view.findViewById(R.id.list_Comentarios);
 
+        //carregar editar
         lvComentarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -62,6 +58,7 @@ public class ComentariosFragment extends Fragment implements ComentarioListener 
             }
         });
 
+        //criar novo comentario
         fabLista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,6 +130,7 @@ public class ComentariosFragment extends Fragment implements ComentarioListener 
         super.onResume();
     }
 
+    //carregar adaptador da lista de comentários
     @Override
     public void onRefreshListaComentarios(ArrayList<Comentario> listaComentarios) {
         if(listaComentarios != null){

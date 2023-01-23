@@ -36,11 +36,17 @@ public class ReservaFragment extends Fragment implements ReservaListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //Atualizar registos da listview
         onRefreshListaReservas(reservas);
+        //Definir a view
         View view = inflater.inflate(R.layout.fragment_reserva, container, false);
         setHasOptionsMenu(true);
+
+        //Variaveis de layout
         lvReservas = view.findViewById(R.id.list_Reservas);
         fabLista=view.findViewById(R.id.floating_AdicionarReserva);
+
+        //selecionar registo de reserva para poder editá-lo ou cancelá-lo
         lvReservas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -50,6 +56,7 @@ public class ReservaFragment extends Fragment implements ReservaListener {
             }
         });
 
+        //registar nova reserva
         fabLista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +83,7 @@ public class ReservaFragment extends Fragment implements ReservaListener {
                 return false;
             }
 
+            //barra de pesquisa
             @Override
             public boolean onQueryTextChange(String s) {
                 ArrayList<Reserva> tempLista = new ArrayList<>();
@@ -106,6 +114,7 @@ public class ReservaFragment extends Fragment implements ReservaListener {
         super.onResume();
     }
 
+    //definir o adaptador da lista
     @Override
     public void onRefreshListaReservas(ArrayList<Reserva> listaReservas) {
         if(listaReservas != null){

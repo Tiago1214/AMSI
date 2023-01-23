@@ -39,11 +39,13 @@ public class CriarPedidosFragment extends Fragment implements PedidoListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Definir a vista
         onRefreshListaPedidos(pedidos);
         View view = inflater.inflate(R.layout.fragment_pedidos_emprocessamento, container, false);
         setHasOptionsMenu(true);
         lvPedidos = view.findViewById(R.id.list_Pedidos);
         fabLista=view.findViewById(R.id.floating_AdicionarPedido);
+        //Editar Pedido se selecionar um pedido
         lvPedidos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -53,6 +55,7 @@ public class CriarPedidosFragment extends Fragment implements PedidoListener{
             }
         });
 
+        //criar novo pedido
         fabLista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +64,7 @@ public class CriarPedidosFragment extends Fragment implements PedidoListener{
             }
         });
 
+        //carregar pedidos em processamento
         SingletonGersoft.getInstance(getContext()).setPedidoListener(this);
         SingletonGersoft.getInstance(getContext()).getAllPedidosEmProcessamentoAPI(getContext());
         return view;
@@ -128,6 +132,7 @@ public class CriarPedidosFragment extends Fragment implements PedidoListener{
         super.onResume();
     }
 
+    //definir adaptador da lista de pedidos
     @Override
     public void onRefreshListaPedidos(ArrayList<Pedido> listaPedidos) {
         if(listaPedidos != null){

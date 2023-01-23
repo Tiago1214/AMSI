@@ -47,27 +47,13 @@ public class CriarPedidoActivity extends AppCompatActivity implements DetalhesLi
         super.onCreate(savedInstanceState);
         //vista
         setContentView(R.layout.activity_criar_pedido);
-        //obter token
+        //obter sharedpreferences
         SharedPreferences sharedPreferences =getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
         token = sharedPreferences.getString("TOKEN", "");
         profile_id=sharedPreferences.getInt("PROFILE_ID",0);
-        //id da reserva
         fabGuardar=findViewById(R.id.fabGuardar);
-        InputFilter timeFilter;
+        //region spinner Mesa
         spMesa=findViewById(R.id.spMesa);
-        /*ArrayList<Integer> arrayList = new ArrayList<>();
-        arrayList.add(1);
-        arrayList.add(2);
-        arrayList.add(3);
-        arrayList.add(4);
-        arrayList.add(5);
-        arrayList.add(6);
-        arrayList.add(7);
-        arrayList.add(8);
-        arrayList.add(9);
-        arrayList.add(10);
-        ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_item, arrayList);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
         ArrayList<Integer> arrayList = new ArrayList<>();
         ArrayList<Integer> tempLista = new ArrayList<>();
         ArrayList<Mesa> teste = SingletonGersoft.getInstance(getApplicationContext()).getMesasDB();
@@ -78,23 +64,38 @@ public class CriarPedidoActivity extends AppCompatActivity implements DetalhesLi
         ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_dropdown_item,arrayList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spMesa.setAdapter(arrayAdapter);
-        //----
+        //endregion
+
+        //carregar pedido
         if(pedido!=null){
             carregarPedido();
         }
+
+        //obter data de hoje
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault());
         String currentDateandTime = sdf.format(new Date());
-        //endregion
+
+        //guardar pedido
         fabGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Pedido pedidoAux = new Pedido(0, 0,
-                        profile_id, Integer.parseInt(spMesa.getSelectedItem().toString()),
-                        currentDateandTime,"Em Processamento",0.0);
-                SingletonGersoft.getInstance(getApplicationContext()).adicionarPedidoAPI(pedidoAux,
-                        getApplicationContext(), token);
-
-                finish();
+                if(spMesa!=null){
+                    ArrayList<Mesa> teste = SingletonGersoft.getInstance(getApplicationContext()).getMesasDB();
+                    int idmesa=0;
+                    int nrmesa=Integer.parseInt(spMesa.getSelectedItem().toString());
+                    for(Mesa m: teste)
+                    {
+                        if(m.getNrmesa()==nrmesa){
+                            idmesa=m.getId();
+                        }
+                    }
+                    Pedido pedidoAux = new Pedido(0, 0,
+                            profile_id, idmesa,
+                            currentDateandTime,"Em Processamento",0.0);
+                    SingletonGersoft.getInstance(getApplicationContext()).adicionarPedidoAPI(pedidoAux,
+                            getApplicationContext(), token);
+                    finish();
+                }
             }
         });
         SingletonGersoft.getInstance(getApplicationContext()).setDetalhesListener(this);
@@ -133,6 +134,8 @@ public class CriarPedidoActivity extends AppCompatActivity implements DetalhesLi
         return super.onOptionsItemSelected(item);
     }
 
+
+    //remover pedido
     private void dialogRemover() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Remover Comentario")

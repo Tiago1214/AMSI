@@ -45,9 +45,12 @@ public class EditarPedidoActivity extends AppCompatActivity implements Linhapedi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Atribuir valores á lista
         onRefreshListaLinhapedidos(linhapedidos);
+        //definir vista
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_pedido);
+        //items da vista
         lvLinhaspedido=findViewById(R.id.lvLinhaspedido);
         etQuantidade=findViewById(R.id.etQuantidade);
         spArtigo=findViewById(R.id.spArtigo);
@@ -109,6 +112,7 @@ public class EditarPedidoActivity extends AppCompatActivity implements Linhapedi
         }
     }
 
+    //Guardar linhas de pedido e atualizar dinamicamente
     public void onClickGuardar(View view){
         if(etQuantidade!=null&&spArtigo!=null){
             ArrayList<Artigo> teste = SingletonGersoft.getInstance(getApplicationContext()).getArtigosBD();
@@ -123,6 +127,7 @@ public class EditarPedidoActivity extends AppCompatActivity implements Linhapedi
                 }
             }
             double valoriva=preco*0.23;
+            //criar linha de pedido
             Linhapedido linhapedidoAux = new Linhapedido(0, Integer.parseInt(etQuantidade.getText().toString()),23,
                     pedido_id,idartigo,preco,valoriva);
             SingletonGersoft.getInstance(getApplicationContext()).adicionarLinhaPedidoAPI(linhapedidoAux,

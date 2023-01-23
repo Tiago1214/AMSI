@@ -207,7 +207,9 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
         });
         //endregion
 
+        //veriricar se a reserva é nula
         if(reserva != null){
+            //carregar Reserva
             carregarReserva();
             int verify=reserva.getEstado();
             //region verificar estado
@@ -229,7 +231,6 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
             }
         }
 
-        //endregion
         fabGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

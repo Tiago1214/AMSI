@@ -24,16 +24,21 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Definir a vista
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //Definir o Listener
         SingletonGersoft.getInstance(getApplicationContext()).setLoginListener(this);
 
         // Atribuir as editText ás variaveis para poder acessar
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
+
+        //Se o utilizador não tiver internet abre a página de artigos e mostra os artigos guardados na base de dados local
         if(!GersoftJsonParser.isConnectionInternet(getApplicationContext())){
-            
+            Intent intent=new Intent(this,ArtigosOfflineActivity.class);
+            startActivity(intent);
         }
     }
 
