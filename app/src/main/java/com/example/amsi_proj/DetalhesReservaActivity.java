@@ -242,9 +242,7 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
                         reserva.setData(etData.getText().toString());
                         reserva.setHora(etHora.getText().toString());
                         SingletonGersoft.getInstance(getApplicationContext()).editarReservaAPI(reserva, getApplicationContext(), token);
-                        Intent intent;
-                        intent = new Intent(view.getContext(), MenuMainActivity.class);
-                        startActivity(intent);
+                        finish();
                     } else {
                         int estado=0;
                         Reserva reservaAux = new Reserva(0,Integer.parseInt(etnrPessoas.getText().toString()),
@@ -252,9 +250,7 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
                                 , etHora.getText().toString());
                         SingletonGersoft.getInstance(getApplicationContext()).adicionarReservaAPI(reservaAux,
                                 getApplicationContext(), token);
-                        Intent intent;
-                        intent = new Intent(view.getContext(), MenuMainActivity.class);
-                        startActivity(intent);
+                        finish();
                     }
                 }
 

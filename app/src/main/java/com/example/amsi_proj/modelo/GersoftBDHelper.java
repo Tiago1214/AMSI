@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.amsi_proj.R;
-import com.example.amsi_proj.adaptadores.ListaArtigoAdaptador;
 
 import java.util.ArrayList;
 

@@ -62,7 +62,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     protected void onResumeFragments() {
         super.onResumeFragments();
         SingletonGersoft.getInstance(getApplicationContext()).getAllReservasAPI(getApplicationContext());
-        SingletonGersoft.getInstance(getApplicationContext()).getAllPedidosAPI(getApplicationContext());
+        SingletonGersoft.getInstance(getApplicationContext()).getAllMesasAPI(getApplicationContext());
     }
 
     //region atribuir valores ao header e ao menu
@@ -114,6 +114,10 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 fragment = new PedidosFragment();
                 setTitle(item.getTitle());
                 break;
+            case R.id.navCriarpedidos:
+                fragment= new CriarPedidosFragment();
+                setTitle(item.getTitle());
+                break;
             case R.id.navArtigos:
                 fragment=new ListaArtigosFragment();
                 setTitle(item.getTitle());
@@ -122,7 +126,6 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 fragment = new RefeicaoFragment();
                 setTitle(item.getTitle());
                 break;
-
             case R.id.navComentarios:
                 fragment = new ComentariosFragment();
                 setTitle(item.getTitle());

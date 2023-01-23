@@ -40,14 +40,21 @@
                     android:textSize="30dp"
                     android:textStyle="bold" />
 
-                <EditText
+                <!--<EditText
                     android:id="@+id/etMesa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:textSize="20dp"
                     android:inputType="number"
-                    android:textStyle="bold" />
+                    android:textStyle="bold" /> -->
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/spMesa">
+
+                </Spinner>
 
 
             <Space

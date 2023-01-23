@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.amsi_proj.listeners.LoginListener;
 import com.example.amsi_proj.modelo.SingletonGersoft;
+import com.example.amsi_proj.utils.GersoftJsonParser;
 
 public class LoginActivity extends AppCompatActivity implements LoginListener {
 
@@ -31,16 +32,17 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         // Atribuir as editText ás variaveis para poder acessar
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
-        SharedPreferences sharedPreferences= getApplicationContext().getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
-        String user_logado=sharedPreferences.getString("USERNAME","");
-        String token_logado=sharedPreferences.getString("TOKEN","");
-        Boolean isloggedin=sharedPreferences.getBoolean("ISLOGGEDIN",false);
-        int perfil_logado=sharedPreferences.getInt("PROFILE_ID",0);
-        if(isloggedin==true){
-            Intent intent=new Intent(getApplicationContext(),MenuMainActivity.class);
-            startActivity(intent);
+        if(!GersoftJsonParser.isConnectionInternet(getApplicationContext())){
+            SharedPreferences sharedPreferences= getApplicationContext().getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+            String user_logado=sharedPreferences.getString("USERNAME","");
+            String token_logado=sharedPreferences.getString("TOKEN","");
+            Boolean isloggedin=sharedPreferences.getBoolean("ISLOGGEDIN",false);
+            int perfil_logado=sharedPreferences.getInt("PROFILE_ID",0);
+            if(isloggedin==true){
+                Intent intent=new Intent(getApplicationContext(),MenuMainActivity.class);
+                startActivity(intent);
+            }
         }
-
     }
 
     // validar o email e o login e apresentar o resultado da validação num Toast.

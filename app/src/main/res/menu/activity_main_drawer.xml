@@ -24,7 +24,12 @@
                 <item
                     android:id="@+id/navPedidos"
                     android:icon="@drawable/ic_action_tablerequest_foreground"
-                    android:title="@string/menu_pedidos" />
+                    android:title="@string/pedidos_concluidos" />
+
+                <item
+                    android:id="@+id/navCriarpedidos"
+                    android:icon="@drawable/ic_action_tablerequest_foreground"
+                    android:title="@string/pedidos_emprocessamento" />
             </menu>
         </item>
     </group>

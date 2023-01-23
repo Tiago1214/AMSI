@@ -28,7 +28,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 
-public class PedidosFragment extends Fragment implements PedidoListener{
+public class CriarPedidosFragment extends Fragment implements PedidoListener{
 
     private ListView lvPedidos;
     private ArrayList<Pedido> pedidos;
@@ -40,29 +40,37 @@ public class PedidosFragment extends Fragment implements PedidoListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         onRefreshListaPedidos(pedidos);
-        View view = inflater.inflate(R.layout.fragment_pedidos_concluidos, container, false);
+        View view = inflater.inflate(R.layout.fragment_pedidos_emprocessamento, container, false);
         setHasOptionsMenu(true);
         lvPedidos = view.findViewById(R.id.list_Pedidos);
-
+        fabLista=view.findViewById(R.id.floating_AdicionarPedido);
         lvPedidos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), VisualizarPedidoConcluidoActivity.class);
+                Intent intent = new Intent(getContext(), EditarPedidoActivity.class);
                 intent.putExtra("ID_PEDIDO", (int) id);
                 startActivityForResult(intent,ACT_DETALHES);
             }
         });
 
+        fabLista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), CriarPedidoActivity.class);
+                startActivityForResult(intent, ACT_DETALHES);
+            }
+        });
+
         SingletonGersoft.getInstance(getContext()).setPedidoListener(this);
-        SingletonGersoft.getInstance(getContext()).getAllPedidosConcluidosAPI(getContext());
+        SingletonGersoft.getInstance(getContext()).getAllPedidosEmProcessamentoAPI(getContext());
         return view;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
         if (resultCode== Activity.RESULT_OK && requestCode==ACT_DETALHES){
-            SingletonGersoft.getInstance(getContext()).getAllPedidosConcluidosAPI(getContext()); // quando sai dos detalhes e volta a lsta
-            onResume();
+            SingletonGersoft.getInstance(getContext()).getAllPedidosEmProcessamentoAPI(getContext()); // quando sai dos detalhes e volta a lsta
+
             switch (intent.getIntExtra(MenuMainActivity.OPERACAO, 0)){
                 case MenuMainActivity.ADD:
                     Toast.makeText(getContext(), "Pedido adicionado", Toast.LENGTH_SHORT).show();
