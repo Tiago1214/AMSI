@@ -33,6 +33,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     public static final String USERNAME="USERNAME";
     public static final String TOKEN="TOKEN";
     public static final String PROFILE_ID="PROFILE_ID";
+    public static final String ISLOGGEDIN="ISLOGGEDIN";
     public static final String OPERACAO="OPERACAO";
     public static final int ADD=10, EDIT=20, DELETE=30;
 
@@ -61,6 +62,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     protected void onResumeFragments() {
         super.onResumeFragments();
         SingletonGersoft.getInstance(getApplicationContext()).getAllReservasAPI(getApplicationContext());
+        SingletonGersoft.getInstance(getApplicationContext()).getAllPedidosAPI(getApplicationContext());
     }
 
     //region atribuir valores ao header e ao menu
@@ -82,6 +84,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             editor.putString(USERNAME, username);
             editor.putString(TOKEN, token);
             editor.putInt(PROFILE_ID,profile_id);
+            editor.putBoolean(ISLOGGEDIN,true);
             editor.apply();
         }
 

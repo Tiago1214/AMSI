@@ -11,15 +11,4 @@
         android:layout_height="match_parent"
         />
 
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_AdicionarPedidoMesa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="20dp"
-        android:clickable="true"
-        android:background="@color/orange2"
-        android:src="@drawable/ic_action_add" />
 </FrameLayout>

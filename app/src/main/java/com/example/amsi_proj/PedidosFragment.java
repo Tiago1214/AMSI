@@ -30,7 +30,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 
-public class PedidosFragment extends Fragment implements PedidoListener {
+public class PedidosFragment extends Fragment implements PedidoListener{
 
     private ListView lvPedidos;
     private ArrayList<Pedido> pedidos;
@@ -45,21 +45,13 @@ public class PedidosFragment extends Fragment implements PedidoListener {
         View view = inflater.inflate(R.layout.fragment_pedidos, container, false);
         setHasOptionsMenu(true);
         lvPedidos = view.findViewById(R.id.list_Pedidos);
-        fabLista=view.findViewById(R.id.floating_AdicionarPedidoMesa);
+        //fabLista=view.findViewById(R.id.floating_AdicionarPedidoMesa);
         lvPedidos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), EditarPedidoActivity.class);
                 intent.putExtra("ID_PEDIDO", (int) id);
                 startActivity(intent);
-            }
-        });
-
-        fabLista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), CriarPedidoActivity.class);
-                startActivityForResult(intent, ACT_DETALHES);
             }
         });
         SingletonGersoft.getInstance(getContext()).setPedidoListener(this);

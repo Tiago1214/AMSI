@@ -19,19 +19,25 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
+import com.example.amsi_proj.EditarPedidoActivity;
 import com.example.amsi_proj.MenuMainActivity;
 import com.example.amsi_proj.PedidosFragment;
 import com.example.amsi_proj.R;
 import com.example.amsi_proj.listeners.ArtigoListener;
 import com.example.amsi_proj.listeners.ComentarioListener;
 import com.example.amsi_proj.listeners.DetalhesListener;
+import com.example.amsi_proj.listeners.LinhapedidoListener;
 import com.example.amsi_proj.listeners.LoginListener;
+import com.example.amsi_proj.listeners.MesaListener;
 import com.example.amsi_proj.listeners.PedidoListener;
 import com.example.amsi_proj.listeners.ReservaListener;
 import com.example.amsi_proj.utils.GersoftJsonParser;
@@ -71,7 +77,16 @@ public class SingletonGersoft {
     //pedidos
     private PedidoListener pedidoListener;
     private static final String mUrlAPIPedidos="http://10.0.2.2/gersoft/backend/web/api/pedidos/meuspedidos";
+    private static final String mUrlAPIPedidosEditAdd="http://10.0.2.2/gersoft/backend/web/api/pedidos";
+    private static final String mUrlAPILinhaPedidoAll="http://10.0.2.2/gersoft/backend/web/api/linhapedidos/linhasdopedido";
     private ArrayList<Pedido> pedidos;
+    private LinhapedidoListener linhapedidoListener;
+    private ArrayList<Linhapedido> linhapedidos;
+
+    //mesas
+    private static final String mUrlAPIMesas="http://10.0.2.2/gersoft/backend/web/api/mesas";
+    private ArrayList<Mesa> mesas;
+    private MesaListener mesaListener;
 
     //region variaveis do singleton
     public SingletonGersoft(Context context) {
@@ -102,14 +117,6 @@ public class SingletonGersoft {
         if (!GersoftJsonParser.isConnectionInternet(context)){
 
             Toast.makeText(context, R.string.SemligacaoInternet, Toast.LENGTH_LONG).show();
-            SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
-            String user_logado=sharedPreferences.getString("USERNAME","");
-            String token_logado=sharedPreferences.getString("TOKEN","");
-            int perfil_logado=sharedPreferences.getInt("PROFILE_ID",0);
-            if(user_logado!=null){
-                Intent intent=new Intent(context,MenuMainActivity.class);
-                loginListener.onValidateLogin(user_logado,username,perfil_logado);
-            }
         }else{
             JsonObjectRequest req=new JsonObjectRequest(Request.Method.GET, mUrlAPILogin, null, new Response.Listener<JSONObject>() {
                 @Override
@@ -602,7 +609,7 @@ public class SingletonGersoft {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
             volleyQueue.add(req);
@@ -626,6 +633,152 @@ public class SingletonGersoft {
     public ArrayList getPedidosDB() {
         pedidos=gersoftBD.getAllPedidosBD();
         return new ArrayList(pedidos);
+    }
+
+    public Pedido getPedido(int id) {
+        for (Pedido p : pedidos){
+            if(p.getId() == id)
+                return p;
+        }
+        return null;
+    }
+    //endregion
+
+    //region mesas
+    public void getAllMesasAPI(final Context context) {
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+            if (mesaListener!=null)
+            {
+                mesaListener.onRefreshListaMesas(gersoftBD.getAllMesasDB());
+            }
+        }else
+        {
+            SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+            String user_logado=sharedPreferences.getString("USERNAME","");
+            String token_logado=sharedPreferences.getString("TOKEN","");
+            JsonArrayRequest req=new JsonArrayRequest(Request.Method.GET, mUrlAPIMesas+"?access-token="+token_logado, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    mesas = GersoftJsonParser.parserJsonMesas(response);
+                    adicionarMesasBD(mesas,context);
+
+                    if (mesaListener!=null)
+                    {
+                        mesaListener.onRefreshListaMesas(mesas);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
+    private void adicionarMesasBD(ArrayList<Mesa> mesas, Context context) {
+        gersoftBD.removerAllMesas();
+        for(Mesa m : mesas)
+        {
+            adicionarMesaBD(m,context);
+        }
+    }
+
+    private void adicionarMesaBD(Mesa m, Context context) {
+        gersoftBD.adicionarMesaBD(m,context);
+    }
+
+    public void adicionarPedidoAPI(Pedido pedido, Context context, String token) {
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        }else
+        {
+            StringRequest req = new StringRequest(Request.Method.POST, mUrlAPIPedidosEditAdd+"?access-token="+token, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    adicionarPedidoBD(GersoftJsonParser.parserJsonPedido(response),context);
+                    if (DetalhesListener!=null)
+                    {
+                        DetalhesListener.onRefreshDetalhes(MenuMainActivity.ADD);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                public Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault());
+                    String currentDateandTime = sdf.format(new Date());
+                    SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+                    int profile_id=sharedPreferences.getInt("PROFILE_ID",0);
+                    params.put("tipo_pedido",0+"");
+                    params.put("profile_id", profile_id+"");
+                    params.put("mesa_id",pedido.getMesa_id()+"");
+                    params.put("data",currentDateandTime);
+                    params.put("estado","Em Processamento");
+                    params.put("total",0+"");
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+    }
+
+    public void setLinhapedidoListener(LinhapedidoListener linhapedidoListener) {
+        this.linhapedidoListener=linhapedidoListener;
+    }
+
+    public void getAllLinhaspedidoAPI(final Context context,int id) {
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+            if (linhapedidoListener!=null)
+            {
+                linhapedidoListener.onRefreshListaLinhapedidos(gersoftBD.getAllLinhapedidosBD());
+            }
+        }else
+        {
+            SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+            String user_logado=sharedPreferences.getString("USERNAME","");
+            String token_logado=sharedPreferences.getString("TOKEN","");
+            JsonArrayRequest req=new JsonArrayRequest(Request.Method.GET, mUrlAPILinhaPedidoAll+
+                    "/"+id+"?access-token="+token_logado, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    linhapedidos = GersoftJsonParser.parserJsonLinhaPedidos(response);
+                    adicionarLinhapedidosBD(linhapedidos,context);
+
+                    if (linhapedidoListener!=null)
+                    {
+                        linhapedidoListener.onRefreshListaLinhapedidos(linhapedidos);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
+    private void adicionarLinhapedidosBD(ArrayList<Linhapedido> linhapedidos,Context context) {
+        gersoftBD.removerAllLinhapedidos();
+        for(Linhapedido l : linhapedidos)
+        {
+            adicionarLinhapedidoBD(l,context);
+        }
+    }
+
+    public void adicionarLinhapedidoBD(Linhapedido l,Context context)
+    {
+        gersoftBD.adicionarLinhapedidoDB(l,context);
     }
     //endregion
 }

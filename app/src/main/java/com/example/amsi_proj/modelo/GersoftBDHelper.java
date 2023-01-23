@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.amsi_proj.R;
+import com.example.amsi_proj.adaptadores.ListaArtigoAdaptador;
 
 import java.util.ArrayList;
 
@@ -103,7 +104,6 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
                 TIPO_PEDIDO+" INTEGER NOT NULL, "+
                 ESTADO+" TEXT NOT NULL, "+
                 PROFILE_ID+" INTEGER NOT NULL, "+
-                METODO_PAGAMENTO_ID+" INTEGER DEFAULT NULL, "+
                 MESA_ID+" INTEGER DEFAULT NULL);";
 
         String sqlCreateTableReserva="CREATE TABLE "+TABLE_RESERVA+"("+
@@ -336,8 +336,8 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             do {
                 Pedido auxPedido = new Pedido(cursor.getInt(0), cursor.getInt(1)
-                        , cursor.getInt(2), cursor.getInt(3),cursor.getInt(4),
-                        cursor.getString(5),cursor.getString(6),cursor.getDouble(7)
+                        , cursor.getInt(2),cursor.getInt(3),
+                        cursor.getString(4),cursor.getString(5),cursor.getDouble(6)
                 );
                 pedidos.add(auxPedido);
             }while (cursor.moveToNext());
@@ -356,7 +356,6 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
         values.put(ID, p.getId());
         values.put(TIPO_PEDIDO, p.getTipo_pedido());
         values.put(PROFILE_ID, p.getProfile_id());
-        values.put(METODO_PAGAMENTO_ID, p.getMetodo_pagamento_id());
         values.put(MESA_ID, p.getMesa_id());
         values.put(DATA, p.getData());
         values.put(ESTADO,p.getEstado());
@@ -370,5 +369,81 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
         }
         return null;
     }
+
+    public ArrayList<Mesa> getAllMesasDB() {
+        ArrayList<Mesa> mesas=new ArrayList<>();
+        Cursor cursor=db.query(TABLE_MESA,new String[]{ID,NRMESA,NRLUGARES,TIPOMESA},
+                null,null,null,null,null);
+
+        if(cursor.moveToFirst()){
+            do {
+                Mesa auxMesa = new Mesa(cursor.getInt(0), cursor.getInt(1),
+                        cursor.getInt(2),cursor.getString(3)
+                );
+                mesas.add(auxMesa);
+            }while (cursor.moveToNext());
+            cursor.close();
+        }
+        return mesas;
+    }
+
+    public void removerAllMesas() {db.delete(TABLE_MESA, null, null);}
+
+    public Mesa adicionarMesaBD(Mesa m, Context context) {
+        ContentValues values = new ContentValues();
+        values.put(ID, m.getId());
+        values.put(NRMESA, m.getNrmesa());
+        values.put(NRLUGARES, m.getNrlugares());
+        values.put(TIPOMESA, m.getTipomesa());
+        // db.insert retorna -1 em caso de erro ou o id que foi criado
+        int id = (int)db.insert(TABLE_MESA, null, values);
+        if(id>-1)
+        {
+            m.setId(id);
+            return m;
+        }
+        return null;
+    }
+
+    public ArrayList<Linhapedido> getAllLinhapedidosBD() {
+        ArrayList<Linhapedido> linhapedidos=new ArrayList<>();
+        Cursor cursor=db.query(TABLE_LINHAPEDIDO,new String[]{ID,QUANTIDADE,TAXAIVA,PEDIDO_ID,
+                ARTIGO_ID,VALORUNITARIO,VALORIVA},
+                null,null,null,null,null);
+
+        if(cursor.moveToFirst()){
+            do {
+                Linhapedido auxLinhapedido = new Linhapedido(cursor.getInt(0), cursor.getInt(1),
+                        cursor.getInt(2),cursor.getInt(3),cursor.getInt(4),cursor.getDouble(5)
+                        ,cursor.getDouble(6)
+                );
+                linhapedidos.add(auxLinhapedido);
+            }while (cursor.moveToNext());
+            cursor.close();
+        }
+        return linhapedidos;
+    }
+
+    public void removerAllLinhapedidos() {db.delete(TABLE_LINHAPEDIDO, null, null);}
+
+    public Linhapedido adicionarLinhapedidoDB(Linhapedido l, Context context) {
+        ContentValues values = new ContentValues();
+        values.put(ID, l.getId());
+        values.put(QUANTIDADE,l.getQuantidade());
+        values.put(TAXAIVA,l.getTaxaiva());
+        values.put(PEDIDO_ID,l.getPedido_id());
+        values.put(ARTIGO_ID,l.getArtigo_id());
+        values.put(VALORUNITARIO,l.getValorunitario());
+        values.put(VALORIVA,l.getValoriva());
+        // db.insert retorna -1 em caso de erro ou o id que foi criado
+        int id = (int)db.insert(TABLE_LINHAPEDIDO, null, values);
+        if(id>-1)
+        {
+            l.setId(id);
+            return l;
+        }
+        return null;
+    }
+
     //endregion
 }

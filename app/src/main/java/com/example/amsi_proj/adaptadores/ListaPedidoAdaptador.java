@@ -73,7 +73,12 @@ public class ListaPedidoAdaptador extends BaseAdapter {
         }
 
         public void update(Pedido pedido){
-            tvTipoPedido.setText(pedido.getTipo_pedido()+"");
+            if(pedido.getTipo_pedido()==0){
+                tvTipoPedido.setText("Restaurante");
+            }
+            else{
+                tvTipoPedido.setText("Takeaway");
+            }
             tvData.setText(pedido.getData());
             tvTotal.setText(pedido.getTotal()+"€");
             tvEstado.setText(pedido.getEstado());
