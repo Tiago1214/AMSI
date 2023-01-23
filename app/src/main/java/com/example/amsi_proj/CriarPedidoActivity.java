@@ -9,54 +9,33 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.InputFilter;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 import com.example.amsi_proj.listeners.DetalhesListener;
-import com.example.amsi_proj.listeners.PedidoListener;
+import com.example.amsi_proj.modelo.Artigo;
 import com.example.amsi_proj.modelo.GersoftBDHelper;
 import com.example.amsi_proj.modelo.Mesa;
 import com.example.amsi_proj.modelo.Pedido;
-import com.example.amsi_proj.modelo.Reserva;
 import com.example.amsi_proj.modelo.SingletonGersoft;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
-import java.time.Year;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 public class CriarPedidoActivity extends AppCompatActivity implements DetalhesListener {
 
     private Pedido pedido;
-    private EditText etMesa;
+    //private EditText etMesa;
+    private Spinner spMesa;
     private String token;
     private int profile_id;
     private FloatingActionButton fabGuardar;
@@ -64,6 +43,7 @@ public class CriarPedidoActivity extends AppCompatActivity implements DetalhesLi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SingletonGersoft.getInstance(getApplicationContext()).getAllMesasAPI(getApplicationContext());
         super.onCreate(savedInstanceState);
         //vista
         setContentView(R.layout.activity_criar_pedido);
@@ -74,7 +54,31 @@ public class CriarPedidoActivity extends AppCompatActivity implements DetalhesLi
         //id da reserva
         fabGuardar=findViewById(R.id.fabGuardar);
         InputFilter timeFilter;
-        etMesa=findViewById(R.id.etMesa);
+        spMesa=findViewById(R.id.spMesa);
+        /*ArrayList<Integer> arrayList = new ArrayList<>();
+        arrayList.add(1);
+        arrayList.add(2);
+        arrayList.add(3);
+        arrayList.add(4);
+        arrayList.add(5);
+        arrayList.add(6);
+        arrayList.add(7);
+        arrayList.add(8);
+        arrayList.add(9);
+        arrayList.add(10);
+        ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_item, arrayList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        ArrayList<Integer> tempLista = new ArrayList<>();
+        ArrayList<Mesa> teste = SingletonGersoft.getInstance(getApplicationContext()).getMesasDB();
+        for(Mesa m: teste)
+        {
+            arrayList.add(m.getNrmesa());
+        }
+        ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_dropdown_item,arrayList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spMesa.setAdapter(arrayAdapter);
+        //----
         if(pedido!=null){
             carregarPedido();
         }
@@ -85,19 +89,21 @@ public class CriarPedidoActivity extends AppCompatActivity implements DetalhesLi
             @Override
             public void onClick(View view) {
                 Pedido pedidoAux = new Pedido(0, 0,
-                        profile_id, Integer.parseInt(etMesa.getText().toString()),
+                        profile_id, Integer.parseInt(spMesa.getSelectedItem().toString()),
                         currentDateandTime,"Em Processamento",0.0);
                 SingletonGersoft.getInstance(getApplicationContext()).adicionarPedidoAPI(pedidoAux,
                         getApplicationContext(), token);
+
                 finish();
             }
         });
+        SingletonGersoft.getInstance(getApplicationContext()).setDetalhesListener(this);
+
     }
 
     private void carregarPedido() {
         Resources res=getResources();
         setTitle("Pedido");
-        etMesa.setText(pedido.getMesa_id());
     }
 
     @Override
@@ -146,5 +152,11 @@ public class CriarPedidoActivity extends AppCompatActivity implements DetalhesLi
                 })
                 .setIcon(android.R.drawable.ic_delete)
                 .show();
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SingletonGersoft.getInstance(getApplicationContext()).getAllPedidosEmProcessamentoAPI(getApplicationContext());
+        finish();
     }
 }

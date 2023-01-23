@@ -22,6 +22,7 @@
     <string name="Artigos_menu">Artigos</string>
     <string name="addcomentario">Adicionar Comentario</string>
     <string name="act_titulo">Detalhes:%1$s</string>
-    <string name="menu_pedidos">Pedidos</string>
+    <string name="pedidos_concluidos">Pedidos Concluídos</string>
+    <string name="pedidos_emprocessamento">Criar Pedido</string>
     <string name="info_ped_gratis">Só vai poder resgatar uma refeição gratuita quando atingir os pedidos concluídos</string>
 </resources>

@@ -79,15 +79,14 @@ public class ListaLinhapedidoAdaptador extends BaseAdapter {
         public void update(Linhapedido linhapedido){
             if(linhapedido!=null){
                 tvQuantidade.setText(linhapedido.getQuantidade()+"");
-                tvTotal.setText(linhapedido.getValorunitario()*linhapedido.getQuantidade()+"€");
-                tvIvatotal.setText((linhapedido.getValoriva()*linhapedido.getQuantidade())+"€");
+                tvTotal.setText(Math.round(linhapedido.getValorunitario()*linhapedido.getQuantidade())+"€");
+                tvIvatotal.setText(Math.round(linhapedido.getValoriva()*linhapedido.getQuantidade())+"€");
                 String nome="";
                 String imgurl="";
-                ArrayList<Artigo> tempLista = new ArrayList<>();
                 ArrayList<Artigo> teste = SingletonGersoft.getInstance(context).getArtigosBD();
                 for(Artigo a: teste)
                 {
-                    if(a.getId()==linhapedido.getId()){
+                    if(a.getId()==linhapedido.getArtigo_id()){
                         nome=a.getNome();
                         imgurl=a.getImagemurl();
                     }

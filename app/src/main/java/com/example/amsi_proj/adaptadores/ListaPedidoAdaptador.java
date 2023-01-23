@@ -60,12 +60,11 @@ public class ListaPedidoAdaptador extends BaseAdapter {
     }
 
     private class ViewHolderLista{
-        private TextView tvEstado,tvTotal,tvTipoPedido,tvData;
+        private TextView tvEstado,tvTotal,tvTipoPedido;
         private ImageView imgPedido;
 
         public ViewHolderLista(View view){
             tvTipoPedido = view.findViewById(R.id.tvTipoPedido);
-            tvData = view.findViewById(R.id.tvData);
             tvTotal = view.findViewById(R.id.tvTotal);
             tvEstado=view.findViewById(R.id.tvEstado);
             imgPedido=view.findViewById(R.id.imgPedido);
@@ -79,7 +78,6 @@ public class ListaPedidoAdaptador extends BaseAdapter {
             else{
                 tvTipoPedido.setText("Takeaway");
             }
-            tvData.setText(pedido.getData());
             tvTotal.setText(pedido.getTotal()+"€");
             tvEstado.setText(pedido.getEstado());
             imgPedido.setImageResource(R.drawable.ic_action_takeaway_foreground);

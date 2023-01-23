@@ -172,9 +172,6 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
                 else if (input>2 && start==0){ //if at hour >1 is press then automaticc set the time as 02: or 05: etc
                     etHora.setText("0"+s+":");
                 }
-                else if(input>2 && start==2 && !s.toString().startsWith("0")){ //whe dont have greater than 12 hrs so second postionn shouldn't exceed value 2
-                    etHora.setText(beforeTXT);
-                }
                 else if(start==1 && !beforeTXT.contains(":")){  //if valid input 10 or 11 or 12 is given then convert it to 10: 11: or 12:
                     etHora.setText(s.toString()+":");
 
@@ -242,9 +239,7 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
                         reserva.setData(etData.getText().toString());
                         reserva.setHora(etHora.getText().toString());
                         SingletonGersoft.getInstance(getApplicationContext()).editarReservaAPI(reserva, getApplicationContext(), token);
-                        Intent intent;
-                        intent = new Intent(view.getContext(), MenuMainActivity.class);
-                        startActivity(intent);
+                        finish();
                     } else {
                         int estado=0;
                         Reserva reservaAux = new Reserva(0,Integer.parseInt(etnrPessoas.getText().toString()),
@@ -252,9 +247,7 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
                                 , etHora.getText().toString());
                         SingletonGersoft.getInstance(getApplicationContext()).adicionarReservaAPI(reservaAux,
                                 getApplicationContext(), token);
-                        Intent intent;
-                        intent = new Intent(view.getContext(), MenuMainActivity.class);
-                        startActivity(intent);
+                        finish();
                     }
                 }
 

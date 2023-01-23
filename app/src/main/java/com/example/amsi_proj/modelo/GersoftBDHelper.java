@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.amsi_proj.R;
-import com.example.amsi_proj.adaptadores.ListaArtigoAdaptador;
 
 import java.util.ArrayList;
 
@@ -443,6 +442,10 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
             return l;
         }
         return null;
+    }
+
+    public Boolean removerLinhapedidoDB(int id) {
+        return db.delete(TABLE_LINHAPEDIDO,ID+"=?", new String[]{id+""})==1;
     }
 
     //endregion
