@@ -19,6 +19,7 @@ import android.widget.Spinner;
 
 import com.android.volley.RequestQueue;
 import com.example.amsi_proj.listeners.DetalhesListener;
+import com.example.amsi_proj.modelo.Artigo;
 import com.example.amsi_proj.modelo.GersoftBDHelper;
 import com.example.amsi_proj.modelo.Mesa;
 import com.example.amsi_proj.modelo.Pedido;
@@ -42,6 +43,7 @@ public class CriarPedidoActivity extends AppCompatActivity implements DetalhesLi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SingletonGersoft.getInstance(getApplicationContext()).getAllMesasAPI(getApplicationContext());
         super.onCreate(savedInstanceState);
         //vista
         setContentView(R.layout.activity_criar_pedido);
@@ -53,7 +55,7 @@ public class CriarPedidoActivity extends AppCompatActivity implements DetalhesLi
         fabGuardar=findViewById(R.id.fabGuardar);
         InputFilter timeFilter;
         spMesa=findViewById(R.id.spMesa);
-        ArrayList<Integer> arrayList = new ArrayList<>();
+        /*ArrayList<Integer> arrayList = new ArrayList<>();
         arrayList.add(1);
         arrayList.add(2);
         arrayList.add(3);
@@ -65,6 +67,15 @@ public class CriarPedidoActivity extends AppCompatActivity implements DetalhesLi
         arrayList.add(9);
         arrayList.add(10);
         ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_item, arrayList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        ArrayList<Integer> tempLista = new ArrayList<>();
+        ArrayList<Mesa> teste = SingletonGersoft.getInstance(getApplicationContext()).getMesasDB();
+        for(Mesa m: teste)
+        {
+            arrayList.add(m.getNrmesa());
+        }
+        ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_dropdown_item,arrayList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spMesa.setAdapter(arrayAdapter);
         //----
@@ -86,6 +97,8 @@ public class CriarPedidoActivity extends AppCompatActivity implements DetalhesLi
                 finish();
             }
         });
+        SingletonGersoft.getInstance(getApplicationContext()).setDetalhesListener(this);
+
     }
 
     private void carregarPedido() {

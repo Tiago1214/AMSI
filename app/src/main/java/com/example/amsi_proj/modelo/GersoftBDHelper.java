@@ -444,5 +444,9 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    public Boolean removerLinhapedidoDB(int id) {
+        return db.delete(TABLE_LINHAPEDIDO,ID+"=?", new String[]{id+""})==1;
+    }
+
     //endregion
 }

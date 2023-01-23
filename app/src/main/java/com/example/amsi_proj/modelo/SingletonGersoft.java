@@ -76,6 +76,7 @@ public class SingletonGersoft {
     private static final String mUrlAPIPedidos="http://10.0.2.2/gersoft/backend/web/api/pedidos/meuspedidos";
     private static final String mUrlAPIPedidosEditAdd="http://10.0.2.2/gersoft/backend/web/api/pedidos";
     private static final String mUrlAPILinhaPedidoAll="http://10.0.2.2/gersoft/backend/web/api/linhapedidos/linhasdopedido";
+    private static final String mUrlAPILinhaPedidoEditAdd="http://10.0.2.2/gersoft/backend/web/api/linhapedidos";
     private ArrayList<Pedido> pedidos;
     private LinhapedidoListener linhapedidoListener;
     private ArrayList<Linhapedido> linhapedidos;
@@ -103,6 +104,10 @@ public class SingletonGersoft {
     //detalhes do que o utilizador está a fazer
     public void setDetalhesListener(DetalhesListener detalhesListener ) {
         this.detalhesListener=detalhesListener;
+    }
+
+    public void setMesaListener(MesaListener mesaListener){
+        this.mesaListener=mesaListener;
     }
     //endregion
 
@@ -145,7 +150,7 @@ public class SingletonGersoft {
     //endregion
 
     //region artigos
-    public ArrayList<Artigo> getArtigosBD() { // return da copia dos livros
+    public ArrayList<Artigo> getArtigosBD() { // return da copia dos artigos
         artigos=gersoftBD.getAllArtigosBD();
         return new ArrayList(artigos);
     }
@@ -243,7 +248,7 @@ public class SingletonGersoft {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Erro", Toast.LENGTH_LONG).show();
                 }
             });
             volleyQueue.add(req);
@@ -571,7 +576,6 @@ public class SingletonGersoft {
             Comentario auxComentario = getComentario(id);
             if (auxComentario!=null)
                 gersoftBD.removerComentarioDB(id);
-
     }
     //endregion
 
@@ -678,8 +682,7 @@ public class SingletonGersoft {
     public void getAllMesasAPI(final Context context) {
         if (!GersoftJsonParser.isConnectionInternet(context)){
             Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
-            if (mesaListener!=null)
-            {
+            if(mesaListener!=null){
                 mesaListener.onRefreshListaMesas(gersoftBD.getAllMesasDB());
             }
         }else
@@ -692,9 +695,7 @@ public class SingletonGersoft {
                 public void onResponse(JSONArray response) {
                     mesas = GersoftJsonParser.parserJsonMesas(response);
                     adicionarMesasBD(mesas,context);
-
-                    if (mesaListener!=null)
-                    {
+                    if(mesaListener!=null){
                         mesaListener.onRefreshListaMesas(mesas);
                     }
                 }
@@ -812,8 +813,92 @@ public class SingletonGersoft {
     }
 
     public ArrayList getMesasDB() {
-        mesas=gersoftBD.getAllMesasDB();
+        mesas=gersoftBD.getAllMesasDB();// return da copia das mesas
         return new ArrayList(mesas);
+    }
+
+    public ArrayList getLinhaspedidosDB() {
+        linhapedidos=gersoftBD.getAllLinhapedidosBD();// return da copia das linhas de pedido
+        return new ArrayList(linhapedidos);
+    }
+
+    public void adicionarLinhaPedidoAPI(Linhapedido linhapedido, Context context, String token) {
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        }else
+        {
+            StringRequest req = new StringRequest(Request.Method.POST, mUrlAPILinhaPedidoEditAdd+"?access-token="+token, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    adicionarLinhapedidoBD(GersoftJsonParser.parserJsonLinhaPedido(response),context);
+                    if (DetalhesListener!=null)
+                    {
+                        DetalhesListener.onRefreshDetalhes(MenuMainActivity.ADD);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                public Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("quantidade",linhapedido.getQuantidade()+"");
+                    params.put("valorunitario", linhapedido.getValorunitario()+"");
+                    params.put("valoriva",linhapedido.getValoriva()+"");
+                    params.put("taxaiva",linhapedido.getTaxaiva()+"");
+                    params.put("pedido_id",linhapedido.getPedido_id()+"");
+                    params.put("artigo_id",linhapedido.getArtigo_id()+"");
+                    return params;
+                }
+            };
+            volleyQueue.add(req);
+        }
+    }
+
+    public void removerLinhaPedidoAPI(Linhapedido linhapedido, Context context) {
+        if (!GersoftJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem ligação á internet", Toast.LENGTH_LONG).show();
+        }else
+        {
+            SharedPreferences sharedPreferences= context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+            String user_logado=sharedPreferences.getString("USERNAME","");
+            String token_logado=sharedPreferences.getString("TOKEN","");
+            StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPILinhaPedidoEditAdd+ "/"+linhapedido.getId()
+                    +"?access-token="+token_logado
+                    , new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    removerLinhaPedidoDB(linhapedido.getId());
+                    if (detalhesListener!=null)
+                    {
+                        detalhesListener.onRefreshDetalhes(MenuMainActivity.DELETE);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
+    private void removerLinhaPedidoDB(int id) {
+        Linhapedido auxLinhapedido = getLinhapedido(id);
+        if (auxLinhapedido!=null)
+            gersoftBD.removerLinhapedidoDB(id);
+    }
+
+    public Linhapedido getLinhapedido(int id) {
+        for (Linhapedido p : linhapedidos){
+            if(p.getId() == id)
+                return p;
+        }
+        return null;
     }
     //endregion
 }

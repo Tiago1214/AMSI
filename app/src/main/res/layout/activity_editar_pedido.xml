@@ -8,7 +8,9 @@
         android:id="@+id/spArtigo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:hint="Artigo" />
+
 
     <EditText
         android:id="@+id/etQuantidade"
@@ -18,10 +20,10 @@
         android:hint="Quantidade" />
 
     <Button
-        android:id="@+id/insertButton"
+        android:id="@+id/btnGuardar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="insertText"
+        android:onClick="onClickGuardar"
         android:layout_gravity="right"
         android:text="Guardar" />
 

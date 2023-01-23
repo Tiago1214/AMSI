@@ -226,7 +226,7 @@ public class GersoftJsonParser {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject mesa = (JSONObject) response.get(i);
                 int id = mesa.getInt("id");
-                int nrmesa=mesa.getInt("nr_mesa");
+                int nrmesa=mesa.getInt("nrmesa");
                 int nrlugares=mesa.getInt("nrlugares");
                 String tipomesa=mesa.getString("tipomesa");
                 Mesa auxMesa = new Mesa(id, nrmesa,nrlugares,tipomesa);
@@ -258,6 +258,24 @@ public class GersoftJsonParser {
             e.printStackTrace();
         }
         return linhapedidos;
+    }
+
+    public static Linhapedido parserJsonLinhaPedido(String response) {
+        Linhapedido auxLinhapedido = null;
+        try {
+            JSONObject linhapedido = new JSONObject(response);
+            int id = linhapedido.getInt("id");
+            int quantidade=linhapedido.getInt("quantidade");
+            int taxaiva=linhapedido.getInt("taxaiva");
+            int pedido_id=linhapedido.getInt("pedido_id");
+            int artigo_id=linhapedido.getInt("artigo_id");
+            double valorunitario=linhapedido.getDouble("valorunitario");
+            double valoriva=linhapedido.getDouble("valoriva");
+            auxLinhapedido = new Linhapedido(id, quantidade,taxaiva,pedido_id,artigo_id,valorunitario,valoriva);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxLinhapedido;
     }
     //endregion
 }

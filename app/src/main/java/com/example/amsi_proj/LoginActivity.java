@@ -33,15 +33,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         if(!GersoftJsonParser.isConnectionInternet(getApplicationContext())){
-            SharedPreferences sharedPreferences= getApplicationContext().getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
-            String user_logado=sharedPreferences.getString("USERNAME","");
-            String token_logado=sharedPreferences.getString("TOKEN","");
-            Boolean isloggedin=sharedPreferences.getBoolean("ISLOGGEDIN",false);
-            int perfil_logado=sharedPreferences.getInt("PROFILE_ID",0);
-            if(isloggedin==true){
-                Intent intent=new Intent(getApplicationContext(),MenuMainActivity.class);
-                startActivity(intent);
-            }
+            
         }
     }
 
