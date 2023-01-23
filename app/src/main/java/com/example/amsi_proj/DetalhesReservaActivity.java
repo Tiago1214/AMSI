@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.amsi_proj.listeners.DetalhesListener;
+import com.example.amsi_proj.modelo.Comentario;
 import com.example.amsi_proj.modelo.Reserva;
 import com.example.amsi_proj.modelo.SingletonGersoft;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -36,6 +37,7 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
     private Reserva reserva;
     private EditText etnrPessoas,etData,etHora;
     private String token;
+    private int profile_id;
     private FloatingActionButton fabGuardar;
 
     @Override
@@ -46,6 +48,7 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
         //obter token
         SharedPreferences sharedPreferences =getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
         token = sharedPreferences.getString("TOKEN", "");
+        profile_id=sharedPreferences.getInt("PROFILE_ID",0);
 
         //id da reserva
         int id=getIntent().getIntExtra("ID_RESERVA", 0);
@@ -91,8 +94,8 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
                         int mon  = Integer.parseInt(clean.substring(2,4));
                         int year = Integer.parseInt(clean.substring(4,8));
 
-                        if(mon > 12) mon = 12;
-                        cal.set(Calendar.MONTH, mon-1);
+                        if(mon > 12){ mon = 12;}
+                        cal.set(Calendar.MONTH, mon);
 
                         year = (year<= Year.now().getValue())?Year.now().getValue():(year>2100)?2100:year;
                         cal.set(Calendar.YEAR, year);
@@ -169,7 +172,7 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
                 else if (input>2 && start==0){ //if at hour >1 is press then automaticc set the time as 02: or 05: etc
                     etHora.setText("0"+s+":");
                 }
-                else if(input>3 && start==1 && !s.toString().startsWith("0")){ //whe dont have greater than 12 hrs so second postionn shouldn't exceed value 2
+                else if(input>2 && start==2 && !s.toString().startsWith("0")){ //whe dont have greater than 12 hrs so second postionn shouldn't exceed value 2
                     etHora.setText(beforeTXT);
                 }
                 else if(start==1 && !beforeTXT.contains(":")){  //if valid input 10 or 11 or 12 is given then convert it to 10: 11: or 12:
@@ -209,25 +212,26 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
 
         if(reserva != null){
             carregarReserva();
+            int verify=reserva.getEstado();
+            //region verificar estado
+            //verificar se a reserva se encontra concluída
+            if(verify==1){
+                Toast.makeText(this.getApplicationContext(),"Não se pode alterar" +
+                        " e visualizar reservas Concluídas",Toast.LENGTH_LONG).show();
+                Intent intent;
+                intent = new Intent(this, MenuMainActivity.class);
+                startActivity(intent);
+            }
+            //verificar se a reserva se encontra cancelada
+            if(verify==2){
+                Toast.makeText(this.getApplicationContext(),"Não se pode visualizar" +
+                        " reservas cancelas",Toast.LENGTH_LONG).show();
+                Intent intent;
+                intent = new Intent(this, MenuMainActivity.class);
+                startActivity(intent);
+            }
         }
 
-        //region verificar estado
-        //verificar se a reserva se encontra concluída
-        if(reserva.getEstado()==1){
-            Toast.makeText(this.getApplicationContext(),"Não se pode alterar" +
-                    " e visualizar reservas Concluídas",Toast.LENGTH_LONG).show();
-            Intent intent;
-            intent = new Intent(this, MenuMainActivity.class);
-            startActivity(intent);
-        }
-        //verificar se a reserva se encontra cancelada
-        if(reserva.getEstado()==2){
-            Toast.makeText(this.getApplicationContext(),"Não se pode visualizar" +
-                    " reservas cancelas",Toast.LENGTH_LONG).show();
-            Intent intent;
-            intent = new Intent(this, MenuMainActivity.class);
-            startActivity(intent);
-        }
         //endregion
         fabGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,6 +246,15 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
                         intent = new Intent(view.getContext(), MenuMainActivity.class);
                         startActivity(intent);
                     } else {
+                        int estado=0;
+                        Reserva reservaAux = new Reserva(0,Integer.parseInt(etnrPessoas.getText().toString()),
+                                estado,profile_id,etData.getText().toString()
+                                , etHora.getText().toString());
+                        SingletonGersoft.getInstance(getApplicationContext()).adicionarReservaAPI(reservaAux,
+                                getApplicationContext(), token);
+                        Intent intent;
+                        intent = new Intent(view.getContext(), MenuMainActivity.class);
+                        startActivity(intent);
                     }
                 }
 
@@ -254,21 +267,23 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.itemRemover:
-                //dialogRemover();
+                dialogRemover();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    /*private void dialogRemover() {
+    private void dialogRemover() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Cancelar Reserva")
                 .setMessage("Tem a certeza que pretende cancelar a reserva?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        SingletonGersoft.getInstance(getApplicationContext()).cancelarReservaAPI(reserva, getApplicationContext());
-
+                        SingletonGersoft.getInstance(getApplicationContext()).cancelarReservaAPI(reserva, getApplicationContext(),token);
+                        Intent intent;
+                        intent = new Intent(builder.getContext(), MenuMainActivity.class);
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -279,7 +294,7 @@ public class DetalhesReservaActivity extends AppCompatActivity implements Detalh
                 })
                 .setIcon(android.R.drawable.ic_delete)
                 .show();
-    }*/
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

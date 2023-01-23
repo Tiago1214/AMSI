@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -30,6 +31,15 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         // Atribuir as editText ás variaveis para poder acessar
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
+        SharedPreferences sharedPreferences= getApplicationContext().getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+        String user_logado=sharedPreferences.getString("USERNAME","");
+        String token_logado=sharedPreferences.getString("TOKEN","");
+        Boolean isloggedin=sharedPreferences.getBoolean("ISLOGGEDIN",false);
+        int perfil_logado=sharedPreferences.getInt("PROFILE_ID",0);
+        if(isloggedin==true){
+            Intent intent=new Intent(getApplicationContext(),MenuMainActivity.class);
+            startActivity(intent);
+        }
 
     }
 
@@ -63,12 +73,13 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
 
 
     @Override
-    public void onValidateLogin(String token,String username) {
+    public void onValidateLogin(String token,String username,int profile_id) {
         if (token!=null)
         {
             Intent intent = new Intent(this, MenuMainActivity.class);
             intent.putExtra(MenuMainActivity.TOKEN, token);
             intent.putExtra(MenuMainActivity.USERNAME,username);
+            intent.putExtra(MenuMainActivity.PROFILE_ID,profile_id);
             startActivity(intent);
             finish();
         }else

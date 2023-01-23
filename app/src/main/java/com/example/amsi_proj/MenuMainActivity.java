@@ -18,9 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.amsi_proj.modelo.Artigo;
-import com.example.amsi_proj.modelo.Comentario;
 import com.example.amsi_proj.modelo.SingletonGersoft;
 import com.google.android.material.navigation.NavigationView;
 
@@ -31,9 +28,12 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     private DrawerLayout drawer;
     private String username;
     private String token;
+    private int profile_id;
     public static final String SHARED_USER="DADOS_USER";
     public static final String USERNAME="USERNAME";
     public static final String TOKEN="TOKEN";
+    public static final String PROFILE_ID="PROFILE_ID";
+    public static final String ISLOGGEDIN="ISLOGGEDIN";
     public static final String OPERACAO="OPERACAO";
     public static final int ADD=10, EDIT=20, DELETE=30;
 
@@ -58,6 +58,13 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         carregarFragmentoInicial();
     }
 
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+        SingletonGersoft.getInstance(getApplicationContext()).getAllReservasAPI(getApplicationContext());
+        SingletonGersoft.getInstance(getApplicationContext()).getAllPedidosAPI(getApplicationContext());
+    }
+
     //region atribuir valores ao header e ao menu
     private boolean carregarFragmentoInicial() {
         Menu menu = navigationView.getMenu();
@@ -69,12 +76,15 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     private void carregarCabecalho() {
         username=getIntent().getStringExtra(USERNAME);
         token= getIntent().getStringExtra(TOKEN);
+        profile_id=getIntent().getIntExtra(PROFILE_ID,0);
         SharedPreferences infoUser=getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
 
         if(username!=null && token!=null)  {
             SharedPreferences.Editor editor =infoUser.edit();
             editor.putString(USERNAME, username);
             editor.putString(TOKEN, token);
+            editor.putInt(PROFILE_ID,profile_id);
+            editor.putBoolean(ISLOGGEDIN,true);
             editor.apply();
         }
 
@@ -101,7 +111,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 break;
 
             case R.id.navPedidos:
-                fragment = new PedidoMesaFragment();
+                fragment = new PedidosFragment();
                 setTitle(item.getTitle());
                 break;
             case R.id.navArtigos:
@@ -127,6 +137,8 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
     public void onClickLogout(View view) {
         SharedPreferences preferences = getSharedPreferences(String.valueOf(R.string.SHARED_USER), MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();

@@ -3,6 +3,8 @@ package com.example.amsi_proj;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -26,11 +28,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.BreakIterator;
 import java.util.Calendar;
+import java.util.zip.Inflater;
 
 public class DetalhesComentarioActivity extends AppCompatActivity implements DetalhesListener {
 
     private Comentario comentario;
+    private FragmentManager fragmentManager;
     private String token;
+    private int profile_id;
     private EditText etTitulo, etComentario;
     private FloatingActionButton fabGuardar;
     public static final int MIN_CHAR = 3, MIN_NUMERO=4;
@@ -40,8 +45,9 @@ public class DetalhesComentarioActivity extends AppCompatActivity implements Det
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_comentario);
-        SharedPreferences sharedPreferences =getSharedPreferences(MenuMainActivity.SHARED_USER, Context.MODE_PRIVATE);
-        token = sharedPreferences.getString(MenuMainActivity.TOKEN, null);
+        SharedPreferences sharedPreferences =getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+        token = sharedPreferences.getString("TOKEN", "");
+        profile_id=sharedPreferences.getInt("PROFILE_ID",0);
         int id=getIntent().getIntExtra("ID_COMENTARIO", 0);
         comentario= SingletonGersoft.getInstance(this).getComentario(id);
         etTitulo=findViewById(R.id.etTitulo);
@@ -68,9 +74,17 @@ public class DetalhesComentarioActivity extends AppCompatActivity implements Det
                         comentario.setTitulo(etTitulo.getText().toString());
                         comentario.setDescricao(etComentario.getText().toString());
                         SingletonGersoft.getInstance(getApplicationContext()).editarComentarioAPI(comentario, getApplicationContext(), token);
+                        Intent intent;
+                        intent = new Intent(view.getContext(), MenuMainActivity.class);
+                        startActivity(intent);
                     } else {
-                        Comentario comentarioAux = new Comentario(comentario.getId(),comentario.getProfile_id(),etTitulo.getText().toString(), etComentario.getText().toString());
-                        SingletonGersoft.getInstance(getApplicationContext()).adicionarComentarioAPI(comentarioAux, getApplicationContext(), token);
+                        Comentario comentarioAux = new Comentario(0,profile_id,etTitulo.getText().toString()
+                                , etComentario.getText().toString());
+                        SingletonGersoft.getInstance(getApplicationContext()).adicionarComentarioAPI(comentarioAux,
+                                getApplicationContext(), token);
+                        Intent intent;
+                        intent = new Intent(view.getContext(), MenuMainActivity.class);
+                        startActivity(intent);
                     }
                 }
             }

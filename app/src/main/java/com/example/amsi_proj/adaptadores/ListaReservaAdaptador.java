@@ -56,6 +56,7 @@ public class ListaReservaAdaptador extends BaseAdapter {
         }
 
         viewHolder.update(reservas.get(i));
+
         return view;
     }
 
@@ -69,6 +70,7 @@ public class ListaReservaAdaptador extends BaseAdapter {
             tvHora = view.findViewById(R.id.tvHora);
             tvEstado=view.findViewById(R.id.tvEstado);
             imgCapa=view.findViewById(R.id.imageView3);
+
         }
 
         public void update(Reserva reserva){

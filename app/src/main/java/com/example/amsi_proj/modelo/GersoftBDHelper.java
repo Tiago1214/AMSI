@@ -2,9 +2,13 @@ package com.example.amsi_proj.modelo;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.amsi_proj.R;
+import com.example.amsi_proj.adaptadores.ListaArtigoAdaptador;
 
 import java.util.ArrayList;
 
@@ -14,7 +18,7 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
     //Nome da base de dados
     private static final String DB_NAME="gersoft";
     //versão da base de dados
-    private static final int DB_VERSION=2;
+    private static final int DB_VERSION=5;
     //iniciar base de dados
     private final SQLiteDatabase db;
 
@@ -72,7 +76,7 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
                 ID+" INTEGER PRIMARY KEY, "+
                 TITULO+" TEXT NOT NULL, "+
                 DESCRICAO+" TEXT NOT NULL, "+
-                PROFILE_ID+"INTEGER NOT NULL);";
+                PROFILE_ID+" INTEGER NOT NULL);";
 
         String sqlCreateTableLinhapedido="CREATE TABLE "+TABLE_LINHAPEDIDO+"("+
                 ID+" INTEGER PRIMARY KEY, "+
@@ -87,7 +91,7 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
                 ID+" INTEGER PRIMARY KEY, "+
                 NRMESA+" INTEGER NOT NULL, "+
                 NRLUGARES+" INTEGER NOT NULL, "+
-                TIPOMESA+"TEXT NOT NULL);";
+                TIPOMESA+" TEXT NOT NULL);";
 
         String sqlCreateTableMetodopagamento="CREATE TABLE "+TABLE_METODOPAGAMENTO+"("+
                 ID+" INTEGER PRIMARY KEY, "+
@@ -100,8 +104,7 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
                 TIPO_PEDIDO+" INTEGER NOT NULL, "+
                 ESTADO+" TEXT NOT NULL, "+
                 PROFILE_ID+" INTEGER NOT NULL, "+
-                METODO_PAGAMENTO_ID+"INTEGER, "+
-                MESA_ID+"INTEGER);";
+                MESA_ID+" INTEGER DEFAULT NULL);";
 
         String sqlCreateTableReserva="CREATE TABLE "+TABLE_RESERVA+"("+
                 ID+" INTEGER PRIMARY KEY, "+
@@ -198,17 +201,18 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
         }
         return artigos;
     }
+    //endregion
 
     public ArrayList<Comentario> getAllComentariosBD() {
         ArrayList<Comentario> comentarios=new ArrayList<>();
-        Cursor cursor=db.query(TABLE_COMENTARIO,new String[]{ID,TITULO,DESCRICAO,PROFILE_ID},
+        Cursor cursor=db.query(TABLE_COMENTARIO,new String[]{ID,PROFILE_ID,TITULO,DESCRICAO},
                 null,null,null,null,null);
 
         if(cursor.moveToFirst()){
             do {
-                Comentario auxComentario = new Comentario(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3)
+                Comentario auxComentario = new Comentario(cursor.getInt(0), cursor.getInt(1)
+                        , cursor.getString(2), cursor.getString(3)
                 );
-                
                 comentarios.add(auxComentario);
             }while (cursor.moveToNext());
             cursor.close();
@@ -217,7 +221,7 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
 
     }
 
-    public void removerAllCometarios() {
+    public void removerAllComentarios() {
         db.delete(TABLE_COMENTARIO, null, null);
     }
 
@@ -232,18 +236,22 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
         return db.update(TABLE_COMENTARIO, values, ID+"=?", new String[]{comentario.getId()+""})==1;
 
     }
-    public Boolean removerLivroBD(int id)
+
+    public Boolean removerComentarioDB(int id)
     {
         // db.delete
         return db.delete(TABLE_COMENTARIO,ID+"=?", new String[]{id+""})==1;
     }
 
-    public Comentario adicionarComentarioBD(Comentario comentario)
+    public Comentario adicionarComentarioBD(Comentario comentario,Context context)
     {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+        int profile_id=sharedPreferences.getInt("PROFILE_ID",0);
         ContentValues values = new ContentValues();
         values.put(ID, comentario.getId());
         values.put(TITULO, comentario.getTitulo());
         values.put(DESCRICAO, comentario.getDescricao());
+        values.put(PROFILE_ID,profile_id);
         int id = (int)db.insert(TABLE_COMENTARIO, null, values);
         if(id>-1)
         {
@@ -272,13 +280,15 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
         return reservas;
     }
 
-    public Reserva adicionarReservaBD(Reserva r)
+    public Reserva adicionarReservaBD(Reserva r, Context context)
     {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(String.valueOf(R.string.SHARED_USER), Context.MODE_PRIVATE);
+        int profile_id=sharedPreferences.getInt("PROFILE_ID",0);
         ContentValues values = new ContentValues();
         values.put(ID, r.getId());
         values.put(NRPESSOAS, r.getNrpessoas());
-        values.put(ESTADO, r.getEstado());
-        values.put(PROFILE_ID, r.getProfile_id());
+        values.put(ESTADO, 0);
+        values.put(PROFILE_ID, profile_id);
         values.put(DATA, r.getData());
         values.put(HORA, r.getHora());
         // db.insert retorna -1 em caso de erro ou o id que foi criado
@@ -302,9 +312,138 @@ public class GersoftBDHelper extends SQLiteOpenHelper {
         values.put(NRPESSOAS, reserva.getNrpessoas());
         values.put(DATA,reserva.getData());
         values.put(HORA,reserva.getHora());
+        values.put(ESTADO,reserva.getEstado());
         // db.update retorna o numero de linhas atualizadas
         return db.update(TABLE_RESERVA, values, ID+"=?", new String[]{reserva.getId()+""})==1;
     }
 
-    //end region
+    public boolean cancelarReservaDB(Reserva reserva) {
+        ContentValues values=new ContentValues();
+        values.put(ESTADO,2);
+        return db.update(TABLE_RESERVA, values, ID+"=?", new String[]{reserva.getId()+""})==1;
+    }
+
+
+
+    //endregion
+
+    //region Pedido
+    public ArrayList<Pedido> getAllPedidosBD() {
+        ArrayList<Pedido> pedidos=new ArrayList<>();
+        Cursor cursor=db.query(TABLE_PEDIDO,new String[]{ID,TIPO_PEDIDO,PROFILE_ID,METODO_PAGAMENTO_ID,MESA_ID,DATA,ESTADO,TOTAL},
+                null,null,null,null,null);
+
+        if(cursor.moveToFirst()){
+            do {
+                Pedido auxPedido = new Pedido(cursor.getInt(0), cursor.getInt(1)
+                        , cursor.getInt(2),cursor.getInt(3),
+                        cursor.getString(4),cursor.getString(5),cursor.getDouble(6)
+                );
+                pedidos.add(auxPedido);
+            }while (cursor.moveToNext());
+            cursor.close();
+        }
+        return pedidos;
+    }
+
+    public void removerAllPedidos() {
+        db.delete(TABLE_PEDIDO, null, null);
+    }
+
+    public Pedido adicionarPedidoBD(Pedido p,Context context)
+    {
+        ContentValues values = new ContentValues();
+        values.put(ID, p.getId());
+        values.put(TIPO_PEDIDO, p.getTipo_pedido());
+        values.put(PROFILE_ID, p.getProfile_id());
+        values.put(MESA_ID, p.getMesa_id());
+        values.put(DATA, p.getData());
+        values.put(ESTADO,p.getEstado());
+        values.put(TOTAL,p.getTotal());
+        // db.insert retorna -1 em caso de erro ou o id que foi criado
+        int id = (int)db.insert(TABLE_PEDIDO, null, values);
+        if(id>-1)
+        {
+            p.setId(id);
+            return p;
+        }
+        return null;
+    }
+
+    public ArrayList<Mesa> getAllMesasDB() {
+        ArrayList<Mesa> mesas=new ArrayList<>();
+        Cursor cursor=db.query(TABLE_MESA,new String[]{ID,NRMESA,NRLUGARES,TIPOMESA},
+                null,null,null,null,null);
+
+        if(cursor.moveToFirst()){
+            do {
+                Mesa auxMesa = new Mesa(cursor.getInt(0), cursor.getInt(1),
+                        cursor.getInt(2),cursor.getString(3)
+                );
+                mesas.add(auxMesa);
+            }while (cursor.moveToNext());
+            cursor.close();
+        }
+        return mesas;
+    }
+
+    public void removerAllMesas() {db.delete(TABLE_MESA, null, null);}
+
+    public Mesa adicionarMesaBD(Mesa m, Context context) {
+        ContentValues values = new ContentValues();
+        values.put(ID, m.getId());
+        values.put(NRMESA, m.getNrmesa());
+        values.put(NRLUGARES, m.getNrlugares());
+        values.put(TIPOMESA, m.getTipomesa());
+        // db.insert retorna -1 em caso de erro ou o id que foi criado
+        int id = (int)db.insert(TABLE_MESA, null, values);
+        if(id>-1)
+        {
+            m.setId(id);
+            return m;
+        }
+        return null;
+    }
+
+    public ArrayList<Linhapedido> getAllLinhapedidosBD() {
+        ArrayList<Linhapedido> linhapedidos=new ArrayList<>();
+        Cursor cursor=db.query(TABLE_LINHAPEDIDO,new String[]{ID,QUANTIDADE,TAXAIVA,PEDIDO_ID,
+                ARTIGO_ID,VALORUNITARIO,VALORIVA},
+                null,null,null,null,null);
+
+        if(cursor.moveToFirst()){
+            do {
+                Linhapedido auxLinhapedido = new Linhapedido(cursor.getInt(0), cursor.getInt(1),
+                        cursor.getInt(2),cursor.getInt(3),cursor.getInt(4),cursor.getDouble(5)
+                        ,cursor.getDouble(6)
+                );
+                linhapedidos.add(auxLinhapedido);
+            }while (cursor.moveToNext());
+            cursor.close();
+        }
+        return linhapedidos;
+    }
+
+    public void removerAllLinhapedidos() {db.delete(TABLE_LINHAPEDIDO, null, null);}
+
+    public Linhapedido adicionarLinhapedidoDB(Linhapedido l, Context context) {
+        ContentValues values = new ContentValues();
+        values.put(ID, l.getId());
+        values.put(QUANTIDADE,l.getQuantidade());
+        values.put(TAXAIVA,l.getTaxaiva());
+        values.put(PEDIDO_ID,l.getPedido_id());
+        values.put(ARTIGO_ID,l.getArtigo_id());
+        values.put(VALORUNITARIO,l.getValorunitario());
+        values.put(VALORIVA,l.getValoriva());
+        // db.insert retorna -1 em caso de erro ou o id que foi criado
+        int id = (int)db.insert(TABLE_LINHAPEDIDO, null, values);
+        if(id>-1)
+        {
+            l.setId(id);
+            return l;
+        }
+        return null;
+    }
+
+    //endregion
 }

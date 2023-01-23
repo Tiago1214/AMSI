@@ -1,6 +1,7 @@
 package com.example.amsi_proj.adaptadores;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,18 +63,19 @@ public class ListaComentarioAdaptador extends BaseAdapter {
     private class ViewHolderLista{
 
         private TextView  tvTitulo, tvComentario;
+        private ImageView imgComentario;
 
         public ViewHolderLista(View view){
 
             tvTitulo = view.findViewById(R.id.tvTitulo);
             tvComentario = view.findViewById(R.id.tvComentario);
-
+            imgComentario=view.findViewById(R.id.imgComentario);
         }
 
         public void update(Comentario comentario){
             tvTitulo.setText(comentario.getTitulo());
             tvComentario.setText(comentario.getDescricao());
-
+            imgComentario.setImageResource(R.drawable.ic_action_comment_foreground);
         }
     }
 }

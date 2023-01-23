@@ -1,13 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RefeicaoFragment">
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    tools:context=".ReservaFragment">
 
-    <GridView
+
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="2" />
+        android:layout_height="0dp"
+        android:layout_weight="0.1"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Número de Pedidos"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/tvNrPedidos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:hint="10" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        />
+
+
+
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:text="@string/info_ped_gratis" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"/>
+
+    <Button
+        android:id="@+id/btnPedgratis"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.1"
+        android:onClick="onClickPedgratis"
+        android:text="Resgatar Refeição grátis"
+        android:visibility="visible"
+        tools:visibility="visible" />
+</LinearLayout>
