@@ -104,6 +104,8 @@ public class DetalhesComentarioActivity extends AppCompatActivity implements Det
 
     }
 
+
+
     //validar comentário
     private boolean isComentarioValido() {
         String titulo = etTitulo.getText().toString();

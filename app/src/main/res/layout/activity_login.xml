@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:hint="@string/txt_email"/>
+        android:hint="Nome de Utilizador"/>
 
     <EditText
         android:id="@+id/etPassword"

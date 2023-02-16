@@ -34,6 +34,7 @@ public class EditarPedidoActivity extends AppCompatActivity implements Linhapedi
     private ListView lvLinhaspedido;
     private Linhapedido linhapedido;
     private EditText etQuantidade;
+    private LinhapedidoListener linhapedidoListener;
     private Spinner spArtigo;
     private int profile_id;
     int pedido_id;
@@ -67,7 +68,7 @@ public class EditarPedidoActivity extends AppCompatActivity implements Linhapedi
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,arrayList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spArtigo.setAdapter(arrayAdapter);
-        //spinner valroes acabado
+        //spinner valores acabado
         //lista delete
         lvLinhaspedido.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -87,15 +88,17 @@ public class EditarPedidoActivity extends AppCompatActivity implements Linhapedi
         pedido_id=getIntent().getIntExtra("ID_PEDIDO", 0);
         SingletonGersoft.getInstance(getApplicationContext()).setLinhapedidoListener(this);
         SingletonGersoft.getInstance(getApplicationContext()).getAllLinhaspedidoAPI(getApplicationContext(),pedido_id);
-
+        onRefreshListaLinhapedidos(SingletonGersoft.getInstance(getApplicationContext()).getLinhaspedidosDB());
     }
 
     @Override
     public void onResume() {
         if (searchView!=null){
             searchView.onActionViewCollapsed();
+
         }
         super.onResume();
+        onRefreshListaLinhapedidos(SingletonGersoft.getInstance(getApplicationContext()).getLinhaspedidosDB());
     }
 
     @Override
@@ -132,8 +135,12 @@ public class EditarPedidoActivity extends AppCompatActivity implements Linhapedi
                     pedido_id,idartigo,preco,valoriva);
             SingletonGersoft.getInstance(getApplicationContext()).adicionarLinhaPedidoAPI(linhapedidoAux,
                     getApplicationContext(), token);
+
+            SingletonGersoft.getInstance(getApplicationContext()).setLinhapedidoListener(linhapedidoListener);
             onRefreshListaLinhapedidos(SingletonGersoft.getInstance(getApplicationContext()).getLinhaspedidosDB());
+            onResume();
         }
+        onRefreshListaLinhapedidos(SingletonGersoft.getInstance(getApplicationContext()).getLinhaspedidosDB());
     }
 
     private void dialogRemover(Linhapedido linhapedido) {
@@ -144,12 +151,14 @@ public class EditarPedidoActivity extends AppCompatActivity implements Linhapedi
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         SingletonGersoft.getInstance(getApplicationContext()).removerLinhaPedidoAPI(linhapedido, getApplicationContext());
+                        onRefreshListaLinhapedidos(SingletonGersoft.getInstance(getApplicationContext()).getLinhaspedidosDB());
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //Nao fazer nada
+                        onRefreshListaLinhapedidos(SingletonGersoft.getInstance(getApplicationContext()).getLinhaspedidosDB());
                     }
                 })
                 .setIcon(android.R.drawable.ic_delete)
